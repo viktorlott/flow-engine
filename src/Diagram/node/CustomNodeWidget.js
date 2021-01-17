@@ -593,12 +593,12 @@ export class CustomNodeWidget extends React.Component {
         if (this.state.active) return
 
         // console.info("%c"+Date.now(), "color: transparent;")
-        console.info("%cStart", "color: #c4c4c4; font-weight: 500; font-size: 14px; font-family: 'Exo 2','Oxygen',sans-serif!important; text-transform: uppercase;")
+        console.info("%cStart", "color: #c4c4c4; font-weight: 500; font-size: 10px; font-family: 'Exo 2','Oxygen',sans-serif!important; text-transform: uppercase;")
         console.info()
         const tree = new TreeEvaluator(this.props.node)
         const data = await tree.evaluate()
-        console.info("%cSlut", "color: #c4c4c4; font-weight: 500; font-size: 14px; font-family: 'Exo 2','Oxygen',sans-serif!important; text-transform: uppercase; padding-bottom: 15px;")
-        console.info("%c_________________________________________________________", "color: transparent; border-bottom: 1px solid #ececec;")
+        console.info("%cSlut", "color: #c4c4c4; font-weight: 500; font-size: 10px; font-family: 'Exo 2','Oxygen',sans-serif!important; text-transform: uppercase; padding-bottom: 10px;")
+        // console.info("%c__________________________________________", "color: transparent; border-bottom: 1px solid #ececec;")
         console.info()
         // console.info({ type: "result", payload: tree })
     }

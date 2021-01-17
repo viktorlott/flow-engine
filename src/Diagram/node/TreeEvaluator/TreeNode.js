@@ -179,8 +179,8 @@ export default class TreeNode {
 
             const resp = new Response(result)
             // console.info(node.name,   { type: "response", payload: resp })
-            // "#35496f" ||
-            console.info("%c"+node.options.name, `color: ${ node.options.color || "#c4c4c4"}; font-weight: 500; font-size: 14px; font-family: 'Exo 2','Oxygen',sans-serif!important; text-transform: uppercase; padding-left: 0px;`)
+            // "#35496f" ||node.options.color || 
+            console.info("%c"+node.options.name, `border-left: 2px solid ${node.options.color};color: ${ "#c4c4c4"}; font-weight: 500; font-size: 13px; padding: 4px 8px; background: #f3f3f3; border-radius: 0 6px 6px 0; font-family: 'Exo 2','Oxygen',sans-serif!important; text-transform: uppercase;`)
             console.info({ type: "response", payload: resp })
             console.info()
             

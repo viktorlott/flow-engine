@@ -91,7 +91,8 @@ import {
   Main,
   HeaderTabs,
   HeaderTab,
-  ListItem
+  ListItem,
+  SideBarHeader
 } from './styled'
 
 
@@ -200,6 +201,16 @@ function LItem(props) {
 
 
 
+function useDisablePinchZoom(ref) {
+  React.useEffect(() => {
+    const stopScroll = (e) => e.preventDefault()
+    const scrollEl = ref.current
+    scrollEl.addEventListener('wheel', stopScroll)
+    return () => scrollEl.removeEventListener('wheel', stopScroll)
+  }, [])
+}
+
+
 const Diagram = observer(({ graph, toggler, toggleEditor, disabled }) => {
   const processRef = React.useRef()
 
@@ -207,6 +218,9 @@ const Diagram = observer(({ graph, toggler, toggleEditor, disabled }) => {
   const [version, setVersion] = React.useState(0)
 
   const model = graph.tabs[graph.current].model
+
+
+  useDisablePinchZoom(processRef)
 
 
   const zoomIn = React.useCallback(() => {
@@ -244,44 +258,51 @@ const Diagram = observer(({ graph, toggler, toggleEditor, disabled }) => {
     setVersion(prev => prev + 1)
   }, [])
 
+  const onDrop = React.useCallback((event) => {
+
+    const extra = dnd.getData("drop-data")
+
+    if(!Nodes.standard.some(e => e.title === extra.title)) return 
+
+    const { ports, theme, title, ...options } = extra
+
+    const node = new CustomNodeModel({
+      ...options,
+      name: title,
+      color: theme,
+      fields: ports,
+      toggleEditor: toggleEditor,
+      toggler: toggler,
+    })
+
+    const point = graph.engine.getRelativeMousePoint(event);
+    node.setPosition(point)
+    model.addAll(node);
+
+    setIsOver(false)
+
+  })
+
+  const onDragOver = React.useCallback((event) => {
+    event.preventDefault()
+
+    if (!isOver) {
+      setIsOver(true)
+    }
+  })
+
+
+
 
 
   return (
     <DropWrapper disabled={disabled}>
       <Process ref={processRef}
         className="background-dot"
-        onDrop={(event) => {
-
-          const extra = dnd.getData("drop-data")
-
-          if(!Nodes.standard.some(e => e.title === extra.title)) return 
-
-          const { ports, theme, title, ...options } = extra
-
-          const node = new CustomNodeModel({
-            ...options,
-            name: title,
-            color: theme,
-            fields: ports,
-            toggleEditor: toggleEditor,
-            toggler: toggler,
-          })
-
-          const point = graph.engine.getRelativeMousePoint(event);
-          node.setPosition(point)
-          model.addAll(node);
-
-          setIsOver(false)
-
-        }}
-
-        onDragOver={(event) => {
-          event.preventDefault()
-
-          if (!isOver) {
-            setIsOver(true)
-          }
-        }}><CanvasWidget engine={graph.engine} /></Process>
+        onDrop={onDrop}
+        onDragOver={onDragOver}>
+          <CanvasWidget engine={graph.engine} />
+        </Process>
       <ZoomTools zoomIn={zoomIn} zoomOut={zoomOut} zoomFit={zoomFit} />
     </DropWrapper>
   )
@@ -723,20 +744,20 @@ const HButton = styled.div`
 
 
 const Expander = styled.div`
-  height: 100px; 
-  width: 15px; 
+  /* height: 100px;  */
+  /* width: 15px;  */
   ${props => props.left ? "left" : "right"}: 0; 
-  position: absolute; 
-  display: flex;  
+  /* position: absolute;  */
+  /* display: flex;   */
   /* top: 50%;  */
-  bottom: 10px;
+  /* bottom: 10px; */
   /* transform: translateY(-50%);  */
   position: absolute; 
   color: #bbbbbb;
 
   
   &:hover svg {
-    opacity: 1;
+    opacity: 0.7;
 
     visibility: visible
   }
@@ -744,21 +765,24 @@ const Expander = styled.div`
   & > svg {
     cursor: pointer;
     transition: opacity 0.2s, visibility 0.2s;
-    opacity: 0.2;
-    visibility: hidden;
+    opacity: 0.6;
+    color: #686c71;
     /* background: white; */
     padding: 4px;
-    border-radius: 0 5px 5px 0;
+
     /* border: 1px solid #eff1f2; */
     border-left: 0;
-    position: absolute;
-    display: flex;
-    transform: translateY(-50%);
-    top: 50%;
-    ${props => props.left ? "right" : "left"}: -30px;
+    /* position: absolute; */
+    display: ${props => props.visible ? "flex" : "none"};
 
-    ${props => props.visible && "visibility: visible;"}
-    visibility: visible;
+    /* transform: translateY(-50%); */
+    /* top: 50%; */
+    /* ${props => props.left ? "right" : "left"}: -30px; */
+
+    /* visibility: hidden; */
+    ${props => props.visible ? "visibility: visible;" : "visibility: hidden;"}
+    /* visibility: visible; */
+    
 
   }
 
@@ -792,7 +816,7 @@ const Expander = styled.div`
 
 
 function Drawer(props) {
-  const [state, setState] = React.useState({ isOpen: false })
+  const [state, setState] = React.useState(() => ({ isOpen: !!props.defaultOpen || false }))
 
 
 
@@ -852,7 +876,7 @@ const Tabs = observer(({ graph }) => {
 // 2E3A59
 function App() {
   
-  const [state, setState] = React.useState({ showClient: false, showEditor: false, version: 0, saved: false, leftSideMenu: true, rightSideMenu: false })
+  const [state, setState] = React.useState({ showClient: false, showEditor: false, version: 0, saved: false, leftSideMenu: true, rightSideMenu: true })
   const modalRef = React.useRef()
   const [loading, setLoading] = React.useState(true)
 
@@ -891,6 +915,7 @@ function App() {
   const showDiagram = (state.showClient === false && state.showEditor === false)
   const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
+  console.log("-->", state.leftSideMenu)
   
 
 
@@ -945,18 +970,30 @@ function App() {
 
         </HeaderWrapper>
 
-        <Expander left visible active={!state.leftSideMenu}>
-          <svg onClick={() => toggleSideMenu("left")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 9H8v2h4v3l4-4-4-4v3z"/></svg>
-        </Expander>
+       
 
         <SidemenuContainer active={state.leftSideMenu} bg={"white" || "#23263c"} left >
         
-            {/* <Header borderColor={"#f1f1f1"}>
+            <SideBarHeader borderColor={"#f1f1f1"}>
+              <div></div>
               <h4 borderColorTop={"#e5e5e5"}>
-                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>
+                Komponenter
               </h4>
-            </Header> */}
-              <Drawer title={"Standard"}>
+              <Expander visible={state.leftSideMenu} active={state.leftSideMenu}>
+                <svg style={{borderLeft: "1px solid #e6e6e6"}} onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm0-9h4v2h-4v3l-4-4 4-4v3z"/></svg>
+              </Expander>
+              <Expander left visible={!state.leftSideMenu} active={!state.leftSideMenu}>     
+                <svg xmlns="http://www.w3.org/2000/svg" style={{
+                  background: "white",
+                  borderRadius: 4,
+                  boxShadow: "0 2px 5px 0 rgb(32 48 60 / 11%)",
+                  border: "1px solid #eff1f2"
+                }}  onClick={() => toggleSideMenu("left")}   viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>         
+                {/* <svg onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 11V8l4 4-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8z"/></svg> */}
+              </Expander>
+            </SideBarHeader>
+              <Drawer defaultOpen={true} title={"Standard"}>
                 <ComponentListContainer>
                   <BlockList items={Nodes.standard} />
                 </ComponentListContainer>
@@ -968,9 +1005,7 @@ function App() {
               </Drawer>
               <Drawer title={"Extra"}>
               </Drawer>
-              <Expander active={state.leftSideMenu}>
-                <svg onClick={() => toggleSideMenu("left")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 9V8l-4 4 4 4v-3h4v-2h-4z"/></svg>
-              </Expander>
+             
           </SidemenuContainer>
 
 
@@ -1023,9 +1058,9 @@ function App() {
         </ContentWrapper>
 
 
-        <Expander visible right active={!state.rightSideMenu}>
-          <svg onClick={() => toggleSideMenu("right")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 9V8l-4 4 4 4v-3h4v-2h-4z"/></svg>    
-        </Expander>
+        {/* <Expander visible right active={!state.rightSideMenu}>
+          <svg onClick={() => toggleSideMenu("right")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 9V8l-4 4 4 4v-3h4v-2h-4z"/></svg>    
+        </Expander> */}
         <SidemenuContainer active={state.rightSideMenu} borderColor="#f1f1f1" right>
 
             {/* <Header borderColor={"#f1f1f1"}>
@@ -1037,7 +1072,22 @@ function App() {
 
             </Header> */}
 
-            <Header borderColor={"#f1f1f1"} style={{justifyContent: "flex-end"}}>
+            <SideBarHeader borderColor={"#f1f1f1"} style={{justifyContent: "flex-end"}}>
+
+
+        <Expander visible={!state.rightSideMenu}  active={!state.rightSideMenu}>
+        <svg xmlns="http://www.w3.org/2000/svg" onClick={() => toggleSideMenu("right")}  style={{
+                  background: "white",
+                  borderRadius: 4,
+                  boxShadow: "0 2px 5px 0 rgb(32 48 60 / 11%)",
+                  border: "1px solid #eff1f2"
+                }}  viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M6.056 8.3a7.01 7.01 0 0 1 .199-.3h11.49c.069.098.135.199.199.3l2.02-1.166 1 1.732-2.213 1.278c.162.59.249 1.213.249 1.856v1h3v2h-3c0 .953-.19 1.862-.536 2.69l2.5 1.444-1 1.732-2.526-1.458A6.992 6.992 0 0 1 13 21.929V14h-2v7.93a6.992 6.992 0 0 1-4.438-2.522l-2.526 1.458-1-1.732 2.5-1.443A6.979 6.979 0 0 1 5 15H2v-2h3v-1c0-.643.087-1.265.249-1.856L3.036 8.866l1-1.732L6.056 8.3zM8 6a4 4 0 1 1 8 0H8z" /></svg>
+          
+        </Expander>
+
+        <Expander visible={state.rightSideMenu} left active={!state.rightSideMenu}>
+          <svg style={{borderRight: "1px solid #e6e6e6"}} onClick={() => toggleSideMenu("right")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 11V8l4 4-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8z"/></svg>
+        </Expander>
             
             <h4 borderColorTop={"#e5e5e5"} style={{position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)", margin: "auto"}}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M6.056 8.3a7.01 7.01 0 0 1 .199-.3h11.49c.069.098.135.199.199.3l2.02-1.166 1 1.732-2.213 1.278c.162.59.249 1.213.249 1.856v1h3v2h-3c0 .953-.19 1.862-.536 2.69l2.5 1.444-1 1.732-2.526-1.458A6.992 6.992 0 0 1 13 21.929V14h-2v7.93a6.992 6.992 0 0 1-4.438-2.522l-2.526 1.458-1-1.732 2.5-1.443A6.979 6.979 0 0 1 5 15H2v-2h3v-1c0-.643.087-1.265.249-1.856L3.036 8.866l1-1.732L6.056 8.3zM8 6a4 4 0 1 1 8 0H8z" /></svg>
@@ -1052,7 +1102,7 @@ function App() {
               {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M13 19.9a5.002 5.002 0 0 0 4-4.9v-3a4.98 4.98 0 0 0-.415-2h-9.17A4.98 4.98 0 0 0 7 12v3a5.002 5.002 0 0 0 4 4.9V14h2v5.9zm-7.464-2.21A6.979 6.979 0 0 1 5 15H2v-2h3v-1c0-.643.087-1.265.249-1.856L3.036 8.866l1-1.732L6.056 8.3a7.01 7.01 0 0 1 .199-.3h11.49c.069.098.135.199.199.3l2.02-1.166 1 1.732-2.213 1.278c.162.59.249 1.213.249 1.856v1h3v2h-3c0 .953-.19 1.862-.536 2.69l2.5 1.444-1 1.732-2.526-1.458A6.986 6.986 0 0 1 12 22a6.986 6.986 0 0 1-5.438-2.592l-2.526 1.458-1-1.732 2.5-1.443zM8 6a4 4 0 1 1 8 0H8z"/></svg>   */}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M8.586 8.858l-4.95 4.95 5.194 5.194H10V19h1.172l3.778-3.778-6.364-6.364zM10 7.444l6.364 6.364 2.828-2.829-6.364-6.364L10 7.444zM14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19z" /></svg>
             </div>
-          </Header>
+          </SideBarHeader>
 
 
 

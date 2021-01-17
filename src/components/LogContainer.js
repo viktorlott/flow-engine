@@ -42,6 +42,9 @@ const Container = styled(ScrollToBottom)`
     & div[data-method=info] {
         padding-left: 0;
         /* margin: 10px 0; */
+        & > div:last-child {
+            margin-left: 0!important;
+        }
     }
 
     ol[role=tree] span {

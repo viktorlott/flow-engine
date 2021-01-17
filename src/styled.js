@@ -17,7 +17,7 @@ export const Container = styled.div`
 
   display: grid;
   transition: 0.5s;
-  grid-template-columns: ${props => props.leftSideMenu ? "200px" : "100px"} 1fr ${props => props.rightSideMenu ? "340px" : "100px"};
+  grid-template-columns: ${props => props.leftSideMenu ? "250px" : "100px"} 1fr ${props => props.rightSideMenu ? "340px" : "100px"};
   grid-template-rows: 60px 1fr;
 
 
@@ -311,7 +311,7 @@ export const MainContainer = styled.div`
   position: relative;
   flex-flow: column;
   width: calc(100% - 15px);
-  height: calc(100% - 40px);
+  height: calc(100% - 25px);
 
   ${props => props.borderNone ? "" : css`
     border: 1px solid #e5e5e5;
@@ -545,7 +545,10 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   border-radius: 1px 1px 0 0;
+  
   align-items: center;
+  /* border-top: 1px solid #e4e4e4; */
+  /* background: #fbfbfb; */
 
   /* background: #f0f4f7; */
   ${props => props.tabs && props.blank && css`
@@ -557,7 +560,7 @@ export const Header = styled.div`
     align-items: center;
 
 
-    margin-right: 20px;
+    /* margin-right: 20px; */
     &  svg {
       color: #1c2b46;
       cursor: pointer;
@@ -611,6 +614,7 @@ export const Header = styled.div`
     font-weight: 500;
     color: #717171;
     color: #383f48;
+
 
     & > svg {
       margin-right: 5px!important;
@@ -700,6 +704,7 @@ ${'' /*
           background: white;
         } */}
 
+
         &  svg {
         
 
@@ -732,6 +737,25 @@ ${'' /*
   }
 
 
+
+
+`
+
+
+export const SideBarHeader = styled(Header)`
+  /* border-top: 1px solid #e4e4e4; */
+
+  height: 60px;
+  > h4 {
+    color: #686c71;
+    font-weight: 400;
+    font-size: 14px;
+
+
+    > svg {
+      margin-top: 2px;
+    }
+  }
 `
 
 
@@ -880,7 +904,7 @@ export const HeaderTab = styled.h5`
     cursor: pointer;
 
     border: solid transparent;
-    border-width: 3px 1px 1px 1px;
+    border-width: 2px 1px 1px 1px;
     /* transform: translateY(0px);   */
     background: #f9f9f9;
     color: #cccbcb;
@@ -935,7 +959,7 @@ export const HeaderTab = styled.h5`
 
         ${'' /* margin-top: 4px; */}
         margin-right: 5px;
-        border-top: 4px solid ${props => props.borderColorTop ? props.borderColorTop : "#e5e5e5"};
+        border-top: 2px solid ${props => props.borderColorTop ? props.borderColorTop : "#e5e5e5"};
 
         ${'' /* box-shadow: 1px -2px 7px 3px rgb(31 31 31 / 0.03); */}
 
@@ -1128,7 +1152,7 @@ export const SidemenuContainer = styled.div`
 
     /* width: calc(100% - 50px); */
     
-    height: calc(100% - ${props => props.mini? "150px" : "00px"});
+    height: calc(100% - ${props => props.mini? "150px" : "25px"});
     /* ${props => props.maximized ? "border: 1px solid #e5e5e5;" : ""} */
 
     /* justify-content: center; */
@@ -1282,7 +1306,9 @@ export const ZoomButton = styled.button`
   /* background: #f7f7f7; */
   /* background: white; */
   padding: 5px 5px;
-  color: #565656;
+  /* color: #565656; */
+  color: #686c71;
+  opacity: 0.6;
   cursor: pointer;
   border-radius: 3px;
   display: flex;
@@ -1290,6 +1316,14 @@ export const ZoomButton = styled.button`
   background: none;
 
   margin: 3px;
+
+  background: white;
+  border-radius: 4px;
+  box-shadow: rgba(32, 48, 60, 0.11) 0px 2px 5px 0px;
+  border: 1px solid rgb(239, 241, 242);
+
+
+  
 
   ${props => props.middle && css`
     margin-top: 10px;

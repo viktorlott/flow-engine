@@ -770,6 +770,8 @@ const Expander = styled.div`
     /* background: white; */
     padding: 4px;
 
+
+
     /* border: 1px solid #eff1f2; */
     border-left: 0;
     /* position: absolute; */
@@ -981,7 +983,7 @@ function App() {
                 Komponenter
               </h4>
               <Expander visible={state.leftSideMenu} active={state.leftSideMenu}>
-                <svg style={{borderLeft: "1px solid #e6e6e6"}} onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm0-9h4v2h-4v3l-4-4 4-4v3z"/></svg>
+                <svg style={{borderLeft: "1px solid #e6e6e6", padding: "10px 15px"}} onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm0-9h4v2h-4v3l-4-4 4-4v3z"/></svg>
               </Expander>
               <Expander left visible={!state.leftSideMenu} active={!state.leftSideMenu}>     
                 <svg xmlns="http://www.w3.org/2000/svg" style={{
@@ -1086,7 +1088,7 @@ function App() {
         </Expander>
 
         <Expander visible={state.rightSideMenu} left active={!state.rightSideMenu}>
-          <svg style={{borderRight: "1px solid #e6e6e6"}} onClick={() => toggleSideMenu("right")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 11V8l4 4-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8z"/></svg>
+          <svg style={{borderRight: "1px solid #e6e6e6", padding: "10px 15px"}} onClick={() => toggleSideMenu("right")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 11V8l4 4-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8z"/></svg>
         </Expander>
             
             <h4 borderColorTop={"#e5e5e5"} style={{position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)", margin: "auto"}}>

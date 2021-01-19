@@ -96,14 +96,14 @@ export const SectionGridLeft = styled.section`
     position: relative;
     /* justify-content: space-between; */
 
-
+    background: white;
     grid-column: 1/2;
-    grid-row: 1/2;
+    grid-row: 1/3;
 
 
 
-    margin: 0 20px;
-    padding:20px;
+    /* margin: 0 20px; */
+    padding: 20px 20px 50px 20px;
 
 
 `
@@ -115,9 +115,9 @@ export const SectionGridRight = styled.section`
     /* justify-content: space-between; */
 
 
-
+    background: white;
     grid-column: 3/4;
-    grid-row: 1/2;
+    grid-row: 1/3;
 
 
 
@@ -130,8 +130,8 @@ export const SectionGridRight = styled.section`
 
     }
 
-    margin: 0 20px;
-    padding:20px;
+    /* margin: 0 20px; */
+    padding: 20px 20px 50px 20px;
 
     & input::first-child {
         margin-top: 0;

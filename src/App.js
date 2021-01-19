@@ -1062,19 +1062,19 @@ function App() {
                     <Settings>
                       <BodyGrid>
                           <SectionGridLeft>
-                              <DRow>
+                              <DRow center>
                                 <h1>Inställningar för <bold>Standardgraf</bold></h1>
                               </DRow>
-                              <DRow>
+                              <DRow center>
                                 <InputField placeholder="Namn"/>
                               </DRow>
-                              <DRow>
+                              <DRow center>
                                 <InputField placeholder="Kontext"/>
                               </DRow>
-                              <DRow>
+                              <DRow center>
                                 <InputField placeholder="Kontext"/>
                               </DRow>
-                              <DRow>
+                              <DRow center>
                                 <InputField placeholder="Kontext"/>
                               </DRow>
                           </SectionGridLeft>
@@ -1097,9 +1097,10 @@ function App() {
                               </DRow>
                           </SectionGridRight>
                       </BodyGrid>
-                      <div style={{ width: "95%", height: 1, background: "#f3f3f3", margin: "auto" }} />
+                      <div style={{ width: "95%", height: 2, background: "#f0f4f7" || "#f3f3f3", margin: "auto" }} />
                       <BodyGrid>
                         <SectionGridLeft></SectionGridLeft>
+                        <SectionGridRight></SectionGridRight>
                       </BodyGrid>
                     </Settings>
                   </Content>

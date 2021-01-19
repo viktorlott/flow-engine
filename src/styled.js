@@ -1056,7 +1056,7 @@ export const Main = styled.div`
 export const Content = styled.div`
   width: calc(100%);
   height: calc(100% - 30px);
-  background: white;
+  /* background: white; */
   /* border-radius: 0 5px 5px 5px; */
   /* margin-top: 50px; */
   overflow: hidden;
@@ -1090,7 +1090,7 @@ export const Settings = styled.div`
   /* grid-auto-rows: auto; */
   /* grid-template-columns: repeat(12,minmax(0,1fr)); */
 
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   color: #20303c;
   /* #162d3d  */
 

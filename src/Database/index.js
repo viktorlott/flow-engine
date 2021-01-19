@@ -82,7 +82,7 @@ const Body = styled.div`
 `
 
 
-const BodyGrid = styled.div`
+export const BodyGrid = styled.div`
     display: grid!important;
     grid-template-columns: minmax(400px, 1fr) 2px minmax(400px, 1fr);
     grid-template-rows: minmax(200px, 1fr) 65px;
@@ -90,11 +90,11 @@ const BodyGrid = styled.div`
 `
 
 
-const SectionGridLeft = styled.section`
+export const SectionGridLeft = styled.section`
     display: flex;
     flex-flow: column;
     position: relative;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 
 
     grid-column: 1/2;
@@ -108,11 +108,12 @@ const SectionGridLeft = styled.section`
 
 `
 
-const SectionGridRight = styled.section`
+export const SectionGridRight = styled.section`
     display: flex;
     flex-flow: column;
     position: relative;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+
 
 
     grid-column: 3/4;
@@ -163,9 +164,9 @@ const SectionGridBottom = styled.section`
 `
 
 
-const SectionGridLine = styled.div`
-    height: 80%;
-    width: 2px;
+export const SectionGridLine = styled.div`
+    height: 60%;
+    width: 1px;
     background: #f3f3f3;
     align-self: center;
     justify-self: center;
@@ -365,7 +366,7 @@ position: relative;
 `
 
 
-const Row = styled.div`
+export const Row = styled.div`
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -387,7 +388,7 @@ const Row = styled.div`
 
 
 
-const Column = styled.div`
+export const Column = styled.div`
     display: flex;
     flex-flow: ${props => props.horizontal ? "row" : "column"};
 
@@ -418,6 +419,7 @@ const Wrapper = styled.div`
         color: #808080;
         /* align-self: flex-start; */
         z-index: 1;
+
         pointer-events: none;
         transform: ${props => `translate(10px, 10px)` || `translate(${props.hasFocus ? 10 : 30}px, ${props.hasFocus ? 10 : 30}px)`};
     }
@@ -544,7 +546,7 @@ function SuccessIcon() {
 
 
 
-function InputField(props) {
+export function InputField(props) {
     const [state, setState] = useState({ focus: false })
     const { placeholder, ...restProps} = props
 
@@ -556,6 +558,10 @@ function InputField(props) {
         </Wrapper>
     )
 }
+
+
+
+
 
 function Database(props) {
     const [state, setState] = React.useState(() => props.value || { body: ""})

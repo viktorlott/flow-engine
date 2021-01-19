@@ -920,7 +920,7 @@ export const HeaderTab = styled.h5`
     border-top: 2px solid #f9f9f9;
     /* ${props => props.green ? "#d6ead6" : "#eff1f2"||"#f9f9f9" || "#ececec" || "#f4f4f4"} */
     margin-right: 5px;
-    /* transition: color 0.1s, background 0.1s; */
+    transition: color 0.1s;
     will-change: color, background;
     border-radius: 2px 2px 0 0;
 
@@ -1032,6 +1032,10 @@ export const HeaderTab = styled.h5`
       padding: 0!important;
     }
 
+    & > svg > path {
+      transition: fill 0.1s;
+    }
+
     & > svg:hover {
       color: currentColor;
     }
@@ -1052,7 +1056,7 @@ export const Main = styled.div`
 export const Content = styled.div`
   width: calc(100%);
   height: calc(100% - 30px);
-
+  background: white;
   /* border-radius: 0 5px 5px 5px; */
   /* margin-top: 50px; */
   overflow: hidden;
@@ -1067,7 +1071,42 @@ export const Content = styled.div`
   
   `}
 `
+export const SettingsRow = styled.div`
+  display: grid;
+  width: 100%;
+  height: 100%;
+  gap: 30px;
+  /* grid-template-rows: auto; */
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(12,minmax(0,1fr));
 
+  
+  color: #162d3d;
+`
+export const Settings = styled.div`
+  /* display: grid;
+  gap: 30px; */
+  /* grid-template-rows: auto; */
+  /* grid-auto-rows: auto; */
+  /* grid-template-columns: repeat(12,minmax(0,1fr)); */
+
+  padding: 10px 20px;
+  color: #20303c;
+  /* #162d3d  */
+
+  height: calc(100% - 100px);
+
+
+  & h1 {
+    font-weight: 200;
+    color: #686c71;
+    font-size: 24px;
+  }
+
+  & bold {
+    font-weight: 300;
+  }
+`
 
 export const DropWrapper = styled.div`
   position: relative;

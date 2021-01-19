@@ -54,7 +54,7 @@ import {
   DatasetIcon,
 } from './Icons'
 
-import Database from './Database'
+import Database, { InputField, BodyGrid,Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from './Database'
 import Transformer from './Transformer'
 
 import { observer } from "mobx-react"
@@ -92,7 +92,8 @@ import {
   HeaderTabs,
   HeaderTab,
   ListItem,
-  SideBarHeader
+  SideBarHeader,
+  Settings
 } from './styled'
 
 
@@ -878,12 +879,20 @@ const Tabs = observer(({ graph }) => {
 // 2E3A59
 function App() {
   
-  const [state, setState] = React.useState({ showClient: false, showEditor: false, version: 0, saved: false, leftSideMenu: true, rightSideMenu: true })
+  const [state, setState] = React.useState({ showClient: false, showEditor: false, version: 0, saved: false, leftSideMenu: true, rightSideMenu: true, settings: false })
   const modalRef = React.useRef()
   const [loading, setLoading] = React.useState(true)
 
   const toggleClient = () => setState(prev => ({ ...prev, showClient: !prev.showClient }))
   const toggleEditor = (editor = null) => setState(prev => ({ ...prev, showEditor: !prev.showEditor, editor: editor }))
+
+  const toggleDiagram = React.useCallback(() => {
+      setState(prev => ({...prev, settings: false }))
+  },[])
+
+  const toggleSettings = React.useCallback(() => {
+    setState(prev => ({...prev, settings: true }))
+  },[])
 
   const toggler = (name) => (editor = null) => setState(prev => ({ ...prev, [name]: !prev[name] }))
   const saved = () => setState(prev => ({ ...prev, saved: !prev.saved }))
@@ -1025,30 +1034,76 @@ function App() {
                   <Tabs graph={Graph}  />
                 </div>
 
-                <div>
-                  
-                </div>
+                <div></div>
 
                 <div>
-                  <HeaderTab selected={true} borderColorTop={"#767aff" || "#6730ff45" || "#71ff3045" || "#eff1f2" || "white" || "#607d8b" || "#cecece" || "#888888" || "#007ce6" || "#e5e5e5"}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0H24V24H0z" /><path fill="currentColor" d="M15 3c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1h-2v2h4c.552 0 1 .448 1 1v3h2c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1h-6c-.552 0-1-.448-1-1v-4c0-.552.448-1 1-1h2v-2H8v2h2c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1H4c-.552 0-1-.448-1-1v-4c0-.552.448-1 1-1h2v-3c0-.552.448-1 1-1h4V9H9c-.552 0-1-.448-1-1V4c0-.552.448-1 1-1h6zM9 17H5v2h4v-2zm10 0h-4v2h4v-2zM14 5h-4v2h4V5z" /></svg>
+                  <HeaderTab selected={!state.settings} onClick={toggleDiagram} borderColorTop={"#767aff" || "#6730ff45" || "#71ff3045" || "#eff1f2" || "white" || "#607d8b" || "#cecece" || "#888888" || "#007ce6" || "#e5e5e5"}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0H24V24H0z" /><path fill={!state.settings ? "currentColor" : "#cccbcb"} d="M15 3c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1h-2v2h4c.552 0 1 .448 1 1v3h2c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1h-6c-.552 0-1-.448-1-1v-4c0-.552.448-1 1-1h2v-2H8v2h2c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1H4c-.552 0-1-.448-1-1v-4c0-.552.448-1 1-1h2v-3c0-.552.448-1 1-1h4V9H9c-.552 0-1-.448-1-1V4c0-.552.448-1 1-1h6zM9 17H5v2h4v-2zm10 0h-4v2h4v-2zM14 5h-4v2h4V5z" /></svg>
                       Diagram
                     </HeaderTab>
-                  <HeaderTab>
-                    {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M13 19.9a5.002 5.002 0 0 0 4-4.9v-3a4.98 4.98 0 0 0-.415-2h-9.17A4.98 4.98 0 0 0 7 12v3a5.002 5.002 0 0 0 4 4.9V14h2v5.9zm-7.464-2.21A6.979 6.979 0 0 1 5 15H2v-2h3v-1c0-.643.087-1.265.249-1.856L3.036 8.866l1-1.732L6.056 8.3a7.01 7.01 0 0 1 .199-.3h11.49c.069.098.135.199.199.3l2.02-1.166 1 1.732-2.213 1.278c.162.59.249 1.213.249 1.856v1h3v2h-3c0 .953-.19 1.862-.536 2.69l2.5 1.444-1 1.732-2.526-1.458A6.986 6.986 0 0 1 12 22a6.986 6.986 0 0 1-5.438-2.592l-2.526 1.458-1-1.732 2.5-1.443zM8 6a4 4 0 1 1 8 0H8z"/></svg>   */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z" /><path fill="#cccbcb" d="M2.132 13.63a9.942 9.942 0 0 1 0-3.26c1.102.026 2.092-.502 2.477-1.431.385-.93.058-2.004-.74-2.763a9.942 9.942 0 0 1 2.306-2.307c.76.798 1.834 1.125 2.764.74.93-.385 1.457-1.376 1.43-2.477a9.942 9.942 0 0 1 3.262 0c-.027 1.102.501 2.092 1.43 2.477.93.385 2.004.058 2.763-.74a9.942 9.942 0 0 1 2.307 2.306c-.798.76-1.125 1.834-.74 2.764.385.93 1.376 1.457 2.477 1.43a9.942 9.942 0 0 1 0 3.262c-1.102-.027-2.092.501-2.477 1.43-.385.93-.058 2.004.74 2.763a9.942 9.942 0 0 1-2.306 2.307c-.76-.798-1.834-1.125-2.764-.74-.93.385-1.457 1.376-1.43 2.477a9.942 9.942 0 0 1-3.262 0c.027-1.102-.501-2.092-1.43-2.477-.93-.385-2.004-.058-2.763.74a9.942 9.942 0 0 1-2.307-2.306c.798-.76 1.125-1.834.74-2.764-.385-.93-1.376-1.457-2.477-1.43zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /></svg>
+                  <HeaderTab selected={state.settings} onClick={toggleSettings} borderColorTop={"#767aff"}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z" /><path fill={state.settings ? "currentColor" : "#cccbcb"} d="M2.132 13.63a9.942 9.942 0 0 1 0-3.26c1.102.026 2.092-.502 2.477-1.431.385-.93.058-2.004-.74-2.763a9.942 9.942 0 0 1 2.306-2.307c.76.798 1.834 1.125 2.764.74.93-.385 1.457-1.376 1.43-2.477a9.942 9.942 0 0 1 3.262 0c-.027 1.102.501 2.092 1.43 2.477.93.385 2.004.058 2.763-.74a9.942 9.942 0 0 1 2.307 2.306c-.798.76-1.125 1.834-.74 2.764.385.93 1.376 1.457 2.477 1.43a9.942 9.942 0 0 1 0 3.262c-1.102-.027-2.092.501-2.477 1.43-.385.93-.058 2.004.74 2.763a9.942 9.942 0 0 1-2.306 2.307c-.76-.798-1.834-1.125-2.764-.74-.93.385-1.457 1.376-1.43 2.477a9.942 9.942 0 0 1-3.262 0c.027-1.102-.501-2.092-1.43-2.477-.93-.385-2.004-.058-2.763.74a9.942 9.942 0 0 1-2.307-2.306c.798-.76 1.125-1.834.74-2.764-.385-.93-1.376-1.457-2.477-1.43zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /></svg>
                       Inställningar
                   </HeaderTab>
                   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", transform: "translateY(5px)" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" onClick={() => {}} viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M13 13v5.585l1.828-1.828 1.415 1.415L12 22.414l-4.243-4.242 1.415-1.415L11 18.585V13h2zM12 2a7.001 7.001 0 0 1 6.954 6.194 5.5 5.5 0 0 1-.953 10.784v-2.014a3.5 3.5 0 1 0-1.112-6.91 5 5 0 1 0-9.777 0 3.5 3.5 0 0 0-1.292 6.88l.18.03v2.014a5.5 5.5 0 0 1-.954-10.784A7 7 0 0 1 12 2z" /></svg>
                   </div>
-
                 </div>
               </HeaderTabs>
 
-              <Content>
-                {showDiagram ? <Diagram toggleEditor={toggleEditor} toggler={toggler} graph={Graph} /> : <FakeScene />}
-              </Content>
+              {!state.settings 
+                ? (
+                  <Content>
+                    {showDiagram ? <Diagram toggleEditor={toggleEditor} toggler={toggler} graph={Graph} /> : <FakeScene />}
+                  </Content>
+                )
+                : (
+                  <Content>
+                    <Settings>
+                      <BodyGrid>
+                          <SectionGridLeft>
+                              <DRow>
+                                <h1>Inställningar för <bold>Standardgraf</bold></h1>
+                              </DRow>
+                              <DRow>
+                                <InputField placeholder="Namn"/>
+                              </DRow>
+                              <DRow>
+                                <InputField placeholder="Kontext"/>
+                              </DRow>
+                              <DRow>
+                                <InputField placeholder="Kontext"/>
+                              </DRow>
+                              <DRow>
+                                <InputField placeholder="Kontext"/>
+                              </DRow>
+                          </SectionGridLeft>
+                          <SectionGridLine/>
+                          <SectionGridRight>
+                              <DRow center>
+                                <h1 style={{textAlign: "center"}}>Miljlvariabler</h1>
+                              </DRow>
+                              <DRow>
+
+                              </DRow>
+                              <DRow>
+                                
+                              </DRow>
+                              <DRow>
+                                
+                              </DRow>
+                              <DRow>
+                                
+                              </DRow>
+                          </SectionGridRight>
+                      </BodyGrid>
+                      <div style={{ width: "95%", height: 1, background: "#f3f3f3", margin: "auto" }} />
+                      <BodyGrid>
+                        <SectionGridLeft></SectionGridLeft>
+                      </BodyGrid>
+                    </Settings>
+                  </Content>
+                )}
 
             
 

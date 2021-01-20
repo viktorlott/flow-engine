@@ -2,8 +2,16 @@ class DnD {
     constructor() {
         this.data = {}
     }
+    removeDragImg() {
+        const el = document.querySelector("#drop-data")
+
+        if(el && el.remove) {
+            el.remove()
+        }
+    }
+
     getData(key) {
-        document.querySelector("#drop-data").remove()
+        this.removeDragImg()
         const data = this.data[key]
         delete this.data[key]
         return data

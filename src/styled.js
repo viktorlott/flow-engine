@@ -923,6 +923,7 @@ export const HeaderTab = styled.h5`
     transition: color 0.1s;
     will-change: color, background;
     border-radius: 2px 2px 0 0;
+    border-bottom: 1px solid transparent;
 
     /* border-bottom: 1px solid #e5e5e5; */
     /* || props.borderColorTop : "#ffd876" */
@@ -1094,6 +1095,7 @@ export const Settings = styled.div`
   color: #20303c;
   /* #162d3d  */
 
+  background: white;
   height: calc(100% - 100px);
 
 

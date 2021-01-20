@@ -101,11 +101,13 @@ const ToolTip = props => {
        !props.isOver && setIsShown(false)
     } 
 
+    console.log(props)
 
     return React.cloneElement(props.children, { 
+        key: props.id + "_wrapper",
         onMouseEnter, 
         onMouseLeave,
-        style: { ...props.style, position: "relative"}
+        style: { ...props.style, ...props.children.props.style, position: "relative"}
     }, children)
 }
 

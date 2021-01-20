@@ -109,6 +109,7 @@ import SuccessIcon from './components/SuccessIcon'
 
 import SearchingSvg from './svg/searching.svg'
 import LavaSvg from './svg/lava.svg'
+import CometSpinner from './svg/cometspinner.svg'
 
 import * as html2canvas from 'html2canvas'
 
@@ -142,36 +143,44 @@ function LItem(props) {
   const [mouseDown, setMouseDown] = React.useState(false)
   const liRef = React.useRef()
 
-  const portStyle = (position="right",item) => ({position: "absolute", [position]: -9, width: 12, height: 12, top: "50%", transform: "translateY(-50%)", background: item.color || "#616161", borderRadius: "39%", border: "2px solid #ffffff", fontSize: 8})
-  return props.disabled ? null : (
+
+  const onDragStart = React.useCallback(event => {
+    const dragElem = liRef.current.cloneNode(true)
+    const { width, height } = liRef.current.getBoundingClientRect()
+    dragElem.id = "drop-data"
+    dragElem.style.position = "absolute"
+    dragElem.style.top = "-1000px"
+    dragElem.style.width = width+"px"
+    dragElem.style.height = height+"px"
+    document.body.appendChild(dragElem)
+    event.dataTransfer.setDragImage(dragElem, 10, 3)
     
+    dnd.setData("drop-data", item)
+  }, [])
+
+  const onDragEnd = React.useCallback(() => void dnd.removeDragImg(), [])
+
+  const portStyle = (position="right",item) => ({position: "absolute", [position]: -9, width: 12, height: 12, top: "50%", transform: "translateY(-50%)", background: item.color || "#616161", borderRadius: "39%", border: "2px solid #ffffff", fontSize: 8})
+
+  const listStyle = {
+    ...(item.theme ? {
+      borderRadius: 5,
+      color: "white",
+      border: `1px ${showOnURLQuery("dashed") ? "dashed" : "solid"} ${chroma(item.theme).darken(0.2).alpha(showOnURLQuery("dashed") ? 1 : 1).hex()}`,
+    } : {}),
+  }
+
+  return props.disabled ? null : (
     <ListItem
       ref={liRef}
       draggable={true}
       onMouseDown={e => void setMouseDown(true)}
       onMouseUp={e => void setMouseDown(false)}
       onMouseLeave={e => void setMouseDown(false)}
-      onDragStart={(event) => {
-        const dragElem = liRef.current.cloneNode(true)
-        const { width, height } = liRef.current.getBoundingClientRect()
-        dragElem.id = "drop-data"
-        dragElem.style.position = "absolute"
-        dragElem.style.top = "-1000px"
-        dragElem.style.width = width+"px"
-        dragElem.style.height = height+"px"
-        document.body.appendChild(dragElem)
-        event.dataTransfer.setDragImage(dragElem, 10, 3)
-        
-        dnd.setData("drop-data", item)
-      }}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
       bgcolor={chroma(item.theme).darken(0.2).hex()}
-      style={{
-        ...(item.theme ? {
-          borderRadius: 5,
-          color: "white",
-          border: `1px ${showOnURLQuery("dashed") ? "dashed" : "solid"} ${chroma(item.theme).darken(0.2).alpha(showOnURLQuery("dashed") ? 1 : 1).hex()}`,
-        } : {}),
-      }}>
+      style={listStyle}>
       <div style={{ display: "flex", flexFlow: "row", position: "relative"}}>
         <ListMainIcon
           style={{borderRadius: "50%", padding: 0}}
@@ -513,7 +522,7 @@ const Title = styled.h3`
     /* cursor: pointer; */
   }
 
-  & > span > svg:hover {
+  & > span > span > svg:hover {
     color: rgb(63,131,255)!important;
   }
 
@@ -862,8 +871,10 @@ const Tabs = observer(({ graph }) => {
     return (
       <>
       <HeaderTab selected={graph.current === i} onClick={(e) => selectTab(i, e)} borderColorTop={"#009688" || "#ffc967" || "#47a8d85e" || "#eff1f2" || "white" || "#ffe863" || "#d3edff" || "#00ca51"}>
+        {i === 0 && (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill={graph.current === i ? "currentColor" : "#d1d0d0"} d="M2 19h20v2H2v-2zM2 5l5 3.5L12 2l5 6.5L22 5v12H2V5zm2 3.841V15h16V8.841l-3.42 2.394L12 5.28l-4.58 5.955L4 8.84z"/></svg>
+        )}
         {tab.name}
-
         <div onClick={(e) => removeModel(i, e)} style={{ display: i > 0 ? "block" : "none", position: "absolute", top: "57%", transform: "translateY(-50%)", right: 0 }}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill="#e2e1e1" d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" /></svg>
         </div>
@@ -903,7 +914,13 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    setTimeout(() => setLoading(false), 1500)
+    if(showOnURLQuery("noloading")) {
+      setLoading(false)
+    } else if(showOnURLQuery("loading")) {
+
+    } else {
+      setTimeout(() => setLoading(false), 2000)
+    }
   }, [])
 
   React.useEffect(() => {
@@ -926,7 +943,6 @@ function App() {
   const showDiagram = (state.showClient === false && state.showEditor === false)
   const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
-  console.log("-->", state.leftSideMenu)
   
 
 
@@ -934,8 +950,8 @@ function App() {
     <StoreContext.Provider value={{ toggleClient, toggleEditor, toggler }}>
       <Container leftSideMenu={state.leftSideMenu} rightSideMenu={state.rightSideMenu}>
         {loading && <Row h100 w100 acenter jcenter style={{position: "fixed", zIndex: 200, background: "rgba(255,255,255, 1)"}} column>
-          <img src={LavaSvg} width={"100px"} style={{marginBottom: 20}} alt=""/>
-          {/* <div style={{fontSize: 20}}>Hämtar diagram</div> */}
+          <img src={CometSpinner} width={"100px"} style={{marginBottom: 20}} alt=""/>
+          <div style={{fontSize: 20,opacity: 0.7, color: "#20303c"}}>Hämtar diagram</div>
         </Row>}
 
         {/* <div style={{gridColumn: "1/2", gridRow: "1/2", background: "white"}}></div> */}
@@ -951,9 +967,17 @@ function App() {
             <span style={{ fontWeight: 700, fontSize: 20, transform: "translateY(-2px)" }}>Flouw</span>
             <span style={{height:18,margin: "0 12px", width: 1, background: "rgba(0, 0, 0, 0.1)"}}/>
             <span >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M5.828 7l2.536 2.536L6.95 10.95 2 6l4.95-4.95 1.414 1.414L5.828 5H13a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H5.828z"/></svg>
+            <ToolTipPopup id={"undo"+"_tooltip"} text={"Ångra"} delay={700} bg={"#454165"} color={"white"}>
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M5.828 7l2.536 2.536L6.95 10.95 2 6l4.95-4.95 1.414 1.414L5.828 5H13a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H5.828z"/></svg>
+              </span>
+            </ToolTipPopup>
               <span style={{margin: "0 5px"}}/>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.172 7H11a6 6 0 1 0 0 12h9v2h-9a8 8 0 1 1 0-16h7.172l-2.536-2.536L17.05 1.05 22 6l-4.95 4.95-1.414-1.414L18.172 7z"/></svg>
+              <ToolTipPopup id={"undo"+"_tooltip"} text={"Framåt"} delay={700} bg={"#454165"} color={"white"}>
+                <span >
+                  <svg xmlns="http://www.w3.org/2000/svg" style={{opacity: 0.5}} viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.172 7H11a6 6 0 1 0 0 12h9v2h-9a8 8 0 1 1 0-16h7.172l-2.536-2.536L17.05 1.05 22 6l-4.95 4.95-1.414-1.414L18.172 7z"/></svg>
+                </span>
+              </ToolTipPopup>
             </span>
           </Title>
 
@@ -1063,7 +1087,7 @@ function App() {
                       <BodyGrid>
                           <SectionGridLeft>
                               <DRow center>
-                                <h1>Inställningar för <bold>Standardgraf</bold></h1>
+                                <h1>Inställningar för <bold>Diagram</bold></h1>
                               </DRow>
                               <DRow center>
                                 <InputField placeholder="Namn"/>
@@ -1081,7 +1105,7 @@ function App() {
                           <SectionGridLine/>
                           <SectionGridRight>
                               <DRow center>
-                                <h1 style={{textAlign: "center"}}>Miljlvariabler</h1>
+                                <h1 style={{textAlign: "center"}}><bold>Miljlvariabler</bold></h1>
                               </DRow>
                               <DRow>
 
@@ -1097,11 +1121,22 @@ function App() {
                               </DRow>
                           </SectionGridRight>
                       </BodyGrid>
-                      <div style={{ width: "95%", height: 2, background: "#f0f4f7" || "#f3f3f3", margin: "auto" }} />
-                      <BodyGrid>
-                        <SectionGridLeft></SectionGridLeft>
-                        <SectionGridRight></SectionGridRight>
-                      </BodyGrid>
+                      <div style={{ width: "85%", height: 2, background: "#f0f4f7" || "#f3f3f3", margin: "auto" }} />
+
+                              <Row justify="center" align="center" style={{marginTop: 15}}>
+                                  <h1><bold>Extra</bold></h1>
+                              </Row>
+
+                              <DRow>
+
+                              </DRow>
+                              <DRow>
+                                
+                              </DRow>
+                              <DRow>
+                                
+                              </DRow>
+                                
                     </Settings>
                   </Content>
                 )}
@@ -1167,7 +1202,7 @@ function App() {
             <SideMenuContent>
               {!state.showEditor && <LogsContainer>
                 <Row flex="1" w100 justify="center" align="center">
-                  <img src={SearchingSvg} width={"100px"} style={{marginBottom: 20}} alt=""/>
+                  <img src={SearchingSvg} className="icon-gray" width={"100px"} style={{marginBottom: 20}} alt=""/>
                 </Row>
               </LogsContainer>}
             </SideMenuContent>

@@ -165,8 +165,8 @@ const SectionGridBottom = styled.section`
 
 
 export const SectionGridLine = styled.div`
-    height: 60%;
-    width: 1px;
+    height: 72%;
+    width: 2px;
     background: #f3f3f3;
     align-self: center;
     justify-self: center;

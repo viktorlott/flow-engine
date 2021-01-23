@@ -164,7 +164,7 @@ function LItem(props) {
 
   const listStyle = {
     ...(item.theme ? {
-      borderRadius: 5,
+      borderRadius: 3,
       color: "white",
       border: `1px ${showOnURLQuery("dashed") ? "dashed" : "solid"} ${chroma(item.theme).darken(0.2).alpha(showOnURLQuery("dashed") ? 1 : 1).hex()}`,
     } : {}),
@@ -179,8 +179,9 @@ function LItem(props) {
       onMouseLeave={e => void setMouseDown(false)}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
-      bgcolor={chroma(item.theme).darken(0.2).hex()}
+      bgcolor={"#ffffff82" || chroma(item.theme).darken(0.2).hex()}
       style={listStyle}>
+      <div style={{ width: "37px", height: "100%", background: chroma(item.theme).darken(0.2).alpha(0.2).hex(), borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", left: 0, top: 0 }}></div>
       <div style={{ display: "flex", flexFlow: "row", position: "relative"}}>
         <ListMainIcon
           style={{borderRadius: "50%", padding: 0}}
@@ -188,12 +189,15 @@ function LItem(props) {
           color={chroma(item.theme).darken(0.1).alpha(1).hex() || "#212429"}>
           {item.icon || <BoxIcon />}
         </ListMainIcon>
-        <ToolTipPopup id={item.title+"_tooltip"} text={item.label} delay={500} bg={"#454165"} color={"white"} hide={mouseDown}>
+        <ToolTipPopup id={item.title+"_tooltip"} text={item.label} delay={500} bg={"#454165"} color={"white"} hide={true}>
           <ListItemTitle>
             <TitleUpper color={chroma(item.theme).darken(0.1).alpha(1).hex()}>{item.title}</TitleUpper>
           </ListItemTitle>
         </ToolTipPopup>
       </div>
+      {/* <div style={{ width: "1px", height: "100%", borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", right: "15%", top: 0 }}></div> */}
+      {/* <div style={{ width: "1px", height: "100%", background: chroma(item.theme).darken(0.6).alpha(0.9).hex(), position: "absolute", right: "13%", top: 0 }}></div> */}
+      {/* <div style={{ width: "1px", height: "100%", background: chroma(item.theme).darken(1).alpha(0.9).hex(), position: "absolute", right: "11%", top: 0 }}></div> */}
 
       {item.ports.find(e => e.input) && (
         <Row jcenter acenter style={portStyle("left", item.ports.find(e => e.input).input)}>x{item.ports.filter(e => e.input).length}</Row>
@@ -201,6 +205,8 @@ function LItem(props) {
       {item.ports.find(e => e.output) && (
         <Row jcenter acenter style={portStyle("right", item.ports.find(e => e.output).output)}>x{item.ports.filter(e => e.output).length}</Row>
         )}
+
+      
       
     </ListItem>
     
@@ -692,6 +698,7 @@ const SideMenuTitle = styled.div`
     z-index: 2;
     font-size: 12px;
     /* border-radius: 2px; */
+    opacity: 0.7;
 
     & > div {
       justify-content: center;
@@ -708,6 +715,7 @@ const SideMenuTitle = styled.div`
       padding: 0;
       margin: 0;
       color: inherit;
+      opacity: 0.8;
       & > svg {
         color: inherit;
       }

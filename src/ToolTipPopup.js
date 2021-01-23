@@ -35,12 +35,13 @@ const HoverMenuItem = styled.div`
     opacity: ${props => props.show ? "1" : "0"};
     visibility: ${props => props.show ? "visible" : "hidden"};
     left: 50%;
-    z-index: 1000;
+    
     
     ${boxPosition}
     transform: translateX(-50%);
     user-select: none;
     padding: 6px 8px;
+
 
 
     transition: opacity 0.3s, visibility 0.1s, transform 0.2s;
@@ -69,6 +70,8 @@ const HoverMenuItem = styled.div`
         ${arrowPosition}
         z-index: 100;
     }
+
+    z-index: 1000;
 
 `
 

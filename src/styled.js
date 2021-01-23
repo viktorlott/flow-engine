@@ -192,6 +192,36 @@ export const SpecialButton = styled.button`
 
 
 `
+
+
+const spring = t => 
+    -0.5 * 
+    (2.71828 ** (-6 * t)) * (
+        -2 * (2.71828 ** (6 * t)) + 
+        Math.sin(12 * t) + 
+        2 * Math.cos(12 * t)
+    )
+  
+  const lerp = (a, b, p) => a + p * (b - a)
+  
+  const bounce = funcs => css`
+    @keyframes move {
+      ${props => {
+        return [...Array(100).keys()].map(i => {
+          let t = i / (funcs.duration || 100)
+          let p = spring(t)
+          return `${i + "%"} {`+
+            `${(funcs.animation || props.animation)(p, i, lerp)}` +
+          `}`
+        }).join("\n")
+      }}
+
+      100% {
+          ${funcs.rest()}
+      }
+    }
+  `
+  
 export const ListItem = styled.li`
       display: flex;
 
@@ -205,11 +235,27 @@ export const ListItem = styled.li`
 
     transition: background 0.1s;
     will-change: background;
-    background: ${props => chroma(props.bgcolor).alpha(0.2).hex()};
+    background: ${props => chroma(props.bgcolor).alpha(0.3).hex()};
 
+    /* transition: transform 0.08s; */
 
+    /* ${bounce({
+        duration: 25,
+        animation(p, i, lerp) {
+            return `
+                transform: scale(${lerp(1, 1.04, p)});
+            `
+        },
+        rest() {
+            return `transform: scale(1);`
+        }
+    })} */
     &:hover {
-      background: ${props => chroma(props.bgcolor).alpha(0.25).hex()};
+      /* animation: move 2s ease-in-out; */
+      /* transform: scale(1.04); */
+      /* background: ${props => chroma(props.bgcolor).alpha(0).hex()}; */
+
+  
     }
     will-change: background;
 
@@ -292,7 +338,7 @@ export const ListMainIcon = styled.div`
   
   /* background: #fbfbfb; */
   /* border-radius: 4px 0 0 4px; */
-  margin-right: 10px;
+  margin-right: 18px;
   margin-left: 8px;
   color: ${props => props.color};
   background: ${props => props.theme};
@@ -747,7 +793,8 @@ export const SideBarHeader = styled(Header)`
 
   height: 60px;
   > h4 {
-    color: #686c71;
+    color: #585858; 
+    /*#686c71;*/
     font-weight: 400;
     font-size: 14px;
 

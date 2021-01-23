@@ -118,7 +118,7 @@ const ToolContainer = styled.div`
 `
 
 const Container = styled.div`
-    border-radius: 5px;
+    border-radius: 3px;
 
     background:${props => props.selected ? "#404040" : "#404040"};
     display: flex;
@@ -152,6 +152,8 @@ const Container = styled.div`
     ${props => props.transparent && css`
         background: ${chroma(props.color).alpha(props.selected ? 0.2 : 0.1).hex()};
         border: 1px ${props.selected ? "solid" : "solid"} ${props.color || "#404040" };
+        
+        ${'' /* background: transparent; */}
 
         &:hover {
             background: ${chroma(props.color).alpha(0.2).hex()};

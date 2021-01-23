@@ -3,6 +3,9 @@ Flowchart building tool
 
 Work in process!
 
+Link to Demo-site:
+<a href="http://rest-client.surge.sh/">Demo</a>
+
 
 This project is just am experiment, nothing is fully functional.
 
@@ -15,6 +18,8 @@ Contains:
 
 Preview:
 <img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/Screenshot.png" alt="Alt Text" style="max-width:100%;">
+.
+<img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/Screenshot%202021-01-19%20at%2012.39.59.png" alt="Alt Text" style="max-width:100%;">
 
-Link to Demo-site:
-<a href="http://rest-client.surge.sh/">Demo</a>
+
+

@@ -25,9 +25,9 @@ Preview:
 
 ### Different views
 
-<a href="http://rest-client.surge.sh/?sidenone">Without left side menu</a>
-<a href="http://rest-client.surge.sh/?blank">Without navbar</a>
-<a href="http://rest-client.surge.sh/?sidenone&blank">Without left side menu and navbar</a>
+<a href="http://rest-client.surge.sh/?sidenone">Without left side menu</a> <br/>
+<a href="http://rest-client.surge.sh/?blank">Without navbar</a> <br/>
+<a href="http://rest-client.surge.sh/?sidenone&blank">Without left side menu and navbar</a> <br/>
 
 
 

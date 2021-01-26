@@ -92,6 +92,12 @@ export const ComponentListContainer = styled.ul`
   cursor: grab;
 
   padding: 10px 0px;
+  ${props => props.nobg && css`
+      background: transparent!important;
+      background-image: none;
+      border: none;
+      box-shadow: none;
+    `}
 
   & > h3 {
     color: #232b40;
@@ -228,14 +234,14 @@ export const ListItem = styled.li`
     justify-content: space-between;
     position: relative;
 
-    margin: 10px 15px;
+    margin: 10px 18px;
     padding-left: 5px;
 
     cursor: grab;
 
-    transition: background 0.1s;
+    transition: background 0.1s, margin 0.1s;
     will-change: background;
-    background: ${props => chroma(props.bgcolor).alpha(0.3).hex()};
+    background: ${props => props.bgcolor};
 
     /* transition: transform 0.08s; */
 
@@ -254,8 +260,8 @@ export const ListItem = styled.li`
       /* animation: move 2s ease-in-out; */
       /* transform: scale(1.04); */
       /* background: ${props => chroma(props.bgcolor).alpha(0).hex()}; */
-
-  
+      margin: 10px 15px;
+      
     }
     will-change: background;
 
@@ -786,18 +792,40 @@ ${'' /*
 
 
 `
-
+// transform: translateX(-12px)
 
 export const SideBarHeader = styled(Header)`
   /* border-top: 1px solid #e4e4e4; */
 
   height: 60px;
+
+  ${props => props.nobg && css`
+      background: transparent!important;
+      border: none;
+      box-shadow: none;
+    `}
   > h4 {
     color: #585858; 
+    color: #303135;
     /*#686c71;*/
     font-weight: 400;
     font-size: 14px;
 
+    font-weight: 300;
+    font-size: 14px;
+    padding: 5px;
+    width: 130px;
+    /* background: #f3f3f3; */
+    /* color: #5d5d5d; */
+    border-radius: 3px;
+    /* border: 1px solid #ececec; */
+
+
+    ${props => props.nobg && css`
+      background: transparent!important;
+      border: none;
+      box-shadow: none;
+    `}
 
     > svg {
       margin-top: 2px;
@@ -1248,7 +1276,7 @@ export const SidemenuContainer = styled.div`
     /* background: #f0f4f7;
     background: #f9f9f9; */
     /* background: ${props => props.bg ? props.bg : "white"}; */
-    background: white;
+    background: ${props => props.nobg ? "transparent" : "white"};
     /* border-radius: 4px; */
     /* overflow: scroll; */
     flex-direction: column;
@@ -1267,6 +1295,12 @@ export const SidemenuContainer = styled.div`
 
     ${props => props.left ? "box-shadow: 0px 0 5px 0 rgba(32,48,60,.05);" : "box-shadow: 0px 0 5px 0 rgba(32,48,60,.05);"}
     border: 1px solid #eff1f2;
+
+    ${props => props.nobg && css`
+      background: none;
+      border: none;
+      box-shadow: none;
+    `}
 
     ${props => props.left && css`
       grid-column: 1/2;

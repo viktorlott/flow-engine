@@ -6,10 +6,6 @@ import { CustomLinkModel } from './CustomLinkModel';
 
 export class CustomLinkSegmentWidget extends React.Component {
 
-	componentDidMount() {
-
-	}
-
 
 	render() {
 		const Bottom = React.cloneElement(
@@ -20,7 +16,9 @@ export class CustomLinkSegmentWidget extends React.Component {
 				this.props.link.isSelected()
 			),
 			{
-				ref: this.props.forwardRef
+				ref: this.props.forwardRef,
+				strokeWidth: 1.5,
+				// stroke: "#a6a7b1" || "#8f909a"
 			}
 		);
 

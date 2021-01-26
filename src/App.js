@@ -30,28 +30,6 @@ import {
   InfiniteIcon,
   DragIcon,
   BoxIcon,
-  SignalIcon,
-  CodeIcon,
-  DangerIcon,
-  InfoIcon,
-  RelayIcon,
-  BoltIcon,
-  CloudIcon,
-  UserAddIcon,
-  FileAddIcon,
-  OrgIcon,
-  CommentIcon,
-  DatabaseIcon,
-  TerminalIcon,
-  ClapperBoard,
-  BrowserIcon,
-  MailIcon,
-  CogIcon,
-  FolderPlusIcon,
-  ParserIcon,
-  PathIcon,
-  GitPullIcon,
-  DatasetIcon,
 } from './Icons'
 
 import Database, { InputField, BodyGrid,Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from './Database'
@@ -160,7 +138,7 @@ function LItem(props) {
 
   const onDragEnd = React.useCallback(() => void dnd.removeDragImg(), [])
 
-  const portStyle = (position="right",item) => ({position: "absolute", [position]: -9, width: 12, height: 12, top: "50%", transform: "translateY(-50%)", background: item.color || "#616161", borderRadius: "39%", border: "2px solid #ffffff", fontSize: 8})
+  const portStyle = (position="right",item) => ({position: "absolute", [position]: -9, width: 12, height: 12, top: "50%", transform: "translateY(-50%)", background: item.color || "#525252" ||"#616161", borderRadius: "39%", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600})
 
   const listStyle = {
     ...(item.theme ? {
@@ -179,9 +157,9 @@ function LItem(props) {
       onMouseLeave={e => void setMouseDown(false)}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
-      bgcolor={"#ffffff82" || chroma(item.theme).darken(0.2).hex()}
+      bgcolor={"#ffffff00" || chroma(item.theme).darken(0.2).hex()}
       style={listStyle}>
-      <div style={{ width: "37px", height: "100%", background: chroma(item.theme).darken(0.2).alpha(0.2).hex(), borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", left: 0, top: 0 }}></div>
+      <div style={{ width: "37px", height: "100%", background: chroma(item.theme).darken(0.2).alpha(0.3).hex(), borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", left: 0, top: 0 }}></div>
       <div style={{ display: "flex", flexFlow: "row", position: "relative"}}>
         <ListMainIcon
           style={{borderRadius: "50%", padding: 0}}
@@ -695,6 +673,12 @@ const SideMenuTitle = styled.div`
     border-bottom: 1px solid #eff1f2;
     /* border-bottom: 1px solid #2d3042; */
     /* box-shadow: 0 2px 5px 0 rgba(32,48,60,.05); */
+    ${props => props.nobg && css`
+      background: none;
+      border: none;
+      box-shadow: none;
+    `}
+
     z-index: 2;
     font-size: 12px;
     /* border-radius: 2px; */
@@ -842,7 +826,7 @@ function Drawer(props) {
 
   return (
     <>
-      <SideMenuTitle>
+      <SideMenuTitle nobg={props.nobg}>
         <div>{props.title}</div>
         <div>
           <button onClick={() => props.children && setState(prev => ({...prev, isOpen: !prev.isOpen}))}><svg style={{transform: state.isOpen ? "rotate(0deg)" : "rotate(-90deg)"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"/></svg></button>
@@ -909,9 +893,7 @@ function App() {
       setState(prev => ({...prev, settings: false }))
   },[])
 
-  const toggleSettings = React.useCallback(() => {
-    setState(prev => ({...prev, settings: true }))
-  },[])
+  const toggleSettings = React.useCallback(() => void setState(prev => ({...prev, settings: true })),[])
 
   const toggler = (name) => (editor = null) => setState(prev => ({ ...prev, [name]: !prev[name] }))
   const saved = () => setState(prev => ({ ...prev, saved: !prev.saved }))
@@ -1013,13 +995,12 @@ function App() {
 
         </HeaderWrapper>
 
-       
 
-        <SidemenuContainer active={state.leftSideMenu} bg={"white" || "#23263c"} left >
+        <SidemenuContainer active={state.leftSideMenu} bg={"white" || "#23263c"} left nobg={showOnURLQuery("sidenone")} >
         
-            <SideBarHeader borderColor={"#f1f1f1"}>
+            <SideBarHeader borderColor={"#f1f1f1"} nobg={showOnURLQuery("sidenone")}>
               <div></div>
-              <h4 borderColorTop={"#e5e5e5"}>
+              <h4 borderColorTop={"#e5e5e5"} style={{transform: "translateX(-10px)", width: 200}}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>
                 Komponenter
               </h4>
@@ -1036,18 +1017,18 @@ function App() {
                 {/* <svg onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 11V8l4 4-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8z"/></svg> */}
               </Expander>
             </SideBarHeader>
-              <Drawer defaultOpen={true} title={"Standard"}>
-                <ComponentListContainer>
+               <Drawer defaultOpen={true} title={"Standard"} nobg={showOnURLQuery("sidenone")}>
+                <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
                   <BlockList items={Nodes.standard} />
                 </ComponentListContainer>
               </Drawer>
-              <Drawer title={"API"}>
-                <ComponentListContainer>
+              <Drawer title={"API"} nobg={showOnURLQuery("sidenone")}>
+                <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
                   <BlockList items={Nodes.api} />
                 </ComponentListContainer>
               </Drawer>
-              <Drawer title={"Extra"}>
-              </Drawer>
+              {/* <Drawer title={"Extra"}>
+              </Drawer>  */}
              
           </SidemenuContainer>
 

@@ -20,7 +20,7 @@ export default [
       extra: null,
   
       ports: [
-        { input: { name: "in", label: "Inmatning", color: "#616161", gate: true }, output: { name: "out", label: "Resultat", color: "#36bf16" } },
+        { input: { name: "in", label: "Inmatning", color: "#616161", gate: true }, output: { name: "out", label: "Resultat", color: "#7f3bff"||"#36bf16" } },
         { output: { name: "error", label: "Felhantering", color: "#ff7e7e" } },
       ]
     },
@@ -40,7 +40,7 @@ export default [
       theme: "#353535",
       disable: true,
       ports: [
-        { input: { name: "in", label: "Inmatning", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#36bf16" } },
+        { input: { name: "in", label: "Inmatning", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#353535" || "#36bf16" } },
         // { output: { name: "error", label: "Felhantering", color: "#ff7e7e" } },
       ]
     },
@@ -56,10 +56,10 @@ export default [
       ),
   
       // <ParserIcon />, 
-      theme: "#8bc34a", //#ffc107 ffc107
+      theme: "#205249"|| "#62ad0a" || "#8bc34a", //#ffc107 ffc107
       disable: true,
       ports: [
-        { input: { name: "in", label: "Inmatning", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#36bf16" } },
+        { input: { name: "in", label: "Inmatning", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#205249"||"#36bf16" } },
         { output: { name: "error", label: "Felhantering", color: "#ff7e7e" } },
       ]
     },
@@ -74,7 +74,7 @@ export default [
       theme: "#ff510b",
       disable: true,
       ports: [
-        { output: { name: "out", label: "", color: "#ffc107" } }
+        { output: { name: "out", label: "", color: "#ff743d" || "#ffc107" } }
         // { input: { name: "in", label: "URL", color: "#616161" } },
         // { input: { name: "in", label: "Namn", color: "#616161" } },
         // { input: { name: "in", label: "Kollektion", color: "#616161" },  output: { name: "out", label: "Resultat", color: "#36bf16" } },
@@ -97,7 +97,7 @@ export default [
       ports: [
         { input: { name: "in", label: "URL", color: "#616161" } },
         { input: { name: "test", label: "Namn", color: "#616161" } },
-        { input: { name: "test1", label: "Kollektion", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#36bf16" } },
+        { input: { name: "test1", label: "Kollektion", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#0382f4"||"#36bf16" } },
         { input: { name: "test2", label: "Query", color: "#616161" }, output: { name: "error", label: "Felhantering", color: "#ff7e7e" } },
       ]
     },
@@ -114,7 +114,7 @@ export default [
       theme: "#f70054",
       disable: true,
       ports: [
-        { input: { name: "in", label: "", color: "#616161" }, output: { name: "out", label: "", color: "#ffc107" } },
+        { input: { name: "in", label: "", color: "#616161" }, output: { name: "out", label: "", color: "#fb377a"||"#ffc107" } },
       ]
     },
     {
@@ -128,7 +128,7 @@ export default [
       theme: "#ff9800",
       disable: true,
       ports: [
-        { input: { name: "in", label: "", color: "#616161" }, output: { name: "out", label: "", color: "#ffc107" } },
+        { input: { name: "in", label: "", color: "#616161" }, output: { name: "out", label: "", color: "#ff9800" || "#ffc107" } },
       ]
     },
     {
@@ -139,7 +139,7 @@ export default [
       theme: "#d700ef",
       disable: true,
       ports: [
-        { output: { name: "out", label: "", color: "#ffc107" } },
+        { output: { name: "out", label: "", color: "#ea31ff" || "#ffc107" } },
       ]
     },
     {

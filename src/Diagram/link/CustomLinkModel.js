@@ -17,7 +17,7 @@ export class CustomLinkModel extends LinkModel {
 		super({
 			...options,
 			type: 'default',
-			width: options.width || 1 || 2,
+			width: 2 || options.width || 1 || 2,
 			color: options.color || '#c7c7c7',
 			selectedColor: options.selectedColor || "#c7c7c7" || 'rgb(0,192,255)',
 			curvyness: 100,

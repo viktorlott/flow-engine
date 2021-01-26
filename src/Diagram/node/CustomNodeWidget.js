@@ -117,6 +117,15 @@ const ToolContainer = styled.div`
 
 `
 
+
+/**
+ * NODE PORT STYLE FOR VARIABLE
+ * 
+ *  transform: rotate(45deg);
+ *  border-radius: 5px;
+ *  background: #ff7842;
+ */
+
 const Container = styled.div`
     border-radius: 3px;
 
@@ -150,13 +159,13 @@ const Container = styled.div`
     animation: 1s move linear;
 
     ${props => props.transparent && css`
-        background: ${chroma(props.color).alpha(props.selected ? 0.2 : 0.1).hex()};
+        background: ${chroma(props.color).alpha(props.selected ? 0.3 : 0.2).hex()};
         border: 1px ${props.selected ? "solid" : "solid"} ${props.color || "#404040" };
         
         ${'' /* background: transparent; */}
 
         &:hover {
-            background: ${chroma(props.color).alpha(0.2).hex()};
+            background: ${chroma(props.color).alpha(0.3).hex()};
 
 
         }
@@ -192,22 +201,23 @@ const Ports = styled.div`
 
 
 const CirclePort = styled.div`
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     
 
     /* transition: background 0.2s ease-out; */
     /* width: 15px;
     height: 14px; */
+    transform: rotate(0deg);
     background: ${props => props.color ? props.color : "darkgray"};
-    border-radius: ${props => props.minimized || true ? "39%" : "50%"};
+    border-radius: ${props => props.minimized || true ? "30%" : "50%"};
     cursor: pointer;
     transition: color 0.2s, transform 0.2s;
 
     
 
     &:hover {
-        transform: scale(1.3);
+        transform: scale(1.3) rotate(45deg);
         /* background: mediumpurple; */
     }
 

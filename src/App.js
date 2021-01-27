@@ -79,12 +79,12 @@ import LogsContainer from './components/LogContainer'
 import SuccessIcon from './components/SuccessIcon'
 // import example from './example.json'
 
-// import WindowSvg from './window.svg'
 // import ToolTipPopupSvg from './ToolTipPopup.svg'
 // import ServerSvg from './server.svg'
 // import ServerBlockSvg from './serverblock.svg'
 // import SpinnerSvg from './spinner.svg'
 
+import WindowSvg from './svg/window.svg'
 import SearchingSvg from './svg/searching.svg'
 import LavaSvg from './svg/lava.svg'
 import CometSpinner from './svg/cometspinner.svg'
@@ -1191,7 +1191,7 @@ function App() {
             <SideMenuContent>
               {!state.showEditor && <LogsContainer>
                 <Row flex="1" w100 justify="center" align="center">
-                  <img src={SearchingSvg} className="icon-gray" width={"100px"} style={{marginBottom: 20}} alt=""/>
+                  <img src={WindowSvg} className="icon-gray" width={"100px"} style={{marginBottom: 20}} alt=""/>
                 </Row>
               </LogsContainer>}
             </SideMenuContent>

@@ -1000,7 +1000,7 @@ export const HeaderTab = styled.h5`
     margin-right: 5px;
     transition: color 0.1s;
     will-change: color, background;
-    border-radius: 2px 2px 0 0;
+    border-radius: 3px 3px 0 0;
     border-bottom: 1px solid transparent;
 
     /* border-bottom: 1px solid #e5e5e5; */
@@ -1142,7 +1142,7 @@ export const Content = styled.div`
   position: relative;
   /* padding: 1px; */
   /* background: white; */
-  border-radius: 0 3px 2px 2px;
+  border-radius: 0 8px 8px 8px;
   
   ${props => props.border && css`
       border-left: 1px solid #e5e5e5;
@@ -1335,7 +1335,7 @@ export const SidemenuContainer = styled.div`
     /* border-radius: 4px 0 0 4px; */
 
     /* margin-top: 14px; */
-    border-radius: 3px;
+    border-radius: 8px;
     overflow: hidden;
     /* box-shadow: 0 5px 20px 0 rgba(32,48,60,.11); */
     

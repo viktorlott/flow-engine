@@ -8,6 +8,8 @@ export const Container = styled.div`
      outline: none;
      border: none;
 
+     width: 98vw;
+     height: 98vh;
      &:focus {
           outline: none;
           border: none;
@@ -15,7 +17,7 @@ export const Container = styled.div`
 
 
     grid-template-columns: 300px 0px minmax(0, 720px) 10px  minmax(0, 720px);
-    grid-template-rows: 50px minmax(0px, 80px) 1px minmax(0, 720px);
+    grid-template-rows: 50px minmax(0px, 80px) 1px minmax(0, calc(100% - 50px - 80px - 1px));
      /* border: 1px solid ${borderColor}; */
     background-color: white;
     margin: 0;

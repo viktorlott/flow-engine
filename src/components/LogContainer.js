@@ -119,8 +119,8 @@ const LogsContainer = (props) => {
                 <h4 style={{textAlign: "center", opacity: 1}}>
 
                     {props.children}
-                    <div style={{fontWeight: 400, opacity: 0.4}}>Här kommer dina loggar visas.</div>
-                    <div style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, padding: "5px 40px"}}>Just nu så är dina loggar tomma, testa gärna en nod för att fylla dem.</div>
+                    <div style={{fontWeight: 400, opacity: 0.4, color: "#1c2b46", opacity: 0.7}}>Här kommer dina loggar visas.</div>
+                    <div style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, opacity: 0.5, color: "#1c2b46", padding: "5px 40px"}}>Just nu så är dina loggar tomma, testa gärna en nod för att fylla dem.</div>
                 </h4>
                 <h4></h4>
             </div>}

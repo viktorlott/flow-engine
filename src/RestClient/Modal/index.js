@@ -164,7 +164,11 @@ const AnimationWrapper = styled.div`
 // cubic-bezier(0.97, 0.31, 0.7, 0.87)
 const Wrapper = document.createElement("div")
 
+// Wrapper.style = "width: 100%; height: 100%;"
+
 document.body.prepend(Wrapper)
+
+
 
 const Portal = (props) => ReactDOM.createPortal(props.children, Wrapper)
 

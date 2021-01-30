@@ -92,6 +92,7 @@ import LavaSvg from './svg/lava.svg'
 import CometSpinner from './svg/cometspinner.svg'
 import CloudComp from './svg/cloudcomp.svg'
 import dbdrive from './svg/dbdrive.svg'
+import Folder from './svg/folder.svg'
 
 import * as html2canvas from 'html2canvas'
 
@@ -527,7 +528,7 @@ const Table = styled.div`
   
 
   & > div {
-    border: solid #eff1f2;
+    /* border: solid #eff1f2; */
     border-width: 0 0 1px 0;
   }
 
@@ -675,6 +676,7 @@ const SideMenuTitle = styled.div`
     color: #d0d0d0;
     color: #757484;
     color: #383f48;
+    color: #808080;
     font-weight: 400;
     margin: 0 5px;
     /* color: white; */
@@ -682,7 +684,7 @@ const SideMenuTitle = styled.div`
     border: 1px solid var(--element-border-color);
     margin-bottom: 5px;
 
-
+    border-top: none;
     border-left: none;
     border-right: none;
     /* border-bottom: 1px solid #2d3042; */
@@ -694,9 +696,9 @@ const SideMenuTitle = styled.div`
     `}
 
     z-index: 2;
-    font-size: 12px;
+    font-size: 14px;
     /* border-radius: 2px; */
-    opacity: 0.7;
+    /* opacity: 0.7; */
 
     & > div {
       justify-content: center;
@@ -1090,7 +1092,7 @@ function App() {
                   <BlockList items={Nodes.standard} />
                 </ComponentListContainer>
               </Drawer>
-              <Drawer title={"API"} nobg={showOnURLQuery("sidenone")}>
+              <Drawer defaultOpen={true} title={"API"} nobg={showOnURLQuery("sidenone")}>
                 <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
                   <BlockList items={Nodes.api} />
                 </ComponentListContainer>
@@ -1160,8 +1162,8 @@ function App() {
                                 <Row flex="1" w100 style={{height: 400}} justify="center" align="center">
                                   <Row justify="center" align="center" column>
                                     <img src={ServerSvg} className="icon-gray" width={"100px"} style={{marginBottom: 20}} alt=""/>
-                                    <div style={{fontWeight: 400, opacity: 0.4}}>Inställningar för diagram.</div>
-                                    <div style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, padding: "5px 40px"}}>Här skall det finnas fler konfigurerbara fält.</div>
+                                    <div style={{fontWeight: 400, opacity: 0.4}} style={{fontWeight: 400, opacity: 0.4, color: "#1c2b46", opacity: 0.7}}>Inställningar för diagram.</div>
+                                    <div style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, padding: "5px 40px"}} style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, opacity: 0.5, color: "#1c2b46", padding: "5px 40px"}}>Här skall det finnas fler konfigurerbara fält.</div>
                                   </Row>
                                 </Row>
 

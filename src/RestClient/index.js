@@ -511,6 +511,8 @@ function RestClient(props) {
                         <div><p style={{padding: "5px 13px", fontSize:"13.3333px", opacity: state.responseStatus ? 1 : 0, borderRadius: 5, background: statusColor,  color: "white", marginRight: 10, fontWeight: 500}}>{state.responseStatus || 200}</p></div>
                       </ToolTipPopup>
                   </AbsoluteCenter>
+
+          
                 </div>
           
               </div>

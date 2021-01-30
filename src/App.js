@@ -1134,9 +1134,10 @@ function App() {
                 </div>
               </HeaderTabs>
 
-
+              {/* #454165 */}
 
                   <Content>
+                  {showDiagram ? <Diagram toggleEditor={toggleEditor} toggler={toggler} graph={Graph} /> : <FakeScene />}
                   {!state.settings 
                 ? null
                 : (
@@ -1146,7 +1147,7 @@ function App() {
                         position: "absolute", 
                         left: 0, 
                         top: 0, 
-                        zIndex: 1
+                        zIndex: 0
                       }}>
                       <Settings>
                             <div style={{padding: "15px 30px", height: "100%"}}>
@@ -1156,9 +1157,31 @@ function App() {
                                     Inställningar</h1> */}
                                 </DRow>
                                 <DRow>
+                                  <div style={{height: 50}}/>
+                                </DRow>
+
+                               
+{/* 
+                                <DRow>
+                                  <div style={{height: 1, margin: "15px 0", width: "100%", background: "rgba(0,0,0,0.06)"}}/>
+                                </DRow>
+                                <DRow>
+                                  <div style={{margin: "15px 0"}}/>
+                                </DRow> */}
+                                <InputField placeholder="Namn"/>
+                                <InputField placeholder="Typ"/>
+                                <InputField placeholder="Fördröjning"/>
+                                <DropdownField placeholder="Typer" options={[{label: "hello", value: "hello1"}, {label: "hell2", value: "hello2"}]}/>
+
+                                <DRow>
                                   <div style={{height: 20}}/>
                                 </DRow>
 
+                               
+
+                                <DRow>
+                                  <div style={{height: 1, margin: "15px 0", width: "100%", background: "rgba(0,0,0,0.06)"}}/>
+                                </DRow>
                                 <Row flex="1" w100 style={{height: 400}} justify="center" align="center">
                                   <Row justify="center" align="center" column>
                                     <img src={ServerSvg} className="icon-gray" width={"100px"} style={{marginBottom: 20}} alt=""/>
@@ -1166,19 +1189,6 @@ function App() {
                                     <div style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, padding: "5px 40px"}} style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, opacity: 0.5, color: "#1c2b46", padding: "5px 40px"}}>Här skall det finnas fler konfigurerbara fält.</div>
                                   </Row>
                                 </Row>
-
-                                <DRow>
-                                  <div style={{height: 1, margin: "15px 0", width: "100%", background: "rgba(0,0,0,0.06)"}}/>
-                                </DRow>
-                                <DRow>
-                                  <div style={{margin: "15px 0"}}/>
-                                </DRow>
-                                <InputField placeholder="Namn"/>
-                                <InputField placeholder="Typ"/>
-                                <InputField placeholder="Fördröjning"/>
-                                <DropdownField placeholder="Typer" options={[{label: "hello", value: "hello1"}, {label: "hell2", value: "hello2"}]}/>
-
-
 
                                
                                 {/* <DRow >
@@ -1192,7 +1202,7 @@ function App() {
                     </SettingsWrapper>
 
                 )}
-                    {showDiagram ? <Diagram toggleEditor={toggleEditor} toggler={toggler} graph={Graph} /> : <FakeScene />}
+                    
                   </Content>
 
              

@@ -800,6 +800,8 @@ export const SideBarHeader = styled(Header)`
 
   height: 60px;
 
+  /* ${props => props.right && "background: #8290a9;"} */
+
   ${props => props.nobg && css`
       background: transparent!important;
       border: none;
@@ -810,6 +812,7 @@ export const SideBarHeader = styled(Header)`
   > h4 {
     color: #585858; 
     color: #303135;
+    /* color: white; */
     /*#686c71;*/
     font-weight: 400;
     font-size: 14px;
@@ -1176,7 +1179,7 @@ export const SettingsWrapper = styled.div`
       background: rgba(0,0,0,0);
     }
     100% {
-      background: #ffffffc4;
+      background: #ffffff45;
     }
   }
 
@@ -1197,13 +1200,13 @@ export const Settings = styled.div`
   color: #20303c;
   /* #162d3d  */
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   right: 0;
   background: white;
   height: calc(100% );
-  box-shadow: 0 2px 5px 0 rgba(32,48,60,.05);
+  /* box-shadow: 0 2px 5px 0 rgba(32,48,60,.05); */
   border-left: 1px solid #eff1f2;
-
+  /* 0 0px 4px 1px rgb(32 48 60 / 6%) */
   will-change: transform;
 
 

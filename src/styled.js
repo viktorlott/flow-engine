@@ -62,7 +62,7 @@ export const Process = styled.div`
   &, & > div {
     width: calc(100% - 0px);
     height: calc(100% - 0px);
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 3px 3px;
   }
 `
 
@@ -618,6 +618,7 @@ export const Header = styled.div`
       cursor: pointer;
       padding: 10px;
       color: #717171;
+      /* color: #303135; */
 
         
       ${props => props.tabs && props.buttons && css`
@@ -1136,8 +1137,10 @@ export const Content = styled.div`
   /* border-radius: 0 5px 5px 5px; */
   /* margin-top: 50px; */
   overflow: hidden;
+  position: relative;
   /* padding: 1px; */
-  border-radius: 0 5px 5px 5px;
+  /* background: white; */
+  border-radius: 0 3px 2px 2px;
   
   ${props => props.border && css`
       border-left: 1px solid #e5e5e5;
@@ -1159,7 +1162,29 @@ export const SettingsRow = styled.div`
   
   color: #162d3d;
 `
+
+
+export const SettingsWrapper = styled.div`
+  background: transparent;
+
+  will-change: background;
+
+  @keyframes bgtrans {
+    0% {
+      background: rgba(0,0,0,0);
+    }
+    100% {
+      background: #ffffffc4;
+    }
+  }
+
+  animation: 0.2s bgtrans forwards;
+
+`
+
+
 export const Settings = styled.div`
+
   /* display: grid;
   gap: 30px; */
   /* grid-template-rows: auto; */
@@ -1169,9 +1194,31 @@ export const Settings = styled.div`
   /* padding: 10px 20px; */
   color: #20303c;
   /* #162d3d  */
-
+  position: absolute;
+  z-index: 1;
+  right: 0;
   background: white;
-  height: calc(100% - 100px);
+  height: calc(100% );
+  box-shadow: 0 2px 5px 0 rgba(32,48,60,.05);
+  border-left: 1px solid #eff1f2;
+
+  will-change: transform;
+
+
+  @keyframes settingright {
+    0% {
+      transform: translateX(1000px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
+  }
+
+  animation: 0.2s settingright forwards;
+
+  
+
+
 
 
   & h1 {
@@ -1286,7 +1333,8 @@ export const SidemenuContainer = styled.div`
     /* border-radius: 4px 0 0 4px; */
 
     /* margin-top: 14px; */
-    border-radius:2px;
+    border-radius: 3px;
+    overflow: hidden;
     /* box-shadow: 0 5px 20px 0 rgba(32,48,60,.11); */
     
     /* box-shadow: -13px 15px 20px 0 rgba(32,48,60,.01);  */

@@ -103,7 +103,7 @@ export const SectionGridLeft = styled.section`
 
 
     /* margin: 0 20px; */
-    padding: 20px 20px 50px 20px;
+    padding: 20px 20px 50px 40px;
 
 
 `
@@ -296,7 +296,7 @@ const InputWrapper = styled.input`
     padding: 2px 10px;
     position: relative;
     left: 0;
-    width: 300px;
+    /* width: 300px; */
 
     color: #81858e;
     color: #4c5058;
@@ -320,7 +320,7 @@ const InputWrapper = styled.input`
         font-weight: ${props => props.placeholderWeight ? props.placeholderWeight : 400};
     }
 
-    border-radius: 4px;
+    border-radius: 2px;
     margin: 5px 0px 5px 0px;
     background: #ececec;
     background: #f3f3f3;
@@ -328,6 +328,14 @@ const InputWrapper = styled.input`
 
     background: var(--element-color);
     border: 1px solid var(--element-border-color);
+
+    &:hover {
+        border-color: #98cefd;
+        border-color: #0089ff;
+    }
+    &:focus {
+        border-color: #0089ff;
+    }
 
  
 `
@@ -369,7 +377,7 @@ position: relative;
 export const Row = styled.div`
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     align-self: ${props => props.end ? "flex-end" : props.center ? "center" : "unset"};
 
@@ -383,6 +391,16 @@ export const Row = styled.div`
         font-weight: 500;
         margin: 0 0 10px 0;
         color: #1c2b46;
+
+      
+    }
+
+    & > h1 {
+        width: 100%;
+        font-size: 24px;
+        text-align: center;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        padding-bottom: 23px;
     }
 `
 
@@ -412,18 +430,38 @@ const Wrapper = styled.div`
     display: flex;
     flex-flow: column;
     transition: transform 0.2s;
-
+    position: relative;
 
     & > label {
-        font-size: 12px;
-        color: #808080;
-        /* align-self: flex-start; */
+        position: absolute;
         z-index: 1;
-
+        padding: 2px 6px;
+        top: -14px;
+        background: white;
         pointer-events: none;
-        transform: ${props => `translate(10px, 10px)` || `translate(${props.hasFocus ? 10 : 30}px, ${props.hasFocus ? 10 : 30}px)`};
+        color: #808080;
+        left: 0px;
+        /* align-self: flex-start; */
+        transition: font-size 0.2s, transform 0.2s;
+        transform: ${props => `translate(${props.hasFocus ? 10 : 10}px, ${props.hasFocus ? 10 : 27}px)`};
+        font-size: ${props => props.hasFocus ? "12px" : "14px"};
     }
 
+
+    > span {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        margin: auto;
+        transform: translateY(-47%);
+        color: ${props => props.hasFocus ? "#0089ff!important" : "#808080"};
+        & > svg {
+            height: 18px;
+            padding: 0;
+            color: ${props => props.hasFocus ? "#0089ff!important" : "#808080"};
+            
+        }
+    }
 
 
  
@@ -547,14 +585,26 @@ function SuccessIcon() {
 
 
 export function InputField(props) {
-    const [state, setState] = useState({ focus: false })
+    const [state, setState] = useState({ focus: false, value: "" })
     const { placeholder, ...restProps} = props
 
 
+    useEffect(() => {
+        restProps.onChange && restProps.onChange(state.value)
+    },[state.value])
+
+    const onChange = e => {
+        e.persist()
+        setState(prev => ({ ...prev, value: e.target.value }))
+    }
+
     return (
-        <Wrapper hasFocus={state.focus}>
+        <Wrapper hasFocus={state.focus || !!state.value}>
             <label htmlFor="">{placeholder}</label>
-            <InputWrapper onFocus={e => setState(prev => ({...prev, focus: true}))} onBlur={e => setState(prev => ({...prev, focus: false}))} {...restProps}/>
+            <InputWrapper {...restProps} value={state.value} onChange={onChange} onFocus={e => setState(prev => ({...prev, focus: true}))} onBlur={e => setState(prev => ({...prev, focus: false}))} />
+            <span>
+                {props.icon}
+            </span>
         </Wrapper>
     )
 }

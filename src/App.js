@@ -71,7 +71,8 @@ import {
   HeaderTab,
   ListItem,
   SideBarHeader,
-  Settings
+  Settings,
+  SettingsWrapper
 } from './styled'
 
 
@@ -80,11 +81,11 @@ import SuccessIcon from './components/SuccessIcon'
 // import example from './example.json'
 
 // import ToolTipPopupSvg from './ToolTipPopup.svg'
-// import ServerSvg from './server.svg'
 // import ServerBlockSvg from './serverblock.svg'
 // import SpinnerSvg from './spinner.svg'
 
 import WindowSvg from './svg/window.svg'
+import ServerSvg from './svg/server.svg'
 import SearchingSvg from './svg/searching.svg'
 import LavaSvg from './svg/lava.svg'
 import CometSpinner from './svg/cometspinner.svg'
@@ -139,7 +140,7 @@ function LItem(props) {
   const onDragEnd = React.useCallback(() => void dnd.removeDragImg(), [])
 
   const portStyle = (position="right",item) => ({position: "absolute", [position]: -9, width: 12, height: 12, top: "50%", transform: "translateY(-50%)", background: item.color || "#525252" ||"#616161", borderRadius: "39%", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600})
-
+let m = true
   const listStyle = {
     ...(item.theme ? {
       borderRadius: 3,
@@ -543,6 +544,9 @@ const Tr = styled.div`
   font-size: 12px;
   font-weight: 300;
   color: #9c9c9c;
+  color: #656565;
+  /* color: #228c01; */
+
 
   & > div:nth-child(1) {
     display: flex;
@@ -597,6 +601,7 @@ const Tr = styled.div`
 
       color: #b72828;
       color: #2bb300;
+      color: #228c01;
       background: white;
 
   
@@ -671,6 +676,9 @@ const SideMenuTitle = styled.div`
     margin: 0 5px;
     /* color: white; */
     border-bottom: 1px solid #eff1f2;
+    border: 1px solid var(--element-border-color);
+    margin-bottom: 5px;
+
     /* border-bottom: 1px solid #2d3042; */
     /* box-shadow: 0 2px 5px 0 rgba(32,48,60,.05); */
     ${props => props.nobg && css`
@@ -712,7 +720,8 @@ const SideMenuContent = styled.div`
     transition: height 0.14s ease-in-out;
     will-change: height;
     ${props => props.hide ? "display: none;" : ""}
-    margin: 0 5px;
+    margin: 0 11px;
+    margin-bottom: 5px;
 
 `
 
@@ -759,7 +768,7 @@ const Expander = styled.div`
 
   
   &:hover svg {
-    opacity: 0.7;
+    opacity: 0.8;
 
     visibility: visible
   }
@@ -767,8 +776,9 @@ const Expander = styled.div`
   & > svg {
     cursor: pointer;
     transition: opacity 0.2s, visibility 0.2s;
-    opacity: 0.6;
+    opacity: 0.7;
     color: #686c71;
+    color: #303135!important;
     /* background: white; */
     padding: 4px;
 
@@ -1004,6 +1014,7 @@ function App() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>
                 Komponenter
               </h4>
+            
               <Expander visible={state.leftSideMenu} active={state.leftSideMenu}>
                 <svg style={{borderLeft: "1px solid #e6e6e6", padding: "10px 15px"}} onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm0-9h4v2h-4v3l-4-4 4-4v3z"/></svg>
               </Expander>
@@ -1014,9 +1025,14 @@ function App() {
                   boxShadow: "0 2px 5px 0 rgb(32 48 60 / 11%)",
                   border: "1px solid #eff1f2"
                 }}  onClick={() => toggleSideMenu("left")}   viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>         
-                {/* <svg onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 11V8l4 4-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8z"/></svg> */}
               </Expander>
             </SideBarHeader>
+
+               <div style={{ position: "relative", margin: "0 5px" }}>
+                <InputField style={{ height: 32}} placeholder="Sök" icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15zm-3.847-8.699a2 2 0 1 0 2.646 2.646 4 4 0 1 1-2.646-2.646z"/></svg>
+                } />
+              </div>
                <Drawer defaultOpen={true} title={"Standard"} nobg={showOnURLQuery("sidenone")}>
                 <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
                   <BlockList items={Nodes.standard} />
@@ -1064,71 +1080,75 @@ function App() {
                 </div>
               </HeaderTabs>
 
-              {!state.settings 
-                ? (
+
+
                   <Content>
+                  {!state.settings 
+                ? null
+                : (
+                    <SettingsWrapper style={{
+                        width: "100%", 
+                        height: "100%", 
+                        position: "absolute", 
+                        left: 0, 
+                        top: 0, 
+                        zIndex: 1
+                      }}>
+                      <Settings>
+                            <div style={{padding: "15px 30px", height: "100%"}}>
+                                <DRow center>
+                                  <h1>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="30" style={{transform: "translate(-9px, 7px)"}}><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M2 18h7v2H2v-2zm0-7h9v2H2v-2zm0-7h20v2H2V4zm18.674 9.025l1.156-.391 1 1.732-.916.805a4.017 4.017 0 0 1 0 1.658l.916.805-1 1.732-1.156-.391c-.41.37-.898.655-1.435.83L19 21h-2l-.24-1.196a3.996 3.996 0 0 1-1.434-.83l-1.156.392-1-1.732.916-.805a4.017 4.017 0 0 1 0-1.658l-.916-.805 1-1.732 1.156.391c.41-.37.898-.655 1.435-.83L17 11h2l.24 1.196c.536.174 1.024.46 1.434.83zM18 17a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                                    Inställningar</h1>
+                                </DRow>
+                                <DRow>
+                                  <div style={{height: 20}}/>
+                                </DRow>
+
+                                <Row flex="1" w100 style={{height: 400}} justify="center" align="center">
+                                  <Row justify="center" align="center" column>
+                                    <img src={ServerSvg} className="icon-gray" width={"100px"} style={{marginBottom: 20}} alt=""/>
+                                    <div style={{fontWeight: 400, opacity: 0.4}}>Inställningar för diagram.</div>
+                                    <div style={{ fontSize: 12,fontWeight: 400, opacity: 0.3, padding: "5px 40px"}}>Här skall det finnas fler konfigurerbara fält.</div>
+                                  </Row>
+                                </Row>
+
+                                <DRow>
+                                  <div style={{height: 1, margin: "15px 0", width: "100%", background: "rgba(0,0,0,0.06)"}}/>
+                                </DRow>
+                                <DRow>
+                                  <div style={{margin: "15px 0"}}/>
+                                </DRow>
+                                <DRow>
+                                  <InputField placeholder="Namn"/>
+                                </DRow>
+                                <DRow>
+                                  <InputField placeholder="Typ"/>
+                                </DRow>
+                                <DRow>
+                                  <div style={{height: 20}}/>
+                                </DRow>
+                                <DRow>
+                                  <InputField placeholder="Fördröjning"/>
+                                </DRow>
+
+
+                               
+                                {/* <DRow >
+                                  <InputField placeholder="Kontext"/>
+                                </DRow>
+                                <DRow >
+                                  <InputField placeholder="Kontext"/>
+                                </DRow> */}
+                            </div>
+                      </Settings>
+                    </SettingsWrapper>
+
+                )}
                     {showDiagram ? <Diagram toggleEditor={toggleEditor} toggler={toggler} graph={Graph} /> : <FakeScene />}
                   </Content>
-                )
-                : (
-                  <Content>
-                    <Settings>
-                      <BodyGrid>
-                          <SectionGridLeft>
-                              <DRow center>
-                                <h1>Inställningar för <bold>Diagram</bold></h1>
-                              </DRow>
-                              <DRow center>
-                                <InputField placeholder="Namn"/>
-                              </DRow>
-                              <DRow center>
-                                <InputField placeholder="Kontext"/>
-                              </DRow>
-                              <DRow center>
-                                <InputField placeholder="Kontext"/>
-                              </DRow>
-                              <DRow center>
-                                <InputField placeholder="Kontext"/>
-                              </DRow>
-                          </SectionGridLeft>
-                          <SectionGridLine/>
-                          <SectionGridRight>
-                              <DRow center>
-                                <h1 style={{textAlign: "center"}}><bold>Miljlvariabler</bold></h1>
-                              </DRow>
-                              <DRow>
 
-                              </DRow>
-                              <DRow>
-                                
-                              </DRow>
-                              <DRow>
-                                
-                              </DRow>
-                              <DRow>
-                                
-                              </DRow>
-                          </SectionGridRight>
-                      </BodyGrid>
-                      <div style={{ width: "85%", height: 2, background: "#f0f4f7" || "#f3f3f3", margin: "auto" }} />
-
-                              <Row justify="center" align="center" style={{marginTop: 15}}>
-                                  <h1><bold>Extra</bold></h1>
-                              </Row>
-
-                              <DRow>
-
-                              </DRow>
-                              <DRow>
-                                
-                              </DRow>
-                              <DRow>
-                                
-                              </DRow>
-                                
-                    </Settings>
-                  </Content>
-                )}
+             
 
             
 
@@ -1196,16 +1216,14 @@ function App() {
               </LogsContainer>}
             </SideMenuContent>
 
-            <Header borderColor={"#f1f1f1"} >
+            <Header borderColor={"#ffffff"} style={{marginBottom: 20}} >
               <h4  borderColorTop={"#e5e5e5"}>
             
               </h4>
             </Header>
 
-            <Drawer title={"Egenskaper"}>
-            </Drawer>
 
-            <Drawer title={"Miljövariabler"}>
+            <Drawer defaultOpen={true} title={"Miljövariabler"}>
               <Row flex="1" w100>
                     <Table>
                       {Nodes.api.map(row => (
@@ -1214,12 +1232,16 @@ function App() {
                           <div><input type="text" defaultValue={"\""+row.label+"\""} disabled={true}/>
                           </div>
                           <div>
-                            <input type="checkbox" /> 
+                            {/* <input type="checkbox" />  */}
                           </div>
                         </Tr>
                       ))}
                     </Table>
                   </Row>
+            </Drawer>
+
+
+            <Drawer title={"Egenskaper"}>
             </Drawer>
 
 

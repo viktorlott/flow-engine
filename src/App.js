@@ -33,6 +33,7 @@ import {
 } from './Icons'
 
 import Database, { InputField, BodyGrid,Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from './Database'
+import DropdownField from './Database/Dropdown'
 import Transformer from './Transformer'
 
 import { observer } from "mobx-react"
@@ -89,6 +90,8 @@ import ServerSvg from './svg/server.svg'
 import SearchingSvg from './svg/searching.svg'
 import LavaSvg from './svg/lava.svg'
 import CometSpinner from './svg/cometspinner.svg'
+import CloudComp from './svg/cloudcomp.svg'
+import dbdrive from './svg/dbdrive.svg'
 
 import * as html2canvas from 'html2canvas'
 
@@ -679,6 +682,9 @@ const SideMenuTitle = styled.div`
     border: 1px solid var(--element-border-color);
     margin-bottom: 5px;
 
+
+    border-left: none;
+    border-right: none;
     /* border-bottom: 1px solid #2d3042; */
     /* box-shadow: 0 2px 5px 0 rgba(32,48,60,.05); */
     ${props => props.nobg && css`
@@ -695,6 +701,8 @@ const SideMenuTitle = styled.div`
     & > div {
       justify-content: center;
       align-items: center;
+
+      user-select: none;
     }
 
     & > div > button {
@@ -712,6 +720,11 @@ const SideMenuTitle = styled.div`
         color: inherit;
       }
 
+    }
+    transition: color 0.2s;
+
+    &:hover {
+      color: #0089ff;
     }
 `
 
@@ -833,13 +846,15 @@ function Drawer(props) {
   const [state, setState] = React.useState(() => ({ isOpen: !!props.defaultOpen || false }))
 
 
+  const onClick = () => props.children && setState(prev => ({...prev, isOpen: !prev.isOpen}))
+
 
   return (
     <>
-      <SideMenuTitle nobg={props.nobg}>
+      <SideMenuTitle nobg={props.nobg} onClick={onClick} isOpen={state.isOpen}>
         <div>{props.title}</div>
         <div>
-          <button onClick={() => props.children && setState(prev => ({...prev, isOpen: !prev.isOpen}))}><svg style={{transform: state.isOpen ? "rotate(0deg)" : "rotate(-90deg)"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"/></svg></button>
+          <button><svg style={{transform: state.isOpen ? "rotate(0deg)" : "rotate(-90deg)"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"/></svg></button>
         </div>
       </SideMenuTitle>
       <SideMenuContent hide={!state.isOpen}>
@@ -996,8 +1011,36 @@ function App() {
               </HeaderButton>
 
               <div style={{ background: "rgba(0,0,0,0.1)", height: 20, width: 1, marginRight: 20 }} />
-              <BButton>Databas</BButton>
-              <RestClientButton toggleClient={toggleClient} />
+
+              <ToolTipPopup arrow={12} id={"database"+"_tooltip"} box text={(
+                  <Row flex="1" style={{}} justify="center" align="center">
+                      <Row justify="center" align="center" column>
+                        <img src={dbdrive} className="icon-gray" width={"100px"} style={{margin: "35px 0 20px 0"}} alt=""/>
+                        <div style={{fontWeight: 400, fontSize: 18, color: "white" || "#162d3d"}}>Öppna databas</div>
+                        <div style={{ fontSize: 13,fontWeight: 400, color: "white" || "#162d3d", opacity: 0.9, width: 185, whiteSpace: "pre-line", padding: "5px 40px", marginBottom: 25}}>Här kan du testa att kommunicera med en databas.</div>
+                      </Row>
+                    </Row>
+              )} delay={700} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
+                <div>
+                  <BButton>Databas</BButton>
+                </div>
+              </ToolTipPopup>
+
+            
+
+              <ToolTipPopup arrow={12} id={"database"+"_tooltip"} box text={(
+                  <Row flex="1" style={{}} justify="center" align="center">
+                      <Row justify="center" align="center" column>
+                        <img src={CloudComp} className="icon-gray" width={"100px"} style={{margin: "35px 0 20px 0"}} alt=""/>
+                        <div style={{fontWeight: 400, fontSize: 18, color: "white" || "#162d3d"}}>Öppna REST-Klient</div>
+                        <div style={{ fontSize: 13,fontWeight: 400, color: "white" || "#162d3d", opacity: 0.9, width: 185, whiteSpace: "pre-line", padding: "5px 40px", marginBottom: 25}}>Här kan du testa att kommunicera med ett API.</div>
+                      </Row>
+                    </Row>
+              )} delay={700} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
+                <div>
+                  <RestClientButton toggleClient={toggleClient} />
+                </div>
+              </ToolTipPopup>
               <SettingsButton />
 
             </NavBar>
@@ -1014,6 +1057,12 @@ function App() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>
                 Komponenter
               </h4>
+              {/* <div style={{ position: "relative", margin: "0 5px", left: -24}}>
+                <InputField style={{ height: 32}} placeholder="Sök" icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15zm-3.847-8.699a2 2 0 1 0 2.646 2.646 4 4 0 1 1-2.646-2.646z"/></svg>
+                } />
+              </div> */}
+              
             
               <Expander visible={state.leftSideMenu} active={state.leftSideMenu}>
                 <svg style={{borderLeft: "1px solid #e6e6e6", padding: "10px 15px"}} onClick={() => toggleSideMenu("left")}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm0-9h4v2h-4v3l-4-4 4-4v3z"/></svg>
@@ -1033,6 +1082,9 @@ function App() {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15zm-3.847-8.699a2 2 0 1 0 2.646 2.646 4 4 0 1 1-2.646-2.646z"/></svg>
                 } />
               </div>
+              {/* <div style={{ position: "relative", margin: "0 5px" }}>
+                <DropdownField placeholder="Typer"/>
+              </div> */}
                <Drawer defaultOpen={true} title={"Standard"} nobg={showOnURLQuery("sidenone")}>
                 <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
                   <BlockList items={Nodes.standard} />
@@ -1097,9 +1149,9 @@ function App() {
                       <Settings>
                             <div style={{padding: "15px 30px", height: "100%"}}>
                                 <DRow center>
-                                  <h1>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="30" style={{transform: "translate(-9px, 7px)"}}><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M2 18h7v2H2v-2zm0-7h9v2H2v-2zm0-7h20v2H2V4zm18.674 9.025l1.156-.391 1 1.732-.916.805a4.017 4.017 0 0 1 0 1.658l.916.805-1 1.732-1.156-.391c-.41.37-.898.655-1.435.83L19 21h-2l-.24-1.196a3.996 3.996 0 0 1-1.434-.83l-1.156.392-1-1.732.916-.805a4.017 4.017 0 0 1 0-1.658l-.916-.805 1-1.732 1.156.391c.41-.37.898-.655 1.435-.83L17 11h2l.24 1.196c.536.174 1.024.46 1.434.83zM18 17a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
-                                    Inställningar</h1>
+                                  {/* <h1 style={{fontSize: 18, fontWeight: 400}}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="20" style={{transform: "translate(-5px, 5px)"}}><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M2 18h7v2H2v-2zm0-7h9v2H2v-2zm0-7h20v2H2V4zm18.674 9.025l1.156-.391 1 1.732-.916.805a4.017 4.017 0 0 1 0 1.658l.916.805-1 1.732-1.156-.391c-.41.37-.898.655-1.435.83L19 21h-2l-.24-1.196a3.996 3.996 0 0 1-1.434-.83l-1.156.392-1-1.732.916-.805a4.017 4.017 0 0 1 0-1.658l-.916-.805 1-1.732 1.156.391c.41-.37.898-.655 1.435-.83L17 11h2l.24 1.196c.536.174 1.024.46 1.434.83zM18 17a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                                    Inställningar</h1> */}
                                 </DRow>
                                 <DRow>
                                   <div style={{height: 20}}/>
@@ -1119,18 +1171,11 @@ function App() {
                                 <DRow>
                                   <div style={{margin: "15px 0"}}/>
                                 </DRow>
-                                <DRow>
-                                  <InputField placeholder="Namn"/>
-                                </DRow>
-                                <DRow>
-                                  <InputField placeholder="Typ"/>
-                                </DRow>
-                                <DRow>
-                                  <div style={{height: 20}}/>
-                                </DRow>
-                                <DRow>
-                                  <InputField placeholder="Fördröjning"/>
-                                </DRow>
+                                <InputField placeholder="Namn"/>
+                                <InputField placeholder="Typ"/>
+                                <InputField placeholder="Fördröjning"/>
+                                <DropdownField placeholder="Typer" options={[{label: "hello", value: "hello1"}, {label: "hell2", value: "hello2"}]}/>
+
 
 
                                
@@ -1163,7 +1208,7 @@ function App() {
         {/* <Expander visible right active={!state.rightSideMenu}>
           <svg onClick={() => toggleSideMenu("right")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 9V8l-4 4 4 4v-3h4v-2h-4z"/></svg>    
         </Expander> */}
-        <SidemenuContainer active={state.rightSideMenu} borderColor="#f1f1f1" right>
+        <SidemenuContainer active={state.rightSideMenu} borderColor="#f1f1f1" right style={{zIndex: "0!important"}}>
 
             {/* <Header borderColor={"#f1f1f1"}>
 

@@ -805,6 +805,8 @@ export const SideBarHeader = styled(Header)`
       border: none;
       box-shadow: none;
     `}
+
+  border-bottom: none;
   > h4 {
     color: #585858; 
     color: #303135;
@@ -1372,7 +1374,7 @@ export const SidemenuContainer = styled.div`
       overflow: hidden;
       border-color: ${props => props.borderColor ? props.borderColor : "#e4e4e4"};
     }
-    z-index: 10;
+    /* z-index: 10; */
 
     visibility: ${props => props.active ? "visible" : "hidden"};
 `

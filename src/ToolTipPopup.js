@@ -4,17 +4,17 @@ import styled, { css } from 'styled-components'
 const arrow = 5
 
 const arrowUnder = props => css`
-    border-left: ${arrow}px solid transparent;
-    border-right: ${arrow}px solid transparent;
-    border-bottom: ${arrow}px solid ${props.bg ? props.bg : "#f7f7f7"};
-    top: -${arrow}px;
+    border-left: ${props.arrow || arrow}px solid transparent;
+    border-right: ${props.arrow || arrow}px solid transparent;
+    border-bottom: ${props.arrow || arrow}px solid ${props.bg ? props.bg : "#f7f7f7"};
+    top: -${props.arrow - 1 || arrow}px;
 `
 
 const arrowOver = props => css`
-    border-left: ${arrow}px solid transparent;
-    border-right: ${arrow}px solid transparent;
-    border-top: ${arrow}px solid ${props.bg ? props.bg : "#f7f7f7"};
-    bottom: -${arrow}px;
+    border-left: ${props.arrow || arrow}px solid transparent;
+    border-right: ${props.arrow || arrow}px solid transparent;
+    border-top: ${props.arrow || arrow}px solid ${props.bg ? props.bg : "#f7f7f7"};
+    bottom: -${props.arrow  || arrow}px;
 `
 
 const boxUnder = css`
@@ -31,20 +31,26 @@ const boxPosition = props => props.over ? boxOver : props.under ? boxUnder : box
 const HoverMenuItem = styled.div`
     position: absolute;
     text-align: center;
-    display: ${props => props.hide ? "none" : props.show ? "block" : "none"};
+    /* display: ${props => props.hide ? "none" : props.show ? "block" : "none"}; */
+
+
+    visibility: ${props => props.hide ? "hidden" : props.show ? "visible" : "hidden" };
     opacity: ${props => props.show ? "1" : "0"};
-    visibility: ${props => props.show ? "visible" : "hidden"};
+
     left: 50%;
     
     
     ${boxPosition}
-    transform: translateX(-50%);
+    transform: translateX(-50%) ${props => props.show ? "scale(0.95)" : "scale(0.6)"};
     user-select: none;
     padding: 6px 8px;
 
 
 
-    transition: opacity 0.3s, visibility 0.1s, transform 0.2s;
+    
+
+
+    transition: opacity 0.1s, visibility 0.2s, transform 0.2s;
     text-decoration: none;
     font-size: 12px;
     white-space: nowrap;
@@ -71,7 +77,13 @@ const HoverMenuItem = styled.div`
         z-index: 100;
     }
 
-    z-index: 1000;
+    z-index: 10000000000;
+
+    ${props  => props.box && css`
+        ${'' /* box-shadow: 0 0 11px -1px rgb(210 210 210 / 48%); */}
+        ${'' /* border: 1px solid #eff1f2; */}
+        box-shadow: 0 2px 5px 0 rgb(32 48 60 / 5%);
+    `}
 
 `
 
@@ -81,7 +93,7 @@ const ToolTip = props => {
 
     const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
-    const children = [<HoverMenuItem id={props.id} bg={props.bg} hide={props.hide} color={props.color} show={isShown || showOnURLQuery("tooltips")} >{props.text}</HoverMenuItem>, ...React.Children.toArray(props.children.props.children)]
+    const children = [<HoverMenuItem arrow={props.arrow} id={props.id} box={props.box} bg={props.bg} hide={props.hide} color={props.color} show={isShown || showOnURLQuery("tooltips")} >{props.text}</HoverMenuItem>, ...React.Children.toArray(props.children.props.children)]
 
 
     const onMouseEnter = () => {
@@ -104,7 +116,7 @@ const ToolTip = props => {
        !props.isOver && setIsShown(false)
     } 
 
-    console.log(props)
+
 
     return React.cloneElement(props.children, { 
         key: props.id + "_wrapper",

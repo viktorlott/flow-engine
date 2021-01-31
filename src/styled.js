@@ -808,22 +808,45 @@ export const SideBarHeader = styled(Header)`
       box-shadow: none;
     `}
 
+
+    
+
+    ${props => props.left ? css`
+      border-top: 2px solid #007eff;
+    ` : props.right ? css`
+     ${props => props.right && css`
+      border-top: 2px solid #ffa12d;
+    `}
+    ` : "" }
+
+
+
+
   border-bottom: none;
   > h4 {
     color: #585858; 
     color: #303135;
     /* color: white; */
     /*#686c71;*/
-    font-weight: 400;
-    font-size: 14px;
 
-    font-weight: 300;
+
+    color: rgb(28, 43, 70);
+    font-weight: 500;
     font-size: 14px;
     padding: 5px;
     width: 130px;
+    --webkit-font-smoothing: antialiased;
     /* background: #f3f3f3; */
     /* color: #5d5d5d; */
     border-radius: 3px;
+
+    font-family: Lato!important;
+
+    ${props => props.left2 && css`
+      text-decoration-line: underline;
+      text-decoration-color: #ff920a;
+      text-decoration-thickness: 2px;
+    `}
     /* border: 1px solid #ececec; */
 
 
@@ -835,6 +858,8 @@ export const SideBarHeader = styled(Header)`
 
     > svg {
       margin-top: 2px;
+      height: 17px!important;
+      width: 18px!important;
     }
   }
 `
@@ -1041,7 +1066,7 @@ export const HeaderTab = styled.h5`
 
         ${'' /* margin-top: 4px; */}
         margin-right: 5px;
-        border-top: 2px solid ${props => props.borderColorTop ? props.borderColorTop : "#e5e5e5"};
+        border-top: 2px solid ${props =>  props.borderColorTop ? props.borderColorTop : "#e5e5e5"};
 
         ${'' /* box-shadow: 1px -2px 7px 3px rgb(31 31 31 / 0.03); */}
 
@@ -1146,6 +1171,7 @@ export const Content = styled.div`
   /* padding: 1px; */
   /* background: white; */
   border-radius: 0 8px 8px 8px;
+  border-radius: 0 4px 4px 4px;
   
   ${props => props.border && css`
       border-left: 1px solid #e5e5e5;
@@ -1206,6 +1232,8 @@ export const Settings = styled.div`
   height: calc(100% );
   /* box-shadow: 0 2px 5px 0 rgba(32,48,60,.05); */
   border-left: 1px solid #eff1f2;
+  border-left: 2px solid #f3f3f3;
+  
   /* 0 0px 4px 1px rgb(32 48 60 / 6%) */
   will-change: transform;
 
@@ -1338,7 +1366,11 @@ export const SidemenuContainer = styled.div`
     /* border-radius: 4px 0 0 4px; */
 
     /* margin-top: 14px; */
-    border-radius: 8px;
+    border-radius: ${props => props.left ? "0 8px 8px 0" : "8px 0 0 8px"};
+    border-radius: ${props => props.left ? "0 4px 4px 0" : "4px 0 0 4px"};
+
+
+
     overflow: hidden;
     /* box-shadow: 0 5px 20px 0 rgba(32,48,60,.11); */
     

@@ -164,7 +164,7 @@ let m = true
       onDragEnd={onDragEnd}
       bgcolor={"#ffffff00" || chroma(item.theme).darken(0.2).hex()}
       style={listStyle}>
-      <div style={{ width: "37px", height: "100%", background: chroma(item.theme).darken(0.2).alpha(0.3).hex(), borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", left: 0, top: 0 }}></div>
+      <div style={{ width: "37px", height: "100%", background: chroma(item.theme).darken(0.2).alpha(0.5).hex(), borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", left: 0, top: 0 }}></div>
       <div style={{ display: "flex", flexFlow: "row", position: "relative"}}>
         <ListMainIcon
           style={{borderRadius: "50%", padding: 0}}
@@ -606,6 +606,7 @@ const Tr = styled.div`
       color: #b72828;
       color: #2bb300;
       color: #228c01;
+      color: #268c06;
       background: white;
 
   
@@ -678,7 +679,7 @@ const SideMenuTitle = styled.div`
     color: #383f48;
     color: #808080;
     font-weight: 400;
-    margin: 0 5px;
+    margin: 0 10px;
     /* color: white; */
     border-bottom: 1px solid #eff1f2;
     border: 1px solid var(--element-border-color);
@@ -889,7 +890,7 @@ const Tabs = observer(({ graph }) => {
   return graph.tabs.map((tab, i) => {
     return (
       <>
-      <HeaderTab selected={graph.current === i} onClick={(e) => selectTab(i, e)} borderColorTop={"#009688" || "#ffc967" || "#47a8d85e" || "#eff1f2" || "white" || "#ffe863" || "#d3edff" || "#00ca51"}>
+      <HeaderTab selected={graph.current === i} onClick={(e) => selectTab(i, e)} borderColorTop={"#6d94d4"||"#009688" || "#ffc967" || "#47a8d85e" || "#eff1f2" || "white" || "#ffe863" || "#d3edff" || "#00ca51"}>
         {i === 0 && (
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill={graph.current === i ? "currentColor" : "#d1d0d0"} d="M2 19h20v2H2v-2zM2 5l5 3.5L12 2l5 6.5L22 5v12H2V5zm2 3.841V15h16V8.841l-3.42 2.394L12 5.28l-4.58 5.955L4 8.84z"/></svg>
         )}
@@ -973,7 +974,7 @@ function App() {
 
         {/* <div style={{gridColumn: "1/2", gridRow: "1/2", background: "white"}}></div> */}
 
-        <HeaderWrapper hide={showOnURLQuery("blank")}>
+        <HeaderWrapper hide={showOnURLQuery("header") ? false : true}>
 
           <Row justify="center" align="center">
             <HButton >Dokumentation</HButton>
@@ -1014,7 +1015,7 @@ function App() {
 
               <div style={{ background: "rgba(0,0,0,0.1)", height: 20, width: 1, marginRight: 20 }} />
 
-              <ToolTipPopup arrow={12} id={"database"+"_tooltip"} box text={(
+              <ToolTipPopup arrow={12} id={"database"+"_tooltip"} hardHide={state.showDatabase} box text={(
                   <Row flex="1" style={{}} justify="center" align="center">
                       <Row justify="center" align="center" column>
                         <img src={dbdrive} className="icon-gray" width={"100px"} style={{margin: "35px 0 20px 0"}} alt=""/>
@@ -1022,15 +1023,17 @@ function App() {
                         <div style={{ fontSize: 13,fontWeight: 400, color: "white" || "#162d3d", opacity: 0.9, width: 185, whiteSpace: "pre-line", padding: "5px 40px", marginBottom: 25}}>Här kan du testa att kommunicera med en databas.</div>
                       </Row>
                     </Row>
-              )} delay={700} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
+              )} delay={300} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
                 <div>
-                  <BButton>Databas</BButton>
+                  <BButton>
+                    Databas
+                  </BButton>
                 </div>
               </ToolTipPopup>
 
             
 
-              <ToolTipPopup arrow={12} id={"database"+"_tooltip"} box text={(
+              <ToolTipPopup arrow={12} id={"RestClient"+"_tooltip"} hardHide={state.showClient} box text={(
                   <Row flex="1" style={{}} justify="center" align="center">
                       <Row justify="center" align="center" column>
                         <img src={CloudComp} className="icon-gray" width={"100px"} style={{margin: "35px 0 20px 0"}} alt=""/>
@@ -1038,7 +1041,7 @@ function App() {
                         <div style={{ fontSize: 13,fontWeight: 400, color: "white" || "#162d3d", opacity: 0.9, width: 185, whiteSpace: "pre-line", padding: "5px 40px", marginBottom: 25}}>Här kan du testa att kommunicera med ett API.</div>
                       </Row>
                     </Row>
-              )} delay={700} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
+              )} delay={300} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
                 <div>
                   <RestClientButton toggleClient={toggleClient} />
                 </div>
@@ -1053,7 +1056,7 @@ function App() {
 
         <SidemenuContainer active={state.leftSideMenu} bg={"white" || "#23263c"} left nobg={showOnURLQuery("sidenone")} >
         
-            <SideBarHeader borderColor={"#f1f1f1"} nobg={showOnURLQuery("sidenone")}>
+            <SideBarHeader borderColor={"#f1f1f1"} nobg={showOnURLQuery("sidenone")} left>
               <div></div>
               <h4 borderColorTop={"#e5e5e5"} style={{transform: "translateX(-10px)", width: 200}}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/></svg>
@@ -1079,11 +1082,11 @@ function App() {
               </Expander>
             </SideBarHeader>
 
-               <div style={{ position: "relative", margin: "0 5px" }}>
-                <InputField style={{ height: 32}} placeholder="Sök" icon={
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15zm-3.847-8.699a2 2 0 1 0 2.646 2.646 4 4 0 1 1-2.646-2.646z"/></svg>
-                } />
-              </div>
+                <div style={{ position: "relative", margin: "0 10px" }}>
+                  <InputField style={{ height: 32}} placeholder="Sök" icon={
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15zm-3.847-8.699a2 2 0 1 0 2.646 2.646 4 4 0 1 1-2.646-2.646z"/></svg>
+                  } />
+                </div>
               {/* <div style={{ position: "relative", margin: "0 5px" }}>
                 <DropdownField placeholder="Typer"/>
               </div> */}
@@ -1120,7 +1123,7 @@ function App() {
                 <div></div>
 
                 <div>
-                  <HeaderTab selected={!state.settings} onClick={toggleDiagram} borderColorTop={"#767aff" || "#6730ff45" || "#71ff3045" || "#eff1f2" || "white" || "#607d8b" || "#cecece" || "#888888" || "#007ce6" || "#e5e5e5"}>
+                  <HeaderTab selected={!state.settings} onClick={toggleDiagram} borderColorTop={"#0096c3"||"#007eff"||"#767aff" || "#6730ff45" || "#71ff3045" || "#eff1f2" || "white" || "#607d8b" || "#cecece" || "#888888" || "#007ce6" || "#e5e5e5"}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0H24V24H0z" /><path fill={!state.settings ? "currentColor" : "#cccbcb"} d="M15 3c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1h-2v2h4c.552 0 1 .448 1 1v3h2c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1h-6c-.552 0-1-.448-1-1v-4c0-.552.448-1 1-1h2v-2H8v2h2c.552 0 1 .448 1 1v4c0 .552-.448 1-1 1H4c-.552 0-1-.448-1-1v-4c0-.552.448-1 1-1h2v-3c0-.552.448-1 1-1h4V9H9c-.552 0-1-.448-1-1V4c0-.552.448-1 1-1h6zM9 17H5v2h4v-2zm10 0h-4v2h4v-2zM14 5h-4v2h4V5z" /></svg>
                       Diagram
                     </HeaderTab>
@@ -1231,7 +1234,7 @@ function App() {
 
             </Header> */}
 
-            <SideBarHeader borderColor={"#f1f1f1"} style={{justifyContent: "flex-end"}}>
+            <SideBarHeader borderColor={"#f1f1f1"} style={{justifyContent: "flex-end"}} right>
 
 
         <Expander visible={!state.rightSideMenu}  active={!state.rightSideMenu}>

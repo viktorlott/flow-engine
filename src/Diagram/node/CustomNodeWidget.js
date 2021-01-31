@@ -159,13 +159,13 @@ const Container = styled.div`
     animation: 1s move linear;
 
     ${props => props.transparent && css`
-        background: ${chroma(props.color).alpha(props.selected ? 0.3 : 0.2).hex()};
+        background: ${chroma(props.color).alpha(props.selected ? 0.5 : 0.4).hex()};
         border: 1px ${props.selected ? "solid" : "solid"} ${props.color || "#404040" };
         
         ${'' /* background: transparent; */}
 
         &:hover {
-            background: ${chroma(props.color).alpha(0.3).hex()};
+            background: ${chroma(props.color).alpha(0.5).hex()};
 
 
         }

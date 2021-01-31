@@ -33,7 +33,7 @@ const HoverMenuItem = styled.div`
     text-align: center;
     /* display: ${props => props.hide ? "none" : props.show ? "block" : "none"}; */
 
-
+    display: ${props => props.hardHide ? "none" : "flex"};
     visibility: ${props => props.hide ? "hidden" : props.show ? "visible" : "hidden" };
     opacity: ${props => props.show ? "1" : "0"};
 
@@ -93,7 +93,7 @@ const ToolTip = props => {
 
     const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
-    const children = [<HoverMenuItem arrow={props.arrow} id={props.id} box={props.box} bg={props.bg} hide={props.hide} color={props.color} show={isShown || showOnURLQuery("tooltips")} >{props.text}</HoverMenuItem>, ...React.Children.toArray(props.children.props.children)]
+    const children = [<HoverMenuItem hardHide={props.hardHide} arrow={props.arrow} id={props.id} box={props.box} bg={props.bg} hide={props.hide} color={props.color} show={isShown || showOnURLQuery("tooltips")} >{props.text}</HoverMenuItem>, ...React.Children.toArray(props.children.props.children)]
 
 
     const onMouseEnter = () => {

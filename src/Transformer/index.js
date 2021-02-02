@@ -5,7 +5,7 @@ import CodeEditor from '../RestClient/CodeEditor'
 import axios from 'axios'
 import chroma from 'chroma-js'
 import moment from 'moment'
-
+import ReactJson from 'react-json-view'
 
 import JSONEditor from '../JSONEditor'
 
@@ -588,7 +588,11 @@ function Transformer(props) {
             <BodyGrid>
                 <SectionGridLeft>
                     <Row className="gray"> 
-                        <CodeEditor key={"body"} name="body"  active={true} lang="javascript" register={register} setValue={setValue} unregister={unregister} watch={watch} />
+                        {/* <CodeEditor key={"body"} name="body"  active={true} lang="javascript" register={register} setValue={setValue} unregister={unregister} watch={watch} /> */}
+
+                        <ReactJson src={{
+                            hello: { jon: { wick : 10, dog: 0}, help: "hello", date: new Date(), milli: Date.now()}
+                        }}/>
                     </Row>
                 </SectionGridLeft>
 

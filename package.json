@@ -18,8 +18,10 @@
     "dagre": "^0.8.5",
     "esprima": "^4.0.1",
     "eval": "^0.1.4",
+    "fast-xml-parser": "^3.17.6",
     "gsap": "^3.5.1",
     "handlebars": "^4.7.6",
+    "he": "^1.2.0",
     "html2canvas": "^1.0.0-rc.7",
     "jmespath": "^0.15.0",
     "json-schema-generator": "^2.0.6",
@@ -46,6 +48,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.0",
     "react-scroll-to-bottom": "^4.0.0",
+    "react-spring": "^8.0.27",
     "react-table": "^7.6.0",
     "resize-observer-polyfill": "^1.5.1",
     "rodal": "^1.8.1",
@@ -77,4 +80,3 @@
     ]
   }
 }
-    

@@ -34,6 +34,45 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script type="text/javascript">
+
+      //on backspace down + optional callback
+      function onBackspace(e, callback){
+          var key;
+          if(typeof e.keyIdentifier !== "undefined"){
+              key = e.keyIdentifier;
+      
+          }else if(typeof e.keyCode !== "undefined"){
+              key = e.keyCode;
+          }
+          if (key === 'U+0008' || 
+              key === 'Backspace' || 
+              key === 8) {
+                          if(typeof callback === "function"){
+                      callback();
+                  }
+                  return true;
+              }
+          return false;
+      }
+      
+      //event listener
+      window.addEventListener('keydown', function (e) {
+      
+          switch(e.target.tagName.toLowerCase()){
+              case "input":
+              case "textarea":
+              break;
+              case "body":
+                  onBackspace(e,function(){
+                      e.preventDefault();
+                  });
+      
+              break;
+          }
+      }, true);
+      </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -17,7 +17,7 @@ export const Container = styled.div`
 
   display: grid;
   transition: 0.5s;
-  grid-template-columns: ${props => props.leftSideMenu ? "250px" : "100px"} 1fr ${props => props.rightSideMenu ? "340px" : "100px"};
+  grid-template-columns: ${props => props.leftSideMenu ? "300px" : "100px"} 1fr ${props => props.rightSideMenu ? "350px" : "100px"};
   grid-template-rows: 60px 1fr;
 
 
@@ -356,13 +356,62 @@ export const ListMainIcon = styled.div`
 
 `
 
+export const Expander = styled.div`
+  /* height: 100px;  */
+  /* width: 15px;  */
+  ${props => props.left ? "left" : "right"}: 0; 
+  /* position: absolute;  */
+  /* display: flex;   */
+  /* top: 50%;  */
+  /* bottom: 10px; */
+  /* transform: translateY(-50%);  */
+  position: absolute; 
+  color: #bbbbbb;
+
+  
+  &:hover svg {
+    opacity: 0.8;
+
+    visibility: visible
+  }
+
+  & > svg {
+    cursor: pointer;
+    transition: opacity 0.2s, visibility 0.2s;
+    opacity: 0.7;
+    color: #686c71;
+    color: #303135!important;
+    /* background: white; */
+    padding: 4px;
+
+
+
+    /* border: 1px solid #eff1f2; */
+    border-left: 0;
+    /* position: absolute; */
+    display: ${props => props.visible ? "flex" : "none"};
+
+    /* transform: translateY(-50%); */
+    /* top: 50%; */
+    /* ${props => props.left ? "right" : "left"}: -30px; */
+
+    /* visibility: hidden; */
+    ${props => props.visible ? "visibility: visible;" : "visibility: hidden;"}
+    /* visibility: visible; */
+    
+
+  }
+
+  display: ${props => props.active ? "flex" : "none"};
+
+`
 
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
   flex-flow: column;
-  width: calc(100% - 15px);
+  width: calc(100% - 0px);
   height: calc(100% - 25px);
 
   ${props => props.borderNone ? "" : css`
@@ -824,13 +873,13 @@ export const SideBarHeader = styled(Header)`
 
   border-bottom: none;
   > h4 {
-    color: #585858; 
     color: #303135;
+    color: rgb(28, 43, 70);
+    color: #585858; 
     /* color: white; */
     /*#686c71;*/
 
 
-    color: rgb(28, 43, 70);
     font-weight: 500;
     font-size: 14px;
     padding: 5px;
@@ -1015,9 +1064,15 @@ export const HeaderTab = styled.h5`
     background: #f9f9f9;
     color: #cccbcb;
     
+    > span {
+      transition: color 0.1s, font-size 0.1s;
+    }
     &:hover {
       background: #f6f6f6;
       /* color: #e4e4e4; */
+
+
+      
     }
 
 
@@ -1026,7 +1081,7 @@ export const HeaderTab = styled.h5`
     border-top: 2px solid #f9f9f9;
     /* ${props => props.green ? "#d6ead6" : "#eff1f2"||"#f9f9f9" || "#ececec" || "#f4f4f4"} */
     margin-right: 5px;
-    transition: color 0.1s;
+    transition: color 0.1s, font-size 0.1s;
     will-change: color, background;
     border-radius: 3px 3px 0 0;
     border-bottom: 1px solid transparent;
@@ -1075,6 +1130,9 @@ export const HeaderTab = styled.h5`
           /* color: #e4e4e4; */
         }
         
+        > span {
+          font-size: 13px;
+        }
 
         & > svg {
           margin-right: 5px!important;
@@ -1172,6 +1230,7 @@ export const Content = styled.div`
   /* background: white; */
   border-radius: 0 8px 8px 8px;
   border-radius: 0 4px 4px 4px;
+  border-radius: 0 6px 6px 6px;
   
   ${props => props.border && css`
       border-left: 1px solid #e5e5e5;
@@ -1342,7 +1401,7 @@ export const SidemenuContainer = styled.div`
     /* width: ${props => props.width ? props.width : "350px"}; */
     
     /* height: calc(100% ${props => props.maximized ? "" : "- 50px"}); */
-    width: calc(100% - 0px);
+    width: calc(100% - 30px);
     /* width: ${props => props.width ? props.width : "435px"}; */
     /* width: calc(100% - 20px); */
 
@@ -1368,7 +1427,7 @@ export const SidemenuContainer = styled.div`
     /* margin-top: 14px; */
     border-radius: ${props => props.left ? "0 8px 8px 0" : "8px 0 0 8px"};
     border-radius: ${props => props.left ? "0 4px 4px 0" : "4px 0 0 4px"};
-
+    border-radius: 6px;
 
 
     overflow: hidden;

@@ -90,10 +90,12 @@ import ServerSvg from './svg/server.svg'
 import SearchingSvg from './svg/searching.svg'
 import LavaSvg from './svg/lava.svg'
 import CometSpinner from './svg/cometspinner.svg'
+import infinite from './svg/infinite.svg'
 import CloudComp from './svg/cloudcomp.svg'
 import dbdrive from './svg/dbdrive.svg'
 import servercloud from './svg/servercloud.svg'
 import Folder from './svg/folder.svg'
+import restcli from './svg/restcli.svg'
 
 import * as html2canvas from 'html2canvas'
 
@@ -327,7 +329,7 @@ function App() {
     } else if(showOnURLQuery("loading")) {
 
     } else {
-      setTimeout(() => setLoading(false), 2000)
+      setTimeout(() => setLoading(false), 3000)
     }
   }, [])
 
@@ -359,9 +361,18 @@ function App() {
       <Container leftSideMenu={state.leftSideMenu} rightSideMenu={state.rightSideMenu}>
 
       
-        {loading && <Row h100 w100 acenter jcenter style={{position: "fixed", zIndex: 200, background: "rgba(255,255,255, 1)"}} column>
-          <img src={CometSpinner} width={"100px"} style={{marginBottom: 20}} alt=""/>
-          <div style={{fontSize: 20,opacity: 0.7, color: "#20303c"}}>Hämtar diagram</div>
+        {loading && <Row h100 w100 acenter jcenter style={{position: "fixed", zIndex: 200, background: "#f8fcff"||"#cbd7e0"||"rgb(233 245 255)"}} column>
+        {/* <div style={{fontSize: 40,opacity: 0.7,marginBottom: 20, color: "#20303c", fontFamily: "'Acumin-RPro'!important" }}>Hämtar diagram</div> */}
+        <div style={{position: "relative"}}>
+          <img src={restcli} width={"400px"} height={235} style={{marginBottom: 20, opacity: 1}} alt=""/>
+          <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style={{width: 400,  marginBottom: 20,opacity: 1, position: "absolute", left: 0, right: 0, margin: "auto", top: "50%", transform: "translateY(-50%)"}} width="700px" height="700px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <path fill="none" stroke="rgb(203, 215, 224)" stroke-width="3" stroke-dasharray="130.8603533935547 125.72857482910155" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="butt" style={{transform:"scale(0.55)","transformOrigin":"50px 50px"}}>
+              <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="1.0518518518518516s" keyTimes="0;1" values="0;256.58892822265625"></animate>
+            </path>
+          </svg>
+        </div>
+          
+          
         </Row>}
 
 

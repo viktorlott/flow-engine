@@ -142,7 +142,9 @@ const BlockList = observer(props =>  {
 
     return (
       <>
-        {props.items.map((item, i) => {
+        {props.items.filter(item => {
+            return !props.filter ? true : new RegExp(props.filter,"gi").test(item.title)
+        }).map((item, i) => {
           return <LItem key={i} disabled={item.disabled || props.disabled} item={item} />
         })}
       </>
@@ -152,6 +154,10 @@ const BlockList = observer(props =>  {
 
 
 function ComponentList(props) {
+
+    const [state, setState] = React.useState({filter: ""})
+
+
     return (
         <SidemenuContainer active={props.active} bg={"white" || "#23263c"} left nobg={showOnURLQuery("sidenone")} >
         
@@ -183,19 +189,19 @@ function ComponentList(props) {
             </SideBarHeader>
 
                 <div style={{ position: "relative", margin: "0 10px" }}>
-                  <InputField style={{ height: 32}} placeholder="Sök" icon={
+                  <InputField style={{ height: 32}} onChange={val => setState(prev => ({...prev, filter: val }))} placeholder="Sök" icon={
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15zm-3.847-8.699a2 2 0 1 0 2.646 2.646 4 4 0 1 1-2.646-2.646z"/></svg>
                   } />
                 </div>
           
                <Drawer defaultOpen={true} title={"Standard"} nobg={showOnURLQuery("sidenone")}>
                 <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
-                  <BlockList items={props.standard} />
+                  <BlockList filter={state.filter} items={props.standard} />
                 </ComponentListContainer>
               </Drawer>
               <Drawer defaultOpen={false} title={"API"} nobg={showOnURLQuery("sidenone")}>
                 <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
-                  <BlockList items={props.api} />
+                  <BlockList filter={state.filter} items={props.api} />
                 </ComponentListContainer>
               </Drawer>
           

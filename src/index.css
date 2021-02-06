@@ -6,6 +6,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 
 
+
+
+
+
+@font-face {
+  font-family: Acumin-RPro;
+  src: url("./fonts/acumin-pro/Acumin-RPro.otf") format("opentype");
+}
+
 body {
   margin: 0;
   
@@ -67,8 +76,9 @@ html, body {
 
   font-family: 'PT Sans', sans-serif;
 
-font-family: 'Exo 2', 'Oxygen', sans-serif!important;
+  font-family: 'Exo 2', 'Oxygen', sans-serif!important;
 
+  /* font-family: 'Acumin-RPro'!important; */
 
 }
 

@@ -3,12 +3,12 @@
 <img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/svg/restcli2.svg" alt="Alt Text" style="max-width:100%;">
 
 ### Work in process!
+``This project is just an experiment, nothing is fully functional.``
+
 
 Link to Demo-site:
 <a href="http://rest-client.surge.sh/">Demo</a>
 
-
-This project is just am experiment, nothing is fully functional.
 
 Contains:
   - Graph
@@ -16,12 +16,6 @@ Contains:
   - Database-client
   - and more..
 
-
-
-Preview:
-<img src="https://i.imgur.com/FcMSjV4.png" alt="Alt Text" style="max-width:100%;">
-.
-<img src="https://i.imgur.com/iEkl8QV.png" alt="Alt Text" style="max-width:100%;">
 
 
 

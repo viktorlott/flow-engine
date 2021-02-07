@@ -1,9 +1,9 @@
-# flow-engine
-Flowchart building tool
+# Flowstack
+## Build integration diagrams
 
 <img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/svg/restcli2.svg" alt="Alt Text" style="max-width:100%;">
 
-Work in process!
+## Work in process!
 
 Link to Demo-site:
 <a href="http://rest-client.surge.sh/">Demo</a>
@@ -16,9 +16,6 @@ Contains:
   - REST-client
   - Database-client
   - and more..
-
-
-
 
 
 

@@ -37,7 +37,9 @@ import {
 import chroma from 'chroma-js'
 import Drawer from '../../components/Drawer'
 import { observer } from "mobx-react"
-import Database, { InputField, BodyGrid,Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from '../../Database'
+import Database, { BodyGrid, Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from '../../Database'
+
+import InputField from '../../components/Input'
 import {Row} from './styled'
 import dnd from '../../utils/DnD'
 import ToolTipPopup from '../../ToolTipPopup'
@@ -117,8 +119,8 @@ let m = true
       {/* <div style={{ width: "1px", height: "100%", borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", right: "15%", top: 0 }}></div> */}
       {/* <div style={{ width: "1px", height: "100%", background: chroma(item.theme).darken(0.6).alpha(0.9).hex(), position: "absolute", right: "13%", top: 0 }}></div> */}
 
-      <div style={{ width: "1px", height: "100%", position: "absolute", right: "25%", top: 0 }}>
-        {/* <div style={{position: "absolute", width: 8, height: 8, top: 0, transform: "translateY(-50%) rotate(45deg)", background: item.theme, borderRadius: "50%", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600}}/> */}
+      <div style={{ width: "1px", height: "100%", position: "absolute", right: "10px", top: 0 }}>
+        {/* <div style={{position: "absolute", width: 7, height: 7, top: 0, transform: "translateY(-50%) rotate(0deg)", background: item.theme, borderRadius: "4px", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600}}/> */}
         <div style={{position: "absolute",  width: 7, height: 7, top: 0, left: -15, transform: "translateY(-50%) rotate(45deg)", background: item.theme, borderRadius: "25%", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600}}/>
       </div>
 
@@ -145,7 +147,7 @@ const BlockList = observer(props =>  {
         {props.items.filter(item => {
             return !props.filter ? true : new RegExp(props.filter,"gi").test(item.title)
         }).map((item, i) => {
-          return <LItem key={i} disabled={item.disabled || props.disabled} item={item} />
+          return <LItem key={i + "_" + item.title} disabled={item.disabled || props.disabled} item={item} />
         })}
       </>
     )

@@ -7,73 +7,73 @@ import chroma from 'chroma-js'
 const borderColor = "#f3ecec"
 
 
-const InputWrapper = styled.input`
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-    text-rendering: optimizeLegibility;
+// const InputWrapper = styled.input`
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//     font-family: ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI",
+//     Roboto, "Helvetica Neue", Arial, sans-serif;
+//     text-rendering: optimizeLegibility;
 
-    height: calc(100% - 4px);
-    height: 34px;
-    width: 600px;
-    outline: none;
-    background-color: #f9f9f9;
-    background: #fdfdfd;
-    /* border: 1px solid #f1f1f1; */
-    border-color: #d4d4d4;
-    border: none;
-    padding: 2px 10px;
-    position: relative;
-    left: 0;
+//     height: calc(100% - 4px);
+//     height: 34px;
+//     width: 600px;
+//     outline: none;
+//     background-color: #f9f9f9;
+//     background: #fdfdfd;
+//     /* border: 1px solid #f1f1f1; */
+//     border-color: #d4d4d4;
+//     border: none;
+//     padding: 2px 10px;
+//     position: relative;
+//     left: 0;
 
-    /* border-left: 1px solid #cccccc; */
-    /* border-right: 1px solid #cccccc; */
-    border-color: ${borderColor};
+//     /* border-left: 1px solid #cccccc; */
+//     /* border-right: 1px solid #cccccc; */
+//     border-color: ${borderColor};
 
 
-    color: #81858e;
-    color: #4c5058;
-    cursor: pointer;
-    display: inline-block;
-    box-sizing: content-box;
-    box-sizing: content-box;
-    vertical-align: bottom;
+//     color: #81858e;
+//     color: #4c5058;
+//     cursor: pointer;
+//     display: inline-block;
+//     box-sizing: content-box;
+//     box-sizing: content-box;
+//     vertical-align: bottom;
 
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+//     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
     
-    &:hover, &:focus {
-        /* border-color: #4dacff; */
-        /* color: #4dacff; */
-        /* box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.05); */
-        box-shadow: var(--box-shadow-1-arg) var(--box-shadow-2-arg) var(--box-shadow-3-arg) var(--box-shadow-4-arg) var(--box-shadow-5-arg);
-    }
+//     &:hover, &:focus {
+//         /* border-color: #4dacff; */
+//         /* color: #4dacff; */
+//         /* box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.05); */
+//         box-shadow: var(--box-shadow-1-arg) var(--box-shadow-2-arg) var(--box-shadow-3-arg) var(--box-shadow-4-arg) var(--box-shadow-5-arg);
+//     }
 
 
-    &::placeholder {
-        color: rgba(160, 160, 160, 0.6);
-        color: #a9a9a9;
-        font-weight: ${props => props.placeholderWeight ? props.placeholderWeight : 600};
-    }
+//     &::placeholder {
+//         color: rgba(160, 160, 160, 0.6);
+//         color: #a9a9a9;
+//         font-weight: ${props => props.placeholderWeight ? props.placeholderWeight : 600};
+//     }
 
-    border-radius: 4px;
-    /* margin: 0 10px 0 14px; */
-    background: #ececec;
-    background: #f3f3f3;
+//     border-radius: 4px;
+//     /* margin: 0 10px 0 14px; */
+//     background: #ececec;
+//     background: #f3f3f3;
 
-    background: var(--element-color);
-    border: 1px solid var(--element-border-color);
-    padding: 2px 18px 2px 35px;
+//     background: var(--element-color);
+//     border: 1px solid var(--element-border-color);
+//     padding: 2px 18px 2px 35px;
 
 
 
-    /* border-bottom: 4px solid  #e5e5e5; */
+//     /* border-bottom: 4px solid  #e5e5e5; */
 
 
     
 
 
-`
+// `
 
 const Container = styled.div`
     position: relative;
@@ -112,20 +112,156 @@ const Icon = (props) => {
         default: return null
     }
 }
-export default props => {
+// export default props => {
 
 
+
+//     return (
+//         <div>
+//             <Container>
+//                 <Icon icon={props.icon}/>
+                
+//                 <InputWrapper {...props} onChange={e => void props.setValue(props.name, e.target.value)} value={props.watch(props.name, "")} ref={props.register}/>
+//             </Container>
+//         </div>
+//     )
+// }
+
+
+
+
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-flow: column;
+    transition: transform 0.2s;
+    position: relative;
+
+    & > label {
+        position: absolute;
+        z-index: 1;
+        padding: 2px 6px;
+        top: -14px;
+        background: white;
+        pointer-events: none;
+        color: #808080;
+        left: 0px;
+        /* align-self: flex-start; */
+        transition: font-size 0.2s, transform 0.2s;
+        transform: ${props => `translate(${props.hasFocus ? 10 : 10}px, ${props.hasFocus ? 10 : 27}px)`};
+        font-size: ${props => props.hasFocus ? "12px" : "14px"};
+    }
+
+
+    > span {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        margin: auto;
+        transform: translateY(-47%);
+        color: ${props => props.hasFocus ? "#0089ff!important" : "#808080"};
+        & > svg {
+            height: 18px;
+            padding: 0;
+            color: ${props => props.hasFocus ? "#0089ff!important" : "#808080"};
+            
+        }
+    }
+   
+`
+
+
+const InputWrapper = styled.input`
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    
+
+    height: 34px;
+    outline: none;
+    background-color: #f9f9f9;
+    background: #fdfdfd;
+    /* border: 1px solid #f1f1f1; */
+    border-color: #d4d4d4;
+    border: none;
+    padding: 2px 10px;
+    position: relative;
+    left: 0;
+    /* width: 300px; */
+
+    color: #81858e;
+    color: #4c5058;
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: content-box;
+    vertical-align: bottom;
+
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    /* &:hover,
+    &:focus {
+    /* border-color: #4dacff; */
+    /* color: #4dacff; */
+    /* box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.05); */
+    /* } */
+
+
+    &::placeholder {
+        color: rgba(160, 160, 160, 0.6);
+        color: #a9a9a9;
+        font-weight: ${props => props.placeholderWeight ? props.placeholderWeight : 400};
+    }
+
+    border-radius: 2px;
+    margin: 5px 0px 5px 0px;
+    background: #ececec;
+    background: #f3f3f3;
+    padding: 2px 18px;
+
+    background: var(--element-color);
+    border: 1px solid var(--element-border-color);
+
+    &:hover {
+        border-color: #98cefd;
+        border-color: #0089ff;
+    }
+    &:focus {
+        border-color: #0089ff;
+    }
+
+ 
+`
+
+
+
+
+
+export default function InputField(props) {
+    const [state, setState] = useState({ focus: false, value: "" })
+    const { placeholder, ...restProps} = props
+
+
+    useEffect(() => {
+        restProps.onChange && restProps.onChange(state.value)
+    },[state.value])
+
+    const onChange = e => {
+        e.persist()
+        setState(prev => ({ ...prev, value: e.target.value }))
+    }
 
     return (
-        <div>
-            <Container>
-                <Icon icon={props.icon}/>
-                
-                <InputWrapper {...props} onChange={e => void props.setValue(props.name, e.target.value)} value={props.watch(props.name, "")} ref={props.register}/>
-            </Container>
-        </div>
+        <Wrapper hasFocus={state.focus || !!state.value}>
+            <label htmlFor="">{placeholder}</label>
+            <InputWrapper {...restProps} value={state.value} onChange={onChange} onFocus={e => setState(prev => ({...prev, focus: true}))} onBlur={e => setState(prev => ({...prev, focus: false}))} />
+            <span>
+                {props.icon}
+            </span>
+        </Wrapper>
     )
 }
+
 
 const recursive = (obj, path=[]) => {
     if(!obj) {

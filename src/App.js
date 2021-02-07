@@ -95,7 +95,7 @@ import CloudComp from './svg/cloudcomp.svg'
 import dbdrive from './svg/dbdrive.svg'
 import servercloud from './svg/servercloud.svg'
 import Folder from './svg/folder.svg'
-import restcli from './svg/restcli.svg'
+import restcli from './svg/restcli2.svg'
 
 import * as html2canvas from 'html2canvas'
 
@@ -117,7 +117,7 @@ import {
   DeleteItemsAction
 } from '@projectstorm/react-canvas-core';
 
-
+import {useSpring, animated} from 'react-spring'
 
 // const pathfinding = engine.getLinkFactories().getFactory(PathFindingLinkFactory.NAME)
 
@@ -299,6 +299,21 @@ const HButton = styled.div`
 `
 
 
+function LoadingAnimation(props) {
+  const propsAni = useSpring({ from: {transform: "scale(0.95)"}, to: {transform: "scale(1)"}, config: { mass: 10, tension: 400, friction: 1 } })
+
+  return (
+    <animated.div style={{...propsAni, position: "relative"}}>
+      <img src={restcli} width={"400px"} height={235} style={{marginBottom: 20, opacity: 1}} alt=""/>
+      <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style={{width: 400,  marginBottom: 20,opacity: 1, position: "absolute", left: 0, right: 0, margin: "auto", top: "50%", transform: "translateY(-50%)"}} width="700px" height="700px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <path fill="none" stroke={"#e4e9ea" || "rgb(203, 215, 224)"} stroke-width="3" stroke-dasharray="130.8603533935547 125.72857482910155" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="butt" style={{transform:"scale(0.55)","transformOrigin":"50px 50px"}}>
+          <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="1.0518518518518516s" keyTimes="0;1" values="0;256.58892822265625"></animate>
+        </path>
+      </svg>
+  </animated.div>
+  )
+}
+
 // 2E3A59
 function App() {
   
@@ -361,19 +376,21 @@ function App() {
       <Container leftSideMenu={state.leftSideMenu} rightSideMenu={state.rightSideMenu}>
 
       
-        {loading && <Row h100 w100 acenter jcenter style={{position: "fixed", zIndex: 200, background: "#f8fcff"||"#cbd7e0"||"rgb(233 245 255)"}} column>
-        {/* <div style={{fontSize: 40,opacity: 0.7,marginBottom: 20, color: "#20303c", fontFamily: "'Acumin-RPro'!important" }}>Hämtar diagram</div> */}
-        <div style={{position: "relative"}}>
-          <img src={restcli} width={"400px"} height={235} style={{marginBottom: 20, opacity: 1}} alt=""/>
-          <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style={{width: 400,  marginBottom: 20,opacity: 1, position: "absolute", left: 0, right: 0, margin: "auto", top: "50%", transform: "translateY(-50%)"}} width="700px" height="700px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-            <path fill="none" stroke="rgb(203, 215, 224)" stroke-width="3" stroke-dasharray="130.8603533935547 125.72857482910155" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="butt" style={{transform:"scale(0.55)","transformOrigin":"50px 50px"}}>
-              <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="1.0518518518518516s" keyTimes="0;1" values="0;256.58892822265625"></animate>
-            </path>
-          </svg>
-        </div>
-          
-          
-        </Row>}
+        {loading && 
+          <Row 
+            h100 
+            w100 
+            acenter 
+            jcenter 
+            column
+            style={{
+              position: "fixed", 
+              zIndex: 200, 
+              background: "#f8fcff"||"#cbd7e0"||"rgb(233 245 255)"
+            }}>
+            <LoadingAnimation/>
+          </Row>
+        }
 
 
         <HeaderWrapper hide={showOnURLQuery("header") ? false : true}>
@@ -384,7 +401,7 @@ function App() {
 
 
           <Title style={{position: "absolute", top: "50%", transform: "translateY(-50%)", left: 0, right: 0, margin: "auto" }}>
-            <span style={{ fontWeight: 700, fontSize: 20, transform: "translateY(-2px)" }}>Flouw</span>
+            <span style={{ fontWeight: 700, fontSize: 20, transform: "translateY(-2px)" }}>Flowstack</span>
             <span style={{height:18,margin: "0 12px", width: 1, background: "rgba(0, 0, 0, 0.1)"}}/>
             <span >
             <ToolTipPopup id={"undo"+"_tooltip"} text={"Ångra"} delay={700} bg={"#454165"} color={"white"}>

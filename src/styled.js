@@ -260,7 +260,7 @@ export const ListItem = styled.li`
       /* animation: move 2s ease-in-out; */
       /* transform: scale(1.04); */
       /* background: ${props => chroma(props.bgcolor).alpha(0).hex()}; */
-      margin: 10px 15px;
+      margin: 10px 13px;
       
     }
     will-change: background;

@@ -1,6 +1,8 @@
 # flow-engine
 Flowchart building tool
 
+<img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/svg/restcli2.svg" alt="Alt Text" style="max-width:100%;">
+
 Work in process!
 
 Link to Demo-site:
@@ -17,7 +19,7 @@ Contains:
 
 
 
-<img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/svg/restcli2.svg" alt="Alt Text" style="max-width:100%;">
+
 
 
 Preview:

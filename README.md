@@ -1,5 +1,5 @@
 # Flowstack
-## Build integration diagrams
+## Build diagrams
 
 <img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/svg/restcli2.svg" alt="Alt Text" style="max-width:100%;">
 

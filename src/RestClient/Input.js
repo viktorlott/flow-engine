@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import styled, { css } from 'styled-components'
 import chroma from 'chroma-js'
+import InputField from '../components/Input'
 
 
 const borderColor = "#f3ecec"
@@ -112,18 +113,20 @@ const Icon = (props) => {
         default: return null
     }
 }
+
+
 export default props => {
+    const {name, register, unregister} = props
+    useEffect(() => {
+        register({ name });
+        return () => unregister(name);
+      }, [])
 
-
-
+      
     return (
-        <div>
-            <Container>
-                <Icon icon={props.icon}/>
-                
-                <InputWrapper {...props} onChange={e => void props.setValue(props.name, e.target.value)} value={props.watch(props.name, "")} ref={props.register}/>
-            </Container>
-        </div>
+
+                <InputField {...props} width={props.width} icon={false} onChange={val => void props.setValue(props.name, val)} icon={ <Icon icon={props.icon}/>}/>
+         
     )
 }
 

@@ -150,15 +150,19 @@ const Container = styled.div`
     display: flex;
     flex-flow: column;
     position: relative;
-    transition: box-shadow 0.1s, background 0.1s;
+    transition: box-shadow 0.1s, background 0.1s, transform 0.1s ease-in;
     cursor: pointer;
 
     
     box-shadow: 0 0 7px 12px rgb(0 0 0 / 1%)${props => props.selected ? ", inset 0px 0px 0px 1px " + ("transparent" || props.color || "#404040") : ", inset 0px 0px 0px 1px transparent"};
     min-width: 180px;
     padding-bottom: ${props => props.minimized ? "0px" : "5px"};
-    /* transform: scale(1); */
+    transform: scale(1);
 
+
+    /* &:hover {
+        transform: scale(1);
+    } */
 
     
     /* ${bounce({

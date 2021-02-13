@@ -75,5 +75,7 @@ export const SideMenuContent = styled.div`
     margin: 0 11px;
     margin-bottom: 5px;
 
+    overflow: scroll;
+
 `
 

@@ -136,7 +136,7 @@ const Wrapper = styled.div`
     flex-flow: column;
     transition: transform 0.2s;
     position: relative;
-
+    width: 100%;
     & > label {
         position: absolute;
         z-index: 1;
@@ -178,7 +178,7 @@ const InputWrapper = styled.input`
     Roboto, "Helvetica Neue", Arial, sans-serif;
     text-rendering: optimizeLegibility;
     
-
+    /* width: 100%; */
     height: 34px;
     outline: none;
     background-color: #f9f9f9;
@@ -188,6 +188,8 @@ const InputWrapper = styled.input`
     border: none;
     padding: 2px 10px;
     position: relative;
+    box-sizing: border-box;
+    ${props => props.width ? "width: "+props.width + ";" : ""}
     left: 0;
     /* width: 300px; */
 
@@ -252,9 +254,9 @@ export default function InputField(props) {
     }
 
     return (
-        <Wrapper hasFocus={state.focus || !!state.value}>
+        <Wrapper hasFocus={state.focus || !!state.value} >
             <label htmlFor="">{placeholder}</label>
-            <InputWrapper {...restProps} value={state.value} onChange={onChange} onFocus={e => setState(prev => ({...prev, focus: true}))} onBlur={e => setState(prev => ({...prev, focus: false}))} />
+            <InputWrapper {...restProps} width={props.width} value={state.value} onChange={onChange} onFocus={e => setState(prev => ({...prev, focus: true}))} onBlur={e => setState(prev => ({...prev, focus: false}))} />
             <span>
                 {props.icon}
             </span>

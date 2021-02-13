@@ -31,6 +31,8 @@ const ButtonWrapper = styled.button`
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   border-width: 1px 1px 1px 1px;
   border: 1px solid #f3ecec;
+  height: 40px;
+
 
 
   ${props => props.left && css`
@@ -59,12 +61,14 @@ const ButtonWrapper = styled.button`
 
    &:hover {
      background: ${chroma("#2196f3").darken(0.2).hex()};
+
+     
    }
 
   `}
 
 
-  border-radius: 4px;
+  border-radius: 2px;
 
   ${props => props.right && css`
     ${'' /* border-radius: 0 4px 4px 0; */}
@@ -93,9 +97,12 @@ const ButtonWrapper = styled.button`
     border: 1px solid var(--element-border-color);
 
     &:hover {
-     background: var(--element-hover-color);
-     box-shadow: var(--box-shadow-1-arg) var(--box-shadow-2-arg) var(--box-shadow-3-arg) var(--box-shadow-4-arg) var(--box-shadow-5-arg);
-     ${'' /* ${chroma("#efefef").darken(0.2).hex()} */}
+     ${'' /* background: var(--element-hover-color); */}
+     ${'' /* box-shadow: var(--box-shadow-1-arg) var(--box-shadow-2-arg) var(--box-shadow-3-arg) var(--box-shadow-4-arg) var(--box-shadow-5-arg); */}
+
+     border-color: #0089ff!important;
+     color: #0089ff!important;
+
    }
 
 

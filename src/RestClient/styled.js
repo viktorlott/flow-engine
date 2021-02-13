@@ -365,13 +365,14 @@ export const RequestBodyContent = styled.section`
      /* background: #ececec; */
      /* padding: 10px; */
      /* margin-top: 10px; */
-     border-radius: 0 0 5px 5px;
+     /* border-radius: 0 0 5px 5px; */
      /* border-bottom: 7px solid  #e5e5e5; */
 
      background: #f3f3f3;
 
      background: var(--element-color);
     border: 1px solid var(--element-border-color);
+    border-top: none;
 
 `
 
@@ -453,20 +454,25 @@ export const Tabs = styled.div`
      margin-top: 9px;
      margin-left: -1px;
      height: 50px;
+     position: relative;
      
      &::after {
-          /* width: 100%;
-          height: 100%;
-          content: ''; */
+          width: 100%;
+          /* height: 100%; */
+          height: 1px;
+          bottom: 0;
+          content: ''; 
           /* background: #f9f9f9; */
-          /* border-bottom: 1px solid ${borderColor}; */
+          border-bottom: 1px solid ${borderColor};
+          position: absolute;
+          z-index: 2;
      }
 `
 
 export const Tab = styled.div`
 
      /* height: 100%; */
-     font-size: 12px;
+     font-size: 16px;
 
      /* margin: 0 10px 0 0; */
      border: none;
@@ -482,8 +488,9 @@ export const Tab = styled.div`
      justify-content: center;
      align-items: center;
 
-     font-size: 12px;
-     /* font-weight: 600; */
+     font-size: 14px;
+
+  
   
 
 
@@ -510,16 +517,19 @@ export const Tab = styled.div`
 
      transition: background 0.2s, border-color 0.2s, opacity 0.2s;
      opacity: 0.5;
-     border: solid transparent;
      border-top-color: #f5f5f5;
      border-top-color: #f5f5f5;
      border-left-color: #f5f5f5;
-     border-width: 2px 1px 1px 1px;
-     background:  #f5f5f5; /* #f9f9f9 */
-     border-radius: 4px 4px 0 0;
-     margin-right: 4px;
+     border-width: 1px 1px 1px 1px;
+     border: solid transparent;
+     border:none;
 
-     transform: translateY(1px);
+     /* background:  #f5f5f5; #f9f9f9 */
+     border-radius: 2px 2px 0 0;
+     margin-right: 4px;
+     border-bottom: 1px solid transparent;
+
+     /* transform: translateY(1px); */
      
      ${props => props.active && css`
           z-index: 10;
@@ -537,25 +547,28 @@ export const Tab = styled.div`
 
           ${'' /* border: 1px solid var(--element-border-color); */}
 
-          border-bottom: 1px solid #1890ff;
+          ${'' /* border-bottom: 1px solid #1890ff;
           border-bottom: 1px solid #e4e4e4;
           border-bottom: 1px solid #24273b;
           border-bottom: 1px solid #24273b2b;
           
 
-          border: 1px solid #ececec;
+          border: 1px solid #ececec; */}
 
-          border-top-color: #259233;
-          border-top-color: #434567;
-          border-bottom: 1px solid white;
-          border-width: 2px 1px 1px 1px;
-          transform: translateY(1px);
+          ${'' /* border-top-color: #259233;
+          border-top-color: #434567; */}
+          border-bottom: 1px solid #037dfd;
+          border-bottom: 1px solid #24273b;
+          ${'' /* border-width: 2px 1px 1px 1px; */}
+          ${'' /* transform: translateY(1px); */}
           ${'' /* height: 49px; */}
 
           color: #1890ff;
           color: #24273b;
 
-          border-radius: 4px 4px 0 0;
+          ${'' /* border-radius: 3px 3px 0 0; */}
+
+
 
           & span {
                color: #1890ff;

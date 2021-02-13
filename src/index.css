@@ -104,6 +104,13 @@ html, body {
   fill: currentColor!important;
 } */
 
+.monaco-editor .monaco-scrollable-element .scrollbar.vertical .arrow-background {
+  background: rgba(230, 230, 230, 0);
+    display: none;
+}
+.decorationsOverviewRuler {
+  display: none;
+}
 .background-dot {
   background-color: #ffffff;
   background-image:url("data:image/svg+xml;utf8,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Ccircle%20cx%3D%220.5%22%20cy%3D%220.5%22%20r%3D%220.5%22%20fill%3D%22%2381818a%22%20%2F%3E%3C%2Fsvg%3E");background-position: 9px 10px;

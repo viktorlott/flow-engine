@@ -101,6 +101,7 @@ const theme2 = {
         "foreground": "104e8b",
         "token": "support"
       },
+
       {
         "foreground": "009acd",
         "token": "variable"
@@ -444,8 +445,12 @@ const theme2 = {
       "editorCursor.foreground": "#202020",
       "editorWhitespace.foreground": "#0000004A",
       "editorIndentGuide.background": "#8F8F8F",
-      "editorIndentGuide.activeBackground": "#FA2828"
-    }
+      "editorIndentGuide.activeBackground": "#FA2828",
+      
+    },
+   
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden"
   }
 
 
@@ -496,9 +501,14 @@ function CodeEditor(props) {
                         value,
                         language:  props.lang,
                         minimap: {
-                            enabled: false
+                            enabled: false,
                         },
-                        ...(props.monacoConfiguration ? props.monacoConfiguration({ monaco: monacoInstance, lang: props.lang, value }) : {})
+                     
+                        ...(props.monacoConfiguration ? props.monacoConfiguration({ monaco: monacoInstance, lang: props.lang, value }) : {}),
+                        scrollbar: {
+                          vertical: 'hidden',
+                          horizontal: 'hidden',
+                        },
                     }
                         
                     editor.current = monacoInstance.editor.create(editorRef.current,  properties)

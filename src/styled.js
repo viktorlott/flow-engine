@@ -1056,7 +1056,8 @@ export const HeaderTab = styled.h5`
     margin-right: 5px;
     transition: color 0.1s, font-size 0.1s;
     will-change: color, background;
-    border-radius: 3px 3px 0 0;
+    border-radius: 2px 2px 0 0;
+    /* border-radius: 3px; */
     border-bottom: 1px solid transparent;
 
     /* border-bottom: 1px solid #e5e5e5; */
@@ -1204,8 +1205,8 @@ export const Content = styled.div`
   /* padding: 1px; */
   /* background: white; */
   border-radius: 0 8px 8px 8px;
-  border-radius: 0 4px 4px 4px;
   border-radius: 0 6px 6px 6px;
+  border-radius: 0 3px 3px 3px;
   
   ${props => props.border && css`
       border-left: 1px solid #e5e5e5;
@@ -1372,7 +1373,7 @@ export const HeaderWrapper = styled.div`
 export const SidemenuContainer = styled.div`
     display: flex;
     position: relative;
-
+    overflow: initial;
     /* width: ${props => props.width ? props.width : "350px"}; */
     
     /* height: calc(100% ${props => props.maximized ? "" : "- 50px"}); */
@@ -1402,7 +1403,7 @@ export const SidemenuContainer = styled.div`
     /* margin-top: 14px; */
     border-radius: ${props => props.left ? "0 8px 8px 0" : "8px 0 0 8px"};
     border-radius: ${props => props.left ? "0 4px 4px 0" : "4px 0 0 4px"};
-    border-radius: 6px;
+    border-radius: 3px;
 
 
     overflow: hidden;

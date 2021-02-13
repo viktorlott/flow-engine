@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import styled, { css } from 'styled-components'
-
+import DropdownField from '../components/Dropdown'
 
 
 
@@ -266,8 +266,12 @@ const Dropdown = (props) => {
   
   
     const defaultOption = (props.options || []).find(e => e.value === (defaultValue || "get"))
+    if(!props.old) {
+      return (
   
-  
+        <DropdownField placeholder={props.placeholder} options={props.options} value={defaultValue} onChange={option => setValue(name, option.value)} />
+      )
+    }
     return (
       <Container relative={!props.borderNone} ref={bind.ref} style={{...hide}}>
         <Wrapper isOpen={isOpen}>

@@ -124,7 +124,7 @@ const Tabs = observer(({ graph }) => {
         <HeaderTab selected={graph.current === i} onClick={(e) => selectTab(i, e)} borderColorTop={"#00bf86"||"#6d94d4"||"#009688" || "#ffc967" || "#47a8d85e" || "#eff1f2" || "white" || "#ffe863" || "#d3edff" || "#00ca51"}>
           {i === 0 && (
 
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill={graph.current === i ? "currentColor" : "#d1d0d0"} d="M2 19h20v2H2v-2zM2 5l5 3.5L12 2l5 6.5L22 5v12H2V5zm2 3.841V15h16V8.841l-3.42 2.394L12 5.28l-4.58 5.955L4 8.84z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill={graph.current === i ? "#444444" : "#d1d0d0"} d="M2 19h20v2H2v-2zM2 5l5 3.5L12 2l5 6.5L22 5v12H2V5zm2 3.841V15h16V8.841l-3.42 2.394L12 5.28l-4.58 5.955L4 8.84z"/></svg>
           )}
             {/* <img src={icon} width={17} height={20} alt="" style={{marginRight: 7, borderRadius: 2}}/> */}
           <span>

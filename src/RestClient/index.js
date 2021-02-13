@@ -521,22 +521,22 @@ function RestClient(props) {
                 <Header>
                  
                   <AbsoluteCenter>
-                    <Input name="name" watch={watch} icon={"draft"} style={{marginLeft: 0, fontWeight: "300!important", width: "inherit"}} placeholderWeight="400" setValue={setValue} placeholder={"namnge integrationen"} register={register}/>
+                    <Input width={"100%"} name="name"  watch={watch}  unregister={unregister} style={{marginLeft: 0, fontWeight: "300!important", width: "inherit"}} placeholderWeight="400" setValue={setValue} placeholder={"Namn"} register={register}/>
                   </AbsoluteCenter>
                  
                   <AbsoluteCenter>
                       <AbsoluteCenter style={{marginRight: 10}}>
-                        <Dropdown name="method" register={register} setValue={setValue} unregister={unregister} watch={watch}  options={methods}/>
+                        <Dropdown width={"100%"} name="method" placeholder={"Metod"} register={register} setValue={setValue} unregister={unregister} watch={watch}  options={methods}/>
                       </AbsoluteCenter>
-                      <AbsoluteCenter>
-                          <Input name="url" icon={"link"} watch={watch} setValue={setValue} placeholder={"https://api.minprodukt.se/användare"} placeholderWeight="400" register={register}/>
+                      <AbsoluteCenter style={{width: 400}}>
+                        <Input width={"100%"} name="url" watch={watch} unregister={unregister} setValue={setValue} placeholder={"Ange URL"} placeholderWeight="400" register={register}/>
                       </AbsoluteCenter>
 
-                      <AbsoluteCenter style={{marginLeft: 10}}>
+                      <AbsoluteCenter style={{marginLeft: 50}}>
                         <ToolTipPopup text="Klicka för att testa" delay={500}>
                             <Button right onClick={onSubmit} style={{color: "#323448", fontWeight: 500}}>
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M3.741 1.408l18.462 10.154a.5.5 0 0 1 0 .876L3.741 22.592A.5.5 0 0 1 3 22.154V1.846a.5.5 0 0 1 .741-.438zM5 13v6.617L18.85 12 5 4.383V11h5v2H5z"/></svg> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" fill="currentColor" d="M1.513 1.96a1.374 1.374 0 011.499-.21l19.335 9.215a1.146 1.146 0 010 2.07L3.012 22.25a1.374 1.374 0 01-1.947-1.46L2.49 12 1.065 3.21a1.374 1.374 0 01.448-1.25zm2.375 10.79l-1.304 8.042L21.031 12 2.584 3.208l1.304 8.042h7.362a.75.75 0 010 1.5H3.888z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M3.741 1.408l18.462 10.154a.5.5 0 0 1 0 .876L3.741 22.592A.5.5 0 0 1 3 22.154V1.846a.5.5 0 0 1 .741-.438zM5 13v6.617L18.85 12 5 4.383V11h5v2H5z"/></svg>
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" fill="currentColor" d="M1.513 1.96a1.374 1.374 0 011.499-.21l19.335 9.215a1.146 1.146 0 010 2.07L3.012 22.25a1.374 1.374 0 01-1.947-1.46L2.49 12 1.065 3.21a1.374 1.374 0 01.448-1.25zm2.375 10.79l-1.304 8.042L21.031 12 2.584 3.208l1.304 8.042h7.362a.75.75 0 010 1.5H3.888z"></path></svg> */}
                               </Button>
                         </ToolTipPopup>
                       </AbsoluteCenter>
@@ -551,6 +551,7 @@ function RestClient(props) {
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path  fill="currentColor" d="M7 19v-6h10v6h2V7.828L16.172 5H5v14h2zM4 3h13l4 4v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm5 12v4h6v-4H9z"/></svg>
                         Spara</Button>
                     </ToolTipPopup>
+
                     <AbsoluteCenter>
                         <ToolTipPopup text="Klicka här för att stänga" delay={500}>
                             <Button danger style={{color: "#323448", fontWeight: 400}} onClick={e => void (e.preventDefault(), setCloseModal(true))}>Stäng</Button>
@@ -621,7 +622,7 @@ function RestClient(props) {
                                   ? <> 
                                       {data.icon}
                                       {data.label}: {data.list.find(e => e.value === type).label}
-                                      <Dropdown borderNone icon={<DropArrowIcon size={{width: 15, height: 15}} color="#d0d0d0"/>} name={data.listName} disableLabel register={register} setValue={setValue} unregister={unregister} watch={watch} default options={data.list}/> 
+                                      <Dropdown borderNone old icon={<DropArrowIcon size={{width: 15, height: 15}} color="#d0d0d0"/>} name={data.listName} disableLabel register={register} setValue={setValue} unregister={unregister} watch={watch} default options={data.list}/> 
                                     </>
                                   : <>
                                       {data.icon}

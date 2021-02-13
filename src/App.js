@@ -368,7 +368,10 @@ function App() {
   const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
   
+  const urls = window.location.href.split("?")
 
+  const switchViews = (a, b) => ((urls[1] && (/filled[&]noloading/gi).test(urls[1])) ? a || "?noloading" : b || "?filled&noloading")
+  
 
   return (
     <StoreContext.Provider value={{ toggleClient, toggleEditor, toggler }}>
@@ -396,6 +399,20 @@ function App() {
 
           <Row justify="center" align="center">
             <HButton >Dokumentation</HButton>
+            <span style={{height:18,margin: "0 12px", marginLeft: 25, width: 1, background: "rgba(0, 0, 0, 0.1)"}}/>
+
+            <NavBar>
+              <ToolTipPopup id={"undo"+"_tooltip"} text={"Byt utseende"} delay={300} bg={"#454165"} color={"white"}>
+              <div>
+                  <BButton toggleClient={() => {
+                    window.location.href = urls[0] + switchViews()
+                  }}>
+                    {switchViews("Simpel", "Fylld")}
+                  </BButton>
+              </div>
+              </ToolTipPopup>
+            </NavBar>
+
           </Row>
 
 

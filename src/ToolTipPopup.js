@@ -38,19 +38,21 @@ const HoverMenuItem = styled.div`
     opacity: ${props => props.show ? "1" : "0"};
 
     left: 50%;
+
+
+    /* &:hover {
+        display: ${props => true ? "none" : "flex"};
+        visibility: ${props => true ? "hidden" : props.show ? "visible" : "hidden" };
+        opacity: ${props => true ? "1" : "0"};
+    } */
     
     
     ${boxPosition}
-    transform: translateX(-50%) ${props => props.show ? "scale(0.95)" : "scale(0.6)"};
+    transform: translateX(-50%) ${props => props.show ? "scale(0.95)" : "scale(0.85)"};
     user-select: none;
     padding: 6px 8px;
 
-
-
-    
-
-
-    transition: opacity 0.1s, visibility 0.2s, transform 0.2s;
+    transition: opacity 0.1s, visibility 0.1s, transform 0.1s;
     text-decoration: none;
     font-size: 12px;
     white-space: nowrap;
@@ -93,7 +95,18 @@ const ToolTip = props => {
 
     const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
-    const children = [<HoverMenuItem hardHide={props.hardHide} arrow={props.arrow} id={props.id} box={props.box} bg={props.bg} hide={props.hide} color={props.color} show={isShown || showOnURLQuery("tooltips")} >{props.text}</HoverMenuItem>, ...React.Children.toArray(props.children.props.children)]
+    const children = [
+        <HoverMenuItem 
+            hardHide={props.hardHide} 
+            arrow={props.arrow} 
+            id={props.id} 
+            box={props.box} 
+            bg={props.bg} 
+            hide={props.hide} 
+            color={props.color} 
+            show={isShown || showOnURLQuery("tooltips")} >
+                {props.text}
+            </HoverMenuItem>, ...React.Children.toArray(props.children.props.children)]
 
 
     const onMouseEnter = () => {

@@ -18,7 +18,7 @@ export const Container = styled.div`
   display: grid;
   transition: 0.5s;
   grid-template-columns: ${props => props.leftSideMenu ? "300px" : "100px"} 1fr ${props => props.rightSideMenu ? "350px" : "100px"};
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 70px 1fr;
 
 
 `
@@ -228,44 +228,6 @@ const spring = t =>
     }
   `
   
-export const ListItem = styled.li`
-      display: flex;
-
-    justify-content: space-between;
-    position: relative;
-
-    margin: 10px 18px;
-    padding-left: 5px;
-
-    cursor: grab;
-
-    transition: background 0.1s, margin 0.1s;
-    will-change: background;
-    background: ${props => props.bgcolor};
-
-    /* transition: transform 0.08s; */
-
-    /* ${bounce({
-        duration: 25,
-        animation(p, i, lerp) {
-            return `
-                transform: scale(${lerp(1, 1.04, p)});
-            `
-        },
-        rest() {
-            return `transform: scale(1);`
-        }
-    })} */
-    &:hover {
-      /* animation: move 2s ease-in-out; */
-      /* transform: scale(1.04); */
-      /* background: ${props => chroma(props.bgcolor).alpha(0).hex()}; */
-      margin: 10px 13px;
-      
-    }
-    will-change: background;
-
-`
 
 export const ListItemTitle = styled.div`
     display: flex;
@@ -348,6 +310,12 @@ export const ListMainIcon = styled.div`
   margin-left: 8px;
   color: ${props => props.color};
   background: ${props => props.theme};
+
+  transition: width 0.2s ease-in;
+
+  &:hover {
+    width: 100%;
+  }
 
 
   & > svg {
@@ -864,9 +832,12 @@ export const SideBarHeader = styled(Header)`
       border-top: 2px solid #007eff;
     ` : props.right ? css`
      ${props => props.right && css`
-      border-top: 2px solid #ffa12d;
+      border-top: 2px solid #ff9c07;
+      border-top: 2px solid #ea5664;
     `}
     ` : "" }
+
+    /* #ffa12d */
 
 
 
@@ -889,7 +860,7 @@ export const SideBarHeader = styled(Header)`
     /* color: #5d5d5d; */
     border-radius: 3px;
 
-    font-family: Lato!important;
+    /* font-family: Lato!important; */
 
     ${props => props.left2 && css`
       text-decoration-line: underline;
@@ -1003,6 +974,7 @@ export const HeaderTabs = styled(Header)`
     /* background: #f9f9f9; */
     font-weight: 500;
     color: #717171;
+    color: #3c3c3c;
 
    
 
@@ -1019,6 +991,7 @@ export const HeaderTab = styled.h5`
     margin: 0;
     text-align: center;
     color: #1c2b46;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1107,6 +1080,7 @@ export const HeaderTab = styled.h5`
 
         padding: 0px 10px;
         color: #717171;
+        color: #3c3c3c;
         /* margin-top: 24px; */
 
 
@@ -1118,7 +1092,7 @@ export const HeaderTab = styled.h5`
         border: none;
         border-bottom: 1px solid white;
         border-top: 4px solid #383350;
-
+        color: #3c3c3c;
         ${'' /* margin-top: 4px; */}
         margin-right: 5px;
         border-top: 2px solid ${props =>  props.borderColorTop ? props.borderColorTop : "#e5e5e5"};
@@ -1158,6 +1132,7 @@ export const HeaderTab = styled.h5`
             cursor: pointer;
             padding: 10px;
             color: #717171;
+            color: #3c3c3c;
             ${'' /* border: 1px solid #e5e5e5; */}
 
             margin: 0 4px;
@@ -1291,7 +1266,7 @@ export const Settings = styled.div`
   height: calc(100% );
   /* box-shadow: 0 2px 5px 0 rgba(32,48,60,.05); */
   border-left: 1px solid #eff1f2;
-  border-left: 2px solid #f3f3f3;
+  border-left: 1px solid #f3f3f3;
   
   /* 0 0px 4px 1px rgb(32 48 60 / 6%) */
   will-change: transform;
@@ -1503,8 +1478,8 @@ export const Editor = styled.div`
 export const Button = styled.button`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* font-family: ProximaNova, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif; */
   text-rendering: optimizeLegibility;
 
 

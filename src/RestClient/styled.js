@@ -7,9 +7,9 @@ export const Container = styled.div`
     display: grid;
      outline: none;
      border: none;
-
-     width: 98vw;
-     height: 98vh;
+     overflow: hidden;
+     width: 90vw;
+     height: 90vh;
      &:focus {
           outline: none;
           border: none;
@@ -22,11 +22,11 @@ export const Container = styled.div`
     background-color: white;
     margin: 0;
     /* padding: 10px 20px 20px 20px; */
-    border-radius: 5px;
+    border-radius: 6px;
     /* height: calc(100% - 200px); */
     box-shadow: 0 20px 40px 0 rgba(0,35,90,.1), 0 0 2px 0 rgba(0,35,90,.06);
 
-
+     
     & * {
          /* color: #232b40; */
     }
@@ -63,6 +63,9 @@ export const MainHeader = styled.section`
 
      width: 100%;
 
+     border-top: 2px solid #7232f3;
+     border-top: 2px solid #434567;
+
 
      /* background: #fbfbfb; */
      /* border-bottom: 1px solid ${borderColor};
@@ -91,7 +94,7 @@ export const MainHeader = styled.section`
           color: #ffffff;
           /* background: #272727; */
 
-          border-bottom: 1px solid #f5f5f5;
+          /* border-bottom: 1px solid #f5f5f5; */
           background: #fbfbfb;
           background: hsla(0,0%,100%,.96);
           /* border-bottom: 1px solid #191919;
@@ -161,11 +164,14 @@ export const MainHeader = styled.section`
 export const SideMenu = styled.section`
      grid-column: 1 / 2;     
      grid-row: 2 / 5;
-     background: #23263c;
+     /* background: #23263c; */
      border-radius: 0 0 0 5px;
     
      color: white;
-
+     color: #1c2b46;
+     color: #282d38;
+     border-right: 1px solid #ececec;
+     margin: 30px 0;
 
      font-weight: 600;
      
@@ -174,7 +180,7 @@ export const SideMenu = styled.section`
      justify-content: space-between;
      flex-direction: column;
 
-     
+     border-top-right-radius: 3px;
     
 
 `
@@ -190,7 +196,7 @@ export const SideMenuContainer = styled.section`
 
 
 export const SideMenuSection = styled.section`
-     margin: 10px 0;
+     margin: 10px 10px;
      & > h4 {
           display: flex;
           /* justify-content: center; */
@@ -506,9 +512,9 @@ export const Tab = styled.div`
      opacity: 0.5;
      border: solid transparent;
      border-top-color: #f5f5f5;
-     border-top-color: #e2e2e2;
+     border-top-color: #f5f5f5;
      border-left-color: #f5f5f5;
-     border-width: 3px 1px 1px 1px;
+     border-width: 2px 1px 1px 1px;
      background:  #f5f5f5; /* #f9f9f9 */
      border-radius: 4px 4px 0 0;
      margin-right: 4px;
@@ -538,8 +544,11 @@ export const Tab = styled.div`
           
 
           border: 1px solid #ececec;
+
+          border-top-color: #259233;
+          border-top-color: #434567;
           border-bottom: 1px solid white;
-          border-width: 3px 1px 1px 1px;
+          border-width: 2px 1px 1px 1px;
           transform: translateY(1px);
           ${'' /* height: 49px; */}
 

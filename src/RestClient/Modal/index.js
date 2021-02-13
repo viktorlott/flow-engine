@@ -7,7 +7,7 @@ import styled, { keyframes, css } from 'styled-components'
 const animationScale = keyframes`
     0% {
         opacity: 0;
-        transform: scale(0.6);
+        transform: scale(0.65);
     }
     100% {
         opacity: 1;
@@ -45,7 +45,7 @@ const Container = styled.div`
     height: 100%;
     z-index: 99999999;
 
-    transition: visibility 0.6s, opacity 0.9s, background 0.6s;
+    transition: visibility 0.2s, opacity 0.2s, background 0.6s;
     
     
     display: flex;
@@ -53,8 +53,11 @@ const Container = styled.div`
     align-items: center;
     
     visibility: ${props => props.isOpen ? "visible" : "hidden"};
-    background:${props => props.isOpen ? "rgba(0,0,0,.2)" || "#121b2f9c" : "rgba(0,0,0,0)"};
+    background:${props => props.isOpen ? "rgba(0,0,0,0)" || "#121b2f9c" : "rgba(0,0,0,0)"};
     opacity: ${props => props.isOpen ? "1" : "0"};
+
+
+    
     
 `
 // #0304049c
@@ -64,13 +67,14 @@ const Content = styled.div`
     opacity: 0;
     position: relative;
         /* transition: opacity 0.6s; */
+    ${props => !props.noshadow && "box-shadow: 0px 0 10px 0px rgb(81 86 105 / 10%);"}
     ${props => !props.isOpen && css`
     `}
 
     ${props => props.isOpen && css`
         ${'' /* animation: 0.2s ${animationScale} cubic-bezier(0.6,0,0.4,1) 0.2s forwards; */}
 
-        animation: 0.2s ${animationScale} cubic-bezier(0.6,0,0.4,1) 0.3s forwards;
+        animation: ${animationScale} cubic-bezier(0.6,0,0.4,1) 0.3s forwards;
     ` }
 
 
@@ -185,7 +189,7 @@ function Modal(props) {
         <Portal>
            <Container isOpen={props.isOpen}>
                     <AnimationWrapper  isOpen={props.isOpen}>
-                        <Content isOpen={props.isOpen}>
+                        <Content noshadow={props.noshadow} isOpen={props.isOpen}>
                             {props.isOpen && props.children}
                         </Content>
                         {/* <div>

@@ -475,7 +475,7 @@ function RestClient(props) {
     return (
         <Container>
             <Modal isOpen={closeModal}>
-              <AbsoluteCenter style={{flexFlow: "column", background: "white", justifyContent: "center", borderRadius: "3px",alignItems: "center", overflow: "hidden"}}>
+              <AbsoluteCenter style={{flexFlow: "column", background: "white", justifyContent: "center", borderRadius: "3px",alignItems: "center", overflow: "hidden", borderTop: "2px solid #ff5250"}}>
                 <div style={{padding: "25px 80px"}}>Är du säker?</div>
                 <div style={{display: "flex", width: "100%", justifyContent: "space-evenly", alignItems: "center", padding: "20px 30px"}}>
                   <Button danger onClick={e => void (e.preventDefault(), props.toggle(null))}>Stäng</Button>
@@ -484,7 +484,7 @@ function RestClient(props) {
               </AbsoluteCenter>
             </Modal>
 
-            <Modal isOpen={saveModal}>
+            <Modal noshadow isOpen={saveModal}>
               <AbsoluteCenter style={{flexFlow: "column", justifyContent: "center", borderRadius: "3px",alignItems: "center", overflow: "hidden"}}>
                 <div style={{padding: "20px 30px"}}>
                   <SuccessIcon color="rgb(3, 130, 244)"/>
@@ -498,7 +498,7 @@ function RestClient(props) {
 
                 <h1>
                   {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0L24 0 24 24 0 24z"/><path className="path_signal" d="M3.929 4.929l1.414 1.414C3.895 7.791 3 9.791 3 12c0 2.21.895 4.21 2.343 5.657L3.93 19.07C2.119 17.261 1 14.761 1 12s1.12-5.261 2.929-7.071zm16.142 0C21.881 6.739 23 9.239 23 12s-1.12 5.262-2.929 7.071l-1.414-1.414C20.105 16.209 21 14.209 21 12s-.895-4.208-2.342-5.656L20.07 4.93zM13 5v6h3l-5 8v-6H8l5-8zM6.757 7.757l1.415 1.415C7.448 9.895 7 10.895 7 12c0 1.105.448 2.105 1.172 2.828l-1.415 1.415C5.672 15.157 5 13.657 5 12c0-1.657.672-3.157 1.757-4.243zm10.487.001C18.329 8.844 19 10.344 19 12c0 1.657-.672 3.157-1.757 4.243l-1.415-1.415C16.552 14.105 17 13.105 17 12c0-1.104-.447-2.104-1.17-2.827l1.414-1.415z"/></svg> */}
-                  Integration
+                  {/* Integration */}
                 </h1>
 
                 <h1>
@@ -573,24 +573,24 @@ function RestClient(props) {
                           <h5>Tidigare kallelser</h5>
                       </SideMenuSection>
                     </div>
-                    <div style={{gridRow: "span 13 / auto", overflowY: "auto", paddingTop: 6, borderBottom: "1px solid #434567", borderTop: "1px solid #434567", marginTop: 30 }}>
+                    <div style={{gridRow: "span 13 / auto", overflowY: "auto", paddingTop: 6, borderBottom: "1px solid #ececec", borderTop: "1px solid #ececec", marginTop: 30, marginLeft: 30, marginRight: 30 }}>
                       <SideMenuSection style={{  height: "100%"}}>
                           {!history.length && <>
-                            <span style={{padding: "50px 5px 10px 5px", fontSize: 16, color: "#ffffff"}}>
+                            <span style={{padding: "50px 5px 10px 5px", fontSize: 16, color: "#1c2b46"}}>
 
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="50"><path fill="none" d="M0 0H24V24H0z"/><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12h2c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8C9.25 4 6.824 5.387 5.385 7.5H8v2H2v-6h2V6c1.824-2.43 4.729-4 8-4zm1 5v4.585l3.243 3.243-1.415 1.415L11 12.413V7h2z"/></svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="45" height="45"><path fill="none" d="M0 0H24V24H0z"/><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12h2c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8C9.25 4 6.824 5.387 5.385 7.5H8v2H2v-6h2V6c1.824-2.43 4.729-4 8-4zm1 5v4.585l3.243 3.243-1.415 1.415L11 12.413V7h2z"/></svg>
                             </span>
-                            <span style={{padding: "0px 5px 10px 5px", fontSize: 16, color: "#ffffff"}}>
+                            <span style={{padding: "0px 5px 10px 5px", fontSize: 14, color: "#1c2b46"}}>
                               Du har inte skickat några kallalser
                             </span>
-                            <span style={{fontSize: 14, paddingTop: 0}}>
+                            <span style={{fontSize: 12, paddingTop: 0}}>
                               Varje kallelse du skickar kommer dyka upp här
                             </span>
                           </>
                         }
 
                         {history.map(e => <div>
-                          <span style={{color: "white", fontSize: 10, fontWeight: 300}}>{e.method.toUpperCase()} </span>
+                          <span style={{color: "#1c2b46", fontSize: 10, fontWeight: 300}}>{e.method.toUpperCase()} </span>
                           <span style={{
                             width: 200,
                             fontWeight: 400,

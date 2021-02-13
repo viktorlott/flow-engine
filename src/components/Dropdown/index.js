@@ -90,7 +90,7 @@ cursor: pointer;
 & > span {
     padding: 2px 6px;
     border-radius: 3px;
-
+    font-size: 13.333px!important;
     /* color: #808080; */
     color: #4c5058;
 }

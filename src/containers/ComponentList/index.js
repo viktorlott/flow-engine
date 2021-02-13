@@ -28,7 +28,7 @@ import {
     Main,
     HeaderTabs,
     HeaderTab,
-    ListItem,
+
     SideBarHeader,
     Settings,
     SettingsWrapper,
@@ -40,7 +40,7 @@ import { observer } from "mobx-react"
 import Database, { BodyGrid, Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from '../../Database'
 
 import InputField from '../../components/Input'
-import {Row} from './styled'
+import {Row, ComponentListItemBG, ListItem } from './styled'
 import dnd from '../../utils/DnD'
 import ToolTipPopup from '../../ToolTipPopup'
 import {
@@ -52,6 +52,8 @@ import {
     DragIcon,
     BoxIcon,
   } from '../../Icons'
+
+
 
 const showOnURLQuery = (q) => new RegExp(q, "gi").test(window.location.search)
 
@@ -84,6 +86,7 @@ let m = true
       borderRadius: 3,
       color: "white",
       border: `1px ${showOnURLQuery("dashed") ? "dashed" : "solid"} ${chroma(item.theme).darken(0.2).alpha(showOnURLQuery("dashed") ? 1 : 1).hex()}`,
+      borderBottom: `3px ${showOnURLQuery("dashed") ? "dashed" : "solid"} ${chroma(item.theme).darken(0.5).alpha(showOnURLQuery("dashed") ? 1 : 1).hex()}`,
     } : {}),
   }
 
@@ -99,17 +102,24 @@ let m = true
       bgcolor={"#ffffff00" || chroma(item.theme).darken(0.2).hex()}
       style={listStyle}>
 
-      <div style={{ width: "37px", height: "100%", background: chroma(item.theme).darken(0.2).alpha(0.5).hex(), borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", left: 0, top: 0 }}></div>
+      <ComponentListItemBG  bg={chroma(item.theme).darken(0.2).alpha(1).hex()} borderColor={chroma(item.theme).darken(0.2).alpha(1).hex()} >
+        <ListItemTitle style={{position: "absolute", left: 50}}>
+            <TitleUpper color={"white"}>{item.title}</TitleUpper>
+          </ListItemTitle>
+        </ComponentListItemBG>
 
 
 
       <div style={{ display: "flex", flexFlow: "row", position: "relative"}}>
         <ListMainIcon
-          style={{borderRadius: "50%", padding: 0}}
+          style={{borderRadius: "50%", padding: 0, zIndex: 3}}
           theme={"transparent"||"#424353"||"#5a64ff"||"#2c3f77"||chroma(item.theme).darken(0.1).alpha(1).hex()}
-          color={chroma(item.theme).darken(0.1).alpha(1).hex() || "#212429"}>
+          color={"white"||chroma(item.theme).darken(0.1).alpha(1).hex() || "#212429"}>
           {item.icon || <BoxIcon />}
+
         </ListMainIcon>
+
+
         <ToolTipPopup id={item.title+"_tooltip"} text={item.label} delay={500} bg={"#454165"} color={"white"} hide={true}>
           <ListItemTitle>
             <TitleUpper color={chroma(item.theme).darken(0.1).alpha(1).hex()}>{item.title}</TitleUpper>
@@ -119,16 +129,16 @@ let m = true
       {/* <div style={{ width: "1px", height: "100%", borderRight: "1px dashed "+chroma(item.theme).darken(0.2).alpha(1).hex(), position: "absolute", right: "15%", top: 0 }}></div> */}
       {/* <div style={{ width: "1px", height: "100%", background: chroma(item.theme).darken(0.6).alpha(0.9).hex(), position: "absolute", right: "13%", top: 0 }}></div> */}
 
-      <div style={{ width: "1px", height: "100%", position: "absolute", right: "10px", top: 0 }}>
+      <div style={{ width: "1px", height: "100%", position: "absolute", right: "10px", top: 0, zIndex: 3 }}>
         {/* <div style={{position: "absolute", width: 7, height: 7, top: 0, transform: "translateY(-50%) rotate(0deg)", background: item.theme, borderRadius: "4px", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600}}/> */}
         <div style={{position: "absolute",  width: 7, height: 7, top: 0, left: -15, transform: "translateY(-50%) rotate(45deg)", background: item.theme, borderRadius: "25%", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600}}/>
       </div>
 
       {item.ports.find(e => e.input) && (
-        <Row jcenter acenter style={portStyle("left", item.ports.find(e => e.input).input)}>x{item.ports.filter(e => e.input).length}</Row>
+        <Row zIndex={3} jcenter acenter style={portStyle("left", item.ports.find(e => e.input).input)}>x{item.ports.filter(e => e.input).length}</Row>
       )}
       {item.ports.find(e => e.output) && (
-        <Row jcenter acenter style={portStyle("right", item.ports.find(e => e.output).output)}>x{item.ports.filter(e => e.output).length}</Row>
+        <Row zIndex={3} jcenter acenter style={portStyle("right", item.ports.find(e => e.output).output)}>x{item.ports.filter(e => e.output).length}</Row>
         )}
 
       
@@ -201,7 +211,7 @@ function ComponentList(props) {
                   <BlockList filter={state.filter} items={props.standard} />
                 </ComponentListContainer>
               </Drawer>
-              <Drawer defaultOpen={false} title={"API"} nobg={showOnURLQuery("sidenone")}>
+              <Drawer defaultOpen={true} title={"API"} nobg={showOnURLQuery("sidenone")}>
                 <ComponentListContainer nobg={showOnURLQuery("sidenone")}>
                   <BlockList filter={state.filter} items={props.api} />
                 </ComponentListContainer>

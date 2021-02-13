@@ -72,17 +72,30 @@ const ToolContainer = styled.div`
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: -25px;
+    bottom: -28px;
+    bottom: -18px;
     left: 0; 
     /* right: 0; */
     /* margin: auto; */
     padding: 1px;
+    /* color: white; */
+    z-index:223;
+    color: ${props => props.color}!important;
 
+    & > svg {
 
+        background: white;
+        border-radius: 50%;
+        padding: 2px;
+        margin: 2px;
+
+        transition: transform 0.1s ease-in;
+    }
     & > svg:nth-child(1) {
         width: 14px;
         height: 14px;
-        padding: 5px;
+
+        color: ${props => props.color}!important;
 
         & > path:nth-child(2) {
             /* fill: #ff8686; */
@@ -92,7 +105,9 @@ const ToolContainer = styled.div`
         &:hover {
             & > path:nth-child(2) {
                 /* fill: #ff4040; */
+
             }
+            transform: scale(1.2);
         }
         
     }
@@ -100,7 +115,8 @@ const ToolContainer = styled.div`
     & > svg:nth-child(2) {
         width: 14px;
         height: 14px;
-        padding: 5px;
+        
+        color: ${props => props.color}!important;
 
         & > path:nth-child(2) {
             /* fill: #ff4040; */
@@ -111,6 +127,7 @@ const ToolContainer = styled.div`
             & > path:nth-child(2) {
                 /* fill: #ff4040; */
             }
+            transform: scale(1.2);
         }
         
     }
@@ -159,13 +176,14 @@ const Container = styled.div`
     animation: 1s move linear;
 
     ${props => props.transparent && css`
-        background: ${chroma(props.color).alpha(props.selected ? 0.5 : 0.4).hex()};
-        border: 1px ${props.selected ? "solid" : "solid"} ${props.color || "#404040" };
+        background: ${chroma(props.color)[props.selected ? "brighten": "brighten"](props.selected ? 0.1 : 0.4).hex()};
+        ${'' /* background: ${props.color}!important; */}
+        border-bottom: 4px ${props.selected ? "solid" : "solid"} ${chroma(props.color).brighten(0.1).hex() || "#404040" };
         
         ${'' /* background: transparent; */}
 
         &:hover {
-            background: ${chroma(props.color).alpha(0.5).hex()};
+            background: ${chroma(props.color).brighten(0.1).hex()};
 
 
         }
@@ -176,7 +194,8 @@ const Container = styled.div`
         } */}
 
         & * {
-            color: ${props => props.color ? props.color : "#404040"}!important;
+            ${'' /* color: ${props => props.color ? props.color : "white"}!important; */}
+            ${'' /* color: white!important; */}
         }
     
     
@@ -254,8 +273,11 @@ const AlignCenter = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
+
+
+
     & > span {
-        padding: 3px;
+        padding: 2px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -269,11 +291,17 @@ const AlignCenter = styled.div`
 
     ${props => props.iColor && css`
         & > svg > path {
-            color: ${props.iColor}!important;
+            color: ${props.iColor || "white"}!important;
         }
     
     `}
 
+    ${props => props.hover && css`
+        transition: transform 0.1s ease-in;
+        &:hover {
+            transform: scale(1.2);
+        }
+    `}
     & > span:hover {
         background: ${props => props.transparent ? "none" : props.color};
     }
@@ -309,6 +337,7 @@ function EditIcon() {
 
 
 const StyledSpinnerAlt = styled.i`
+  /* font-size: 15px; */
   @keyframes spinneralt {
     0% {
       transform: rotate(0deg);
@@ -325,8 +354,8 @@ const StyledSpinnerAlt = styled.i`
     box-sizing: border-box;
     position: relative;
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
   &::before {
     content: '';
@@ -350,11 +379,11 @@ export const LoadIcon = React.forwardRef(
 
 function StartIcon() {
     return (
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path fill-rule="evenodd" fill="currentColor" d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z"></path></svg>
-
-    )
-}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path  fill="currentColor"  d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zM10.622 8.415a.4.4 0 0 0-.622.332v6.506a.4.4 0 0 0 .622.332l4.879-3.252a.4.4 0 0 0 0-.666l-4.88-3.252z"/></svg>
+        
+        )
+    }
+//    {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path fill-rule="evenodd" fill="currentColor" d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z"></path></svg> */}
 
 
 /*
@@ -616,20 +645,20 @@ export class CustomNodeWidget extends React.Component {
     }
 
     render() {
-
+        // iColor={true && this.props.node.options.color}
         return (
             <Container  minimized={this.props.node.options.minimized } transparent={true} selected={this.props.node.isSelected()} color={this.props.node.options.color} onDoubleClick={this.openModal}>
-                <ToolContainer style={{ opacity: this.props.node.isSelected() ? 1 : 0, visibility: this.props.node.isSelected() ? "visible" : "none"}}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M17 13v1c0 2.77-.664 5.445-1.915 7.846l-.227.42-1.747-.974c1.16-2.08 1.81-4.41 1.882-6.836L15 14v-1h2zm-6-3h2v4l-.005.379a12.941 12.941 0 0 1-2.691 7.549l-.231.29-1.55-1.264a10.944 10.944 0 0 0 2.471-6.588L11 14v-4zm1-4a5 5 0 0 1 5 5h-2a3 3 0 0 0-6 0v3c0 2.235-.82 4.344-2.271 5.977l-.212.23-1.448-1.38a6.969 6.969 0 0 0 1.925-4.524L7 14v-3a5 5 0 0 1 5-5zm0-4a9 9 0 0 1 9 9v3c0 1.698-.202 3.37-.597 4.99l-.139.539-1.93-.526c.392-1.437.613-2.922.658-4.435L19 14v-3A7 7 0 0 0 7.808 5.394L6.383 3.968A8.962 8.962 0 0 1 12 2zM4.968 5.383l1.426 1.425a6.966 6.966 0 0 0-1.39 3.951L5 11 5.004 13c0 1.12-.264 2.203-.762 3.177l-.156.29-1.737-.992c.38-.665.602-1.407.646-2.183L3.004 13v-2a8.94 8.94 0 0 1 1.964-5.617z"/></svg>
+                <ToolContainer style={{ opacity: this.props.node.isSelected() ? 1 : 0, visibility: this.props.node.isSelected() ? "visible" : "none"}} color={this.props.node.options.color}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill={this.props.node.options.color} d="M17 13v1c0 2.77-.664 5.445-1.915 7.846l-.227.42-1.747-.974c1.16-2.08 1.81-4.41 1.882-6.836L15 14v-1h2zm-6-3h2v4l-.005.379a12.941 12.941 0 0 1-2.691 7.549l-.231.29-1.55-1.264a10.944 10.944 0 0 0 2.471-6.588L11 14v-4zm1-4a5 5 0 0 1 5 5h-2a3 3 0 0 0-6 0v3c0 2.235-.82 4.344-2.271 5.977l-.212.23-1.448-1.38a6.969 6.969 0 0 0 1.925-4.524L7 14v-3a5 5 0 0 1 5-5zm0-4a9 9 0 0 1 9 9v3c0 1.698-.202 3.37-.597 4.99l-.139.539-1.93-.526c.392-1.437.613-2.922.658-4.435L19 14v-3A7 7 0 0 0 7.808 5.394L6.383 3.968A8.962 8.962 0 0 1 12 2zM4.968 5.383l1.426 1.425a6.966 6.966 0 0 0-1.39 3.951L5 11 5.004 13c0 1.12-.264 2.203-.762 3.177l-.156.29-1.737-.992c.38-.665.602-1.407.646-2.183L3.004 13v-2a8.94 8.94 0 0 1 1.964-5.617z"/></svg>
                     <svg onClick={e => {
                         this.props.node.remove()
                         this.props.engine.repaintCanvas()
-                    }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M4 8h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8zm2 2v10h12V10H6zm3 2h2v6H9v-6zm4 0h2v6h-2v-6zM7 5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h5v2H2V5h5zm2-1v1h6V4H9z"/></svg>
+                    }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill={this.props.node.options.color} d="M4 8h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8zm2 2v10h12V10H6zm3 2h2v6H9v-6zm4 0h2v6h-2v-6zM7 5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h5v2H2V5h5zm2-1v1h6V4H9z"/></svg>
                 </ToolContainer>
 
 
                 <Header minimized={this.props.node.options.minimized } transparent={true} color={this.props.node.options.color}>
-                    <AlignCenter style={{paddingLeft: this.props.node.options.minimized ? "5px" : "0"}} iColor={true && this.props.node.options.color}>
+                    <AlignCenter style={{paddingLeft: this.props.node.options.minimized ? "5px" : "0"}} >
                         {listItems.find(e => e.title === this.props.node.options.name).icon}
                         {(this.props.node.options && this.props.node.options.name) || this.props.node.options.name}
                     </AlignCenter>
@@ -638,10 +667,16 @@ export class CustomNodeWidget extends React.Component {
                             <AlignCenter 
                                 style={{
                                     position: "absolute", 
-                                    right: 5, 
-                                    display: this.props.node.options.minimized ? "none" : "flex"
+                                    right: -6, 
+                                    top: -6,
+                                    display: this.props.node.options.minimized ? "none" : "flex",
+                                    color: this.props.node.options.color,
+                                    background: "white",
+                                    borderRadius: "50%"
                                 }} 
+                                hover
                                 transparent={true} 
+                                iColor={this.props.node.options.color}
                                 onClick={() => void this.runNode()} color={chroma(this.props.node.options.color).darken(0.4).hex()}>
                         <span>
                             {this.state.active ? <LoadIcon /> : <StartIcon />}
@@ -660,6 +695,11 @@ export class CustomNodeWidget extends React.Component {
                         </AlignCenter>}
                 </Header>
 
+                {this.props.node.options.marked && (
+                    <div style={{ width: "1px", height: "100%", position: "absolute", right: "20px", top: 0, zIndex: 3 }}>
+                        <div style={{position: "absolute",  width: 7, height: 7, top: 0, left: -15, transform: "translateY(-50%) rotate(45deg)", background: this.props.node.options.color, borderRadius: "25%", border: "2px solid #ffffff", fontSize: 8, fontWeight: 600}}/>
+                    </div>
+                )}
 
                {!this.props.node.options.minimized && 
                     <div>

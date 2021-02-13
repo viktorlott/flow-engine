@@ -15,12 +15,12 @@ export default [
       // <BoltIcon />,
       // 
       // 
-  
-      theme: "#7f3bff",
+      
+      theme:"#00846d"||"#7f3bff",
       extra: null,
   
       ports: [
-        { input: { name: "in", label: "Inmatning", color: "#616161", gate: true }, output: { name: "out", label: "Resultat", color: "#7f3bff"||"#36bf16" } },
+        { input: { name: "in", label: "Inmatning", color: "#616161", gate: true }, output: { name: "out", label: "Resultat", color: "#00846d"||"#7f3bff"||"#36bf16" } },
         { output: { name: "error", label: "Felhantering", color: "#ff7e7e" } },
       ]
     },
@@ -56,10 +56,10 @@ export default [
       ),
   
       // <ParserIcon />, 
-      theme: "#205249"|| "#62ad0a" || "#8bc34a", //#ffc107 ffc107
+      theme: "#3386c3"||"#205249"|| "#62ad0a" || "#8bc34a", //#ffc107 ffc107
       disable: true,
       ports: [
-        { input: { name: "in", label: "Inmatning", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#205249"||"#36bf16" } },
+        { input: { name: "in", label: "Inmatning", color: "#616161" }, output: { name: "out", label: "Resultat", color: "#3386c3"||"#205249"||"#36bf16" } },
         { output: { name: "error", label: "Felhantering", color: "#ff7e7e" } },
       ]
     },
@@ -67,6 +67,7 @@ export default [
       title: "Variabel",
       label: "Hantera variabler",
       minimized: true,
+      marked: true,
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M12 23a7.5 7.5 0 0 0 7.5-7.5c0-.866-.23-1.697-.5-2.47-1.667 1.647-2.933 2.47-3.8 2.47 3.995-7 1.8-10-4.2-14 .5 5-2.796 7.274-4.138 8.537A7.5 7.5 0 0 0 12 23zm.71-17.765c3.241 2.75 3.257 4.887.753 9.274-.761 1.333.202 2.991 1.737 2.991.688 0 1.384-.2 2.119-.595a5.5 5.5 0 1 1-9.087-5.412c.126-.118.765-.685.793-.71.424-.38.773-.717 1.118-1.086 1.23-1.318 2.114-2.78 2.566-4.462z" /></svg>
         // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fillRule="evenodd" fill="currentColor" d="M12.185 21.5c4.059 0 7.065-2.84 7.065-6.75 0-2.337-1.093-3.489-2.678-5.158l-.021-.023c-1.44-1.517-3.139-3.351-3.649-6.557a6.14 6.14 0 00-1.911 1.76c-.787 1.144-1.147 2.633-.216 4.495.603 1.205.777 2.74-.277 3.794-.657.657-1.762 1.1-2.956.586-.752-.324-1.353-.955-1.838-1.79-.567.706-.954 1.74-.954 2.893 0 3.847 3.288 6.75 7.435 6.75zm2.08-19.873c-.017-.345-.296-.625-.632-.543-2.337.575-6.605 4.042-4.2 8.854.474.946.392 1.675.004 2.062-.64.64-1.874.684-2.875-1.815-.131-.327-.498-.509-.803-.334-1.547.888-2.509 2.86-2.509 4.899 0 4.829 4.122 8.25 8.935 8.25 4.812 0 8.565-3.438 8.565-8.25 0-2.939-1.466-4.482-3.006-6.102-1.61-1.694-3.479-3.476-3.479-7.021z"></path></svg> 
@@ -108,6 +109,7 @@ export default [
       title: "Vänta",
       label: "Vänta x sekunder",
       minimized: true,
+      marked: true,
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill={"currentColor"} d="M17.618 5.968l1.453-1.453 1.414 1.414-1.453 1.453a9 9 0 1 1-1.414-1.414zM12 20a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM11 8h2v6h-2V8zM8 1h8v2H8V1z" /></svg>
       ),
@@ -135,6 +137,7 @@ export default [
       title: "Intervall",
       label: "",
       minimized: true,
+      marked: true,
       icon: (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0H24V24H0z" /><path fill={"currentColor"} d="M9 7.539L15 21.539 18.659 13 23 13 23 11 17.341 11 15 16.461 9 2.461 5.341 11 1 11 1 13 6.659 13z" /></svg>),
       theme: "#d700ef",
       disable: true,
@@ -145,6 +148,7 @@ export default [
     {
       title: "Felhantering",
       label: "Hantera fel",
+      marked: true,
       minimized: true,
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M12.866 3l9.526 16.5a1 1 0 0 1-.866 1.5H2.474a1 1 0 0 1-.866-1.5L11.134 3a1 1 0 0 1 1.732 0zm-8.66 16h15.588L12 5.5 4.206 19zM11 16h2v2h-2v-2zm0-7h2v5h-2V9z" /></svg>

@@ -39,7 +39,8 @@ import chroma from 'chroma-js'
 import Drawer from '../../components/Drawer'
 import { observer } from "mobx-react"
 import Database, { InputField, BodyGrid,Column, Row as DRow, SectionGridLeft, SectionGridLine,  SectionGridRight } from '../../Database'
-import DropdownField from '../../Database/Dropdown'
+import DropdownField from '../../components/Dropdown'
+
 import {Row} from './styled'
 import dnd from '../../utils/DnD'
 import ToolTipPopup from '../../ToolTipPopup'
@@ -59,7 +60,7 @@ import ServerSvg from '../../svg/server.svg'
 import LogsContainer from '../../components/LogContainer'
 import { CustomNodeModel } from '../../Diagram/node/CustomNodeModel';
 
-
+import icon from '../../svg/icon4.svg'
 
 import createEngine, {
     DefaultLinkModel,
@@ -122,8 +123,10 @@ const Tabs = observer(({ graph }) => {
         <>
         <HeaderTab selected={graph.current === i} onClick={(e) => selectTab(i, e)} borderColorTop={"#00bf86"||"#6d94d4"||"#009688" || "#ffc967" || "#47a8d85e" || "#eff1f2" || "white" || "#ffe863" || "#d3edff" || "#00ca51"}>
           {i === 0 && (
+
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill={graph.current === i ? "currentColor" : "#d1d0d0"} d="M2 19h20v2H2v-2zM2 5l5 3.5L12 2l5 6.5L22 5v12H2V5zm2 3.841V15h16V8.841l-3.42 2.394L12 5.28l-4.58 5.955L4 8.84z"/></svg>
           )}
+            {/* <img src={icon} width={17} height={20} alt="" style={{marginRight: 7, borderRadius: 2}}/> */}
           <span>
             {tab.name}
           </span>
@@ -157,7 +160,7 @@ const Tabs = observer(({ graph }) => {
 
 
   function TransitionComponent(props) {
-      console.log(props.active)
+
     const transitions = useTransition(props.active, null, {
         from: {  opacity: 0 },
         enter: { opacity: 1 },
@@ -271,6 +274,10 @@ const Tabs = observer(({ graph }) => {
 
 
 export default function DiagramContainer(props) {
+    const { graph, nodes } = props
+    
+
+
     return (
 
         <ContentWrapper>
@@ -304,7 +311,8 @@ export default function DiagramContainer(props) {
                   </HeaderTab>
                   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", transform: "translateY(5px)" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" onClick={() => {
-
+                        const model = graph.tabs[graph.current].model
+                        console.log(JSON.stringify(model.serialize()))
                     }} viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z" /><path fill="currentColor" d="M13 13v5.585l1.828-1.828 1.415 1.415L12 22.414l-4.243-4.242 1.415-1.415L11 18.585V13h2zM12 2a7.001 7.001 0 0 1 6.954 6.194 5.5 5.5 0 0 1-.953 10.784v-2.014a3.5 3.5 0 1 0-1.112-6.91 5 5 0 1 0-9.777 0 3.5 3.5 0 0 0-1.292 6.88l.18.03v2.014a5.5 5.5 0 0 1-.954-10.784A7 7 0 0 1 12 2z" /></svg>
                   </div>
                 </div>

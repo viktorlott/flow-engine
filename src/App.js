@@ -118,7 +118,7 @@ import {
 } from '@projectstorm/react-canvas-core';
 
 import {useSpring, animated} from 'react-spring'
-
+import icon14 from './svg/icon4.svg'
 // const pathfinding = engine.getLinkFactories().getFactory(PathFindingLinkFactory.NAME)
 
 
@@ -140,7 +140,6 @@ function EditorModal(props) {
     </Editor>
   )
 }
-
 
 
 // #323442
@@ -241,7 +240,7 @@ const Title = styled.h3`
   top: 0px;
   padding:0;
   margin: 0;
-  width: 200px;
+  width: 400px;
   font-weight: 200;
   font-size: 18px;
   user-select: none;
@@ -401,16 +400,23 @@ function App() {
 
 
           <Title style={{position: "absolute", top: "50%", transform: "translateY(-50%)", left: 0, right: 0, margin: "auto" }}>
-            <span style={{ fontWeight: 700, fontSize: 20, transform: "translateY(-2px)" }}>Flowstack</span>
+            <span style={{ fontWeight: 600, fontSize: 20, transform: "translateY(-2px)", display: "flex", justifyContent:"center", alignItems: "center" }}>
+              <img src={icon14} width={30} height={25} alt="" style={{marginRight: 7, borderRadius: 15}}/>
+              <span style={{marginBottom: 3}}>
+                Flowstack
+              </span>
+            </span>
+
+
             <span style={{height:18,margin: "0 12px", width: 1, background: "rgba(0, 0, 0, 0.1)"}}/>
             <span >
-            <ToolTipPopup id={"undo"+"_tooltip"} text={"Ångra"} delay={700} bg={"#454165"} color={"white"}>
+            <ToolTipPopup id={"undo"+"_tooltip"} text={"Ångra"} delay={false} bg={"#454165"} color={"white"}>
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M5.828 7l2.536 2.536L6.95 10.95 2 6l4.95-4.95 1.414 1.414L5.828 5H13a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H5.828z"/></svg>
               </span>
             </ToolTipPopup>
               <span style={{margin: "0 5px"}}/>
-              <ToolTipPopup id={"undo"+"_tooltip"} text={"Framåt"} delay={700} bg={"#454165"} color={"white"}>
+              <ToolTipPopup id={"undo"+"_tooltip"} text={"Framåt"} delay={false} bg={"#454165"} color={"white"}>
                 <span >
                   <svg xmlns="http://www.w3.org/2000/svg" style={{opacity: 0.5}} viewBox="0 0 24 24" width="15" height="15"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.172 7H11a6 6 0 1 0 0 12h9v2h-9a8 8 0 1 1 0-16h7.172l-2.536-2.536L17.05 1.05 22 6l-4.95 4.95-1.414-1.414L18.172 7z"/></svg>
                 </span>
@@ -435,7 +441,7 @@ function App() {
                         <div style={{ fontSize: 13,fontWeight: 400, color: "white" || "#162d3d", opacity: 0.9, width: 185, whiteSpace: "pre-line", padding: "5px 40px", marginBottom: 25}}>Här kan du testa att kommunicera med en databas.</div>
                       </Row>
                     </Row>
-              )} delay={300} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
+              )} delay={false} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
                 <div>
                   <BButton>
                     Databas
@@ -453,7 +459,7 @@ function App() {
                         <div style={{ fontSize: 13,fontWeight: 400, color: "white" || "#162d3d", opacity: 0.9, width: 185, whiteSpace: "pre-line", padding: "5px 40px", marginBottom: 25}}>Här kan du testa att kommunicera med ett API.</div>
                       </Row>
                     </Row>
-              )} delay={300} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
+              )} delay={false} bg={"#454165"||"#ffffff"||"#454165"} color={"white"||"#808080"}>
                 <div>
                   <RestClientButton toggleClient={toggleClient} />
                 </div>

@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx"
 import example from './example.json'
+import example2 from './example2.json'
 import { CustomNodeFactory } from '../../Diagram/node/CustomNodeFactory';
 import { CustomNodeModel } from '../../Diagram/node/CustomNodeModel';
 import { CustomPortModel } from '../../Diagram/port/CustomPortModel';
@@ -43,7 +44,7 @@ class Graph {
 
         this.tabs.push({
             model: model,
-            name: "Standardgraf"
+            name: "Standard"
         })
 
         this.engine.setModel(model)
@@ -53,9 +54,9 @@ class Graph {
         this.addTab("Ny graf 3", false)
     }
 
-    setupModel(defaultModel = false) {
+    setupModel(defaultModel = false, custom=example) {
         const model = new DiagramModel()
-        defaultModel && model.deserializeModel(example, this.engine)
+        defaultModel && model.deserializeModel(custom, this.engine)
         model.setGridSize(15)
         return model
     }
@@ -65,9 +66,9 @@ class Graph {
         this.engine.setModel(this.tabs[index].model)
     }
 
-    addTab(name, setModel=true) {
+    addTab(name, setModel=true, custom=false) {
         this.tabs.push({
-            model: this.setupModel(false, false),
+            model: this.setupModel(!!custom, custom),
             name: name || "standardgraf"
         })
         if(setModel) {

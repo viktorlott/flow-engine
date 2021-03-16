@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/nexriz/flow-engine/main/src/svg/restcli2.svg" alt="Alt Text" style="max-width:100%;">
 
-### Work in process!
+### Work in progress!
 ``This project is just an experiment, nothing is fully functional.``
 
 
